@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  db:
+    container_name: events-db
+    image: postgres:12
+    volumes:
+      - type: volume
+        source: postgresdb-data
+        target: /var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: k1ng
+      POSTGRES_DB: eventDB
+      POSTGRES_PASSWORD: k1ng
+
+  # main:
+  #   container_name: go-app
+  #   build:
+  #     context: .
+  #     dockerfile: build/Dockerfile
+  #   command: ./app
+  #   ports:
+  #     - "80:80"
+  #   depends_on:
+  #     - db
+
+volumes:
+  postgresdb-data:
+    driver: local
