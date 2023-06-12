@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  NewsView.swift
 //  MightyK1ngRichard-App
 //
 //  Created by Дмитрий Пермяков on 12.06.2023.
@@ -7,17 +7,15 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    
+struct NewsView: View {
     var body: some View {
-        MainView()
-        
+        Text("Новости")
+            .foregroundColor(.yellow)
     }
-    
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct NewsView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        NewsView()
     }
 }

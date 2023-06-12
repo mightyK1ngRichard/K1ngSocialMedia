@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C3E99E12A37306B00ABEBDA /* FontView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E99E02A37306B00ABEBDA /* FontView.swift */; };
+		2C3E99E42A3731B900ABEBDA /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E99E32A3731B900ABEBDA /* MenuView.swift */; };
+		2C3E99EA2A37354100ABEBDA /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E99E92A37354100ABEBDA /* NewsView.swift */; };
+		2C3E99EE2A3735BA00ABEBDA /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E99ED2A3735BA00ABEBDA /* MainView.swift */; };
+		2C3E99F12A37363000ABEBDA /* SelectedModeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E99F02A37363000ABEBDA /* SelectedModeButton.swift */; };
+		2C3E99F72A373F3E00ABEBDA /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E99F62A373F3E00ABEBDA /* MessagesView.swift */; };
+		2C3E99FE2A37405700ABEBDA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E99FD2A37405700ABEBDA /* ProfileView.swift */; };
 		2CE47B722A3726D6003C863C /* MightyK1ngRichard_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE47B712A3726D6003C863C /* MightyK1ngRichard_AppApp.swift */; };
 		2CE47B742A3726D6003C863C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE47B732A3726D6003C863C /* ContentView.swift */; };
 		2CE47B762A3726D7003C863C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CE47B752A3726D7003C863C /* Assets.xcassets */; };
@@ -34,6 +41,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C3E99E02A37306B00ABEBDA /* FontView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontView.swift; sourceTree = "<group>"; };
+		2C3E99E32A3731B900ABEBDA /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		2C3E99E92A37354100ABEBDA /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
+		2C3E99ED2A3735BA00ABEBDA /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		2C3E99F02A37363000ABEBDA /* SelectedModeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedModeButton.swift; sourceTree = "<group>"; };
+		2C3E99F62A373F3E00ABEBDA /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
+		2C3E99FD2A37405700ABEBDA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		2C3E9A012A374D7B00ABEBDA /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		2CE47B6E2A3726D6003C863C /* MightyK1ngRichard-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MightyK1ngRichard-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE47B712A3726D6003C863C /* MightyK1ngRichard_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MightyK1ngRichard_AppApp.swift; sourceTree = "<group>"; };
 		2CE47B732A3726D6003C863C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +86,123 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C3E99E22A3731B000ABEBDA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2C3E99E82A37351C00ABEBDA /* SelectedMode */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2C3E99E82A37351C00ABEBDA /* SelectedMode */ = {
+			isa = PBXGroup;
+			children = (
+				2C3E99FC2A37404C00ABEBDA /* ProfileView */,
+				2C3E99F82A373FB300ABEBDA /* MenuView */,
+				2C3E99F32A373F2200ABEBDA /* Messages */,
+				2C3E99EC2A3735AE00ABEBDA /* News */,
+				2C3E99EB2A3735A700ABEBDA /* Main */,
+			);
+			path = SelectedMode;
+			sourceTree = "<group>";
+		};
+		2C3E99EB2A3735A700ABEBDA /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				2C3E99FB2A37401B00ABEBDA /* MainView */,
+				2C3E99EF2A37361C00ABEBDA /* Model */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		2C3E99EC2A3735AE00ABEBDA /* News */ = {
+			isa = PBXGroup;
+			children = (
+				2C3E99F22A373ECC00ABEBDA /* MainView */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		2C3E99EF2A37361C00ABEBDA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2C3E99F02A37363000ABEBDA /* SelectedModeButton.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2C3E99F22A373ECC00ABEBDA /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				2C3E99E92A37354100ABEBDA /* NewsView.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		2C3E99F32A373F2200ABEBDA /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				2C3E99F92A37400B00ABEBDA /* MainView */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
+		2C3E99F82A373FB300ABEBDA /* MenuView */ = {
+			isa = PBXGroup;
+			children = (
+				2C3E99FA2A37401100ABEBDA /* MainView */,
+			);
+			path = MenuView;
+			sourceTree = "<group>";
+		};
+		2C3E99F92A37400B00ABEBDA /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				2C3E99F62A373F3E00ABEBDA /* MessagesView.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		2C3E99FA2A37401100ABEBDA /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				2C3E99E32A3731B900ABEBDA /* MenuView.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		2C3E99FB2A37401B00ABEBDA /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				2C3E99ED2A3735BA00ABEBDA /* MainView.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		2C3E99FC2A37404C00ABEBDA /* ProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				2C3E99FF2A37405F00ABEBDA /* MainView */,
+			);
+			path = ProfileView;
+			sourceTree = "<group>";
+		};
+		2C3E99FF2A37405F00ABEBDA /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				2C3E99FD2A37405700ABEBDA /* ProfileView.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		2C3E9A002A374D4C00ABEBDA /* Playground */ = {
+			isa = PBXGroup;
+			children = (
+				2C3E9A012A374D7B00ABEBDA /* MyPlayground.playground */,
+			);
+			path = Playground;
+			sourceTree = "<group>";
+		};
 		2CE47B652A3726D5003C863C = {
 			isa = PBXGroup;
 			children = (
@@ -94,10 +226,13 @@
 		2CE47B702A3726D6003C863C /* MightyK1ngRichard-App */ = {
 			isa = PBXGroup;
 			children = (
+				2C3E9A002A374D4C00ABEBDA /* Playground */,
+				2C3E99E22A3731B000ABEBDA /* Views */,
 				2CE47B712A3726D6003C863C /* MightyK1ngRichard_AppApp.swift */,
 				2CE47B732A3726D6003C863C /* ContentView.swift */,
 				2CE47B752A3726D7003C863C /* Assets.xcassets */,
 				2CE47B772A3726D7003C863C /* Preview Content */,
+				2C3E99E02A37306B00ABEBDA /* FontView.swift */,
 			);
 			path = "MightyK1ngRichard-App";
 			sourceTree = "<group>";
@@ -257,8 +392,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C3E99EE2A3735BA00ABEBDA /* MainView.swift in Sources */,
+				2C3E99FE2A37405700ABEBDA /* ProfileView.swift in Sources */,
+				2C3E99F72A373F3E00ABEBDA /* MessagesView.swift in Sources */,
 				2CE47B742A3726D6003C863C /* ContentView.swift in Sources */,
+				2C3E99E42A3731B900ABEBDA /* MenuView.swift in Sources */,
+				2C3E99EA2A37354100ABEBDA /* NewsView.swift in Sources */,
+				2C3E99F12A37363000ABEBDA /* SelectedModeButton.swift in Sources */,
 				2CE47B722A3726D6003C863C /* MightyK1ngRichard_AppApp.swift in Sources */,
+				2C3E99E12A37306B00ABEBDA /* FontView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
