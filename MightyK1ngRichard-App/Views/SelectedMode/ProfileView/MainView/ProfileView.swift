@@ -22,10 +22,11 @@ struct ProfileView: View {
     var locationInfo    = "London"
     var backgroundColor : UIColor = #colorLiteral(red: 0.1105830893, green: 0.1105830893, blue: 0.1105830893, alpha: 1)
     var colorOfText     : Color = .white
+    var countOfFriends  = "105" + "дрезей"
     
     var body: some View {
         ScrollView {
-            VStack {
+            VStack(spacing: 0) {
                 ZStack(alignment: .top) {
                     Image("wwdc")
                         .resizable()
@@ -64,11 +65,7 @@ struct ProfileView: View {
                     .padding(.top, 150)
                 }
                 
-                Text("105 друзей")
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical)
-                    .cornerRadius(20)
-                    .background(Color(backgroundColor))
+                DownView()
 
             }
         }
@@ -132,8 +129,17 @@ struct ProfileView: View {
     
     private func DownView() -> some View {
         VStack {
-            Text("103 друга")
+            Text(countOfFriends)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading)
+                .padding(.vertical)
+                .background(Color(backgroundColor))
+                .foregroundColor(colorOfText)
+                .cornerRadius(20)
             
+            HStack {
+                
+            }
         }
     }
 }

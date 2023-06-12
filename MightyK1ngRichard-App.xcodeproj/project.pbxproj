@@ -14,6 +14,7 @@
 		2C3E99F12A37363000ABEBDA /* SelectedModeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E99F02A37363000ABEBDA /* SelectedModeButton.swift */; };
 		2C3E99F72A373F3E00ABEBDA /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E99F62A373F3E00ABEBDA /* MessagesView.swift */; };
 		2C3E99FE2A37405700ABEBDA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E99FD2A37405700ABEBDA /* ProfileView.swift */; };
+		2C3E9A042A376BA100ABEBDA /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E9A032A376BA100ABEBDA /* APIManager.swift */; };
 		2CE47B722A3726D6003C863C /* MightyK1ngRichard_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE47B712A3726D6003C863C /* MightyK1ngRichard_AppApp.swift */; };
 		2CE47B742A3726D6003C863C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE47B732A3726D6003C863C /* ContentView.swift */; };
 		2CE47B762A3726D7003C863C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CE47B752A3726D7003C863C /* Assets.xcassets */; };
@@ -49,6 +50,7 @@
 		2C3E99F62A373F3E00ABEBDA /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
 		2C3E99FD2A37405700ABEBDA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		2C3E9A012A374D7B00ABEBDA /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		2C3E9A032A376BA100ABEBDA /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		2CE47B6E2A3726D6003C863C /* MightyK1ngRichard-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MightyK1ngRichard-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE47B712A3726D6003C863C /* MightyK1ngRichard_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MightyK1ngRichard_AppApp.swift; sourceTree = "<group>"; };
 		2CE47B732A3726D6003C863C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -203,6 +205,14 @@
 			path = Playground;
 			sourceTree = "<group>";
 		};
+		2C3E9A022A376B9000ABEBDA /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				2C3E9A032A376BA100ABEBDA /* APIManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		2CE47B652A3726D5003C863C = {
 			isa = PBXGroup;
 			children = (
@@ -226,6 +236,7 @@
 		2CE47B702A3726D6003C863C /* MightyK1ngRichard-App */ = {
 			isa = PBXGroup;
 			children = (
+				2C3E9A022A376B9000ABEBDA /* Network */,
 				2C3E9A002A374D4C00ABEBDA /* Playground */,
 				2C3E99E22A3731B000ABEBDA /* Views */,
 				2CE47B712A3726D6003C863C /* MightyK1ngRichard_AppApp.swift */,
@@ -394,6 +405,7 @@
 			files = (
 				2C3E99EE2A3735BA00ABEBDA /* MainView.swift in Sources */,
 				2C3E99FE2A37405700ABEBDA /* ProfileView.swift in Sources */,
+				2C3E9A042A376BA100ABEBDA /* APIManager.swift in Sources */,
 				2C3E99F72A373F3E00ABEBDA /* MessagesView.swift in Sources */,
 				2CE47B742A3726D6003C863C /* ContentView.swift in Sources */,
 				2C3E99E42A3731B900ABEBDA /* MenuView.swift in Sources */,
