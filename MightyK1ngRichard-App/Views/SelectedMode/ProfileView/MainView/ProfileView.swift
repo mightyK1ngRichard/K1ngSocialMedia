@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+var backgroundColor : UIColor = #colorLiteral(red: 0.1105830893, green: 0.1105830893, blue: 0.1105830893, alpha: 1)
+var colorOfText     : Color = .white
+
 struct ProfileView: View {
     @EnvironmentObject var selected   : SelectedButton
     @State private var pressedButton = "Фото"
@@ -22,14 +25,10 @@ struct ProfileView: View {
     var description     = " Engoing Web/iOS developing"
     var locationInfo    = "London"
     var backroundImage  = "wwdc"
-    var backgroundColor : UIColor = #colorLiteral(red: 0.1105830893, green: 0.1105830893, blue: 0.1105830893, alpha: 1)
-    var colorOfText     : Color = .white
     var countOfFriends  = "105" + " друзей"
     
-    
-    
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             ScreenOfUser()
         }
         .background(Color(.black))
@@ -105,9 +104,21 @@ struct ProfileView: View {
                     VStack {
                         TopView()
                             .frame(height: 200)
-                        DownView()
+                        CountOfFriendsView()
                         
                         imagesView()
+                        
+                        // TODO: При работе с БД заменить данные
+                        ForEach(0...4, id: \.self) { _ in
+                            let test = """
+Пишу что-то для тест поста. Я хз что писать для проверки вёрстки, но надо побольше текста.
+Так, вот я сделал абзац.
+
+А вот теперь ещё один.
+""".trimmingCharacters(in: .whitespaces)
+
+                            UserPostsView(textOfPost: test, imageOfPost: Image("k1ng"), dateOfPost: .now, username: nickname, userImage: Image("k1ng"))
+                        }
                     }
                     
                     Image(image)
@@ -176,8 +187,8 @@ struct ProfileView: View {
                     Text("Загрузить фото")
                 }
 
-                
                 Divider()
+                    .background(Color.white.opacity(0.6))
                 
                 Button {
                     // ?
@@ -193,12 +204,13 @@ struct ProfileView: View {
             .padding(.bottom)
         }
         .foregroundColor(.white)
-        .frame(maxWidth: .infinity)
+        // TODO: Размеры подумать для других устройств.
+        .frame(maxWidth: .infinity, maxHeight: 220)
         .background(Color(backgroundColor))
         .cornerRadius(20)
     }
 
-    private func DownView() -> some View {
+    private func CountOfFriendsView() -> some View {
         VStack {
             Text(countOfFriends)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -211,15 +223,14 @@ struct ProfileView: View {
     }
 }
 
+/// Кнопки: фотки, видео, музыка.
 struct ButtonsOfModes: View {
     @Binding var pressedButton: String
     var img : String
     var text: String
-    
+    let color = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
     
     var body: some View {
-        let color = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-        
         HStack {
             Button {
                 pressedButton = text
@@ -238,6 +249,119 @@ struct ButtonsOfModes: View {
         .cornerRadius(10)
     }
     
+}
+
+/// View постов.
+struct UserPostsView: View {
+    var textOfPost  : String?
+    var imageOfPost : Image?
+    var dateOfPost  : Date
+    var username    : String
+    var userImage   : Image?
+    
+    var body: some View {
+        VStack {
+            Group {
+                HStack {
+                    if let img = userImage {
+                        img
+                            .resizable()
+                            .frame(width: 35, height: 35)
+                            .clipShape(Circle())
+                        
+                    } else {
+                        Image(systemName: "person.circle")
+                            .resizable()
+                            .frame(width: 35, height: 35)
+                            .foregroundColor(.white.opacity(0.5))
+                    }
+                    
+                    VStack {
+                        Text(username)
+                            .font(.subheadline)
+                            .foregroundColor(colorOfText)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        Text("\(dateOfPost.formatted())")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    
+                    Spacer()
+                }
+                
+                if let text = textOfPost {
+                    HStack {
+                        Text(text)
+                            .foregroundColor(colorOfText)
+                            .font(.body)
+                        Spacer()
+                    }
+                }
+            }
+            .padding(.horizontal)
+            .padding(.top, 8)
+            
+            
+            if let imgPost = imageOfPost {
+                imgPost
+                    .resizable()
+                    .frame(width: 395, height: 395)
+                    .frame(maxWidth: .infinity)
+                    .background(Color(backgroundColor))
+            }
+            
+            HStack {
+                HStack {
+                    Image(systemName: "heart.circle.fill")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(.red)
+                        .background(Color.white.frame(width: 12, height: 12))
+                        .clipShape(Circle())
+                    
+                    Text("43")
+                        .font(.caption)
+                        .offset(x: -4)
+                        .foregroundColor(.red)
+                }
+                .padding(.horizontal, 7)
+                .padding(.vertical, 5)
+                .background(
+                    Capsule()
+                        .foregroundColor(.red)
+                        .opacity(0.15)
+                )
+                
+                HStack {
+                    Image(systemName: "bubble.left")
+                        .foregroundColor(.white.opacity(0.6))
+                        
+                    Text("3")
+                        .font(.caption)
+                        .offset(x: -5)
+                        .foregroundColor(.white.opacity(0.6))
+                }
+                .padding(.leading, 7)
+                .padding(.trailing, 4)
+                .padding(.vertical, 5)
+                .background(
+                    Capsule()
+                        .foregroundColor(.gray)
+                        .opacity(0.1)
+                )
+                
+                Spacer()
+            }
+            .foregroundColor(.white)
+            .padding(.horizontal)
+            .padding(.bottom, 8)
+        }
+        .frame(maxWidth: .infinity)
+        .background(Color(backgroundColor))
+        .cornerRadius(20)
+    }
 }
 
 struct ProfileView_Previews: PreviewProvider {
