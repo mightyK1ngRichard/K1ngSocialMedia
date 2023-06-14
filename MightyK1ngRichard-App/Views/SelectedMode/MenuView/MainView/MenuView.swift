@@ -48,6 +48,10 @@ struct MenuView: View {
                                 
                             } label: {
                                 Image(systemName: button.image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 20)
+                                    .padding(.trailing, 8)
                                 
                                 Text(button.text.rawValue)
                                     .font(.headline)

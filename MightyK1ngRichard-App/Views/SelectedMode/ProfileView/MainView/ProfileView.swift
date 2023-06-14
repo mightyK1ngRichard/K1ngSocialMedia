@@ -20,17 +20,19 @@ struct ProfileView: View {
         ("2023-02-02", "Просто что-то про жизнь"),
         ("2023-02-02", "Просто что-то про жизнь")
     ]
-    var image           = "k1ng"
     var nickname        = "Dmitriy Permyakov"
     var description     = " Engoing Web/iOS developing"
     var locationInfo    = "London"
-    var backroundImage  = "wwdc"
+    var backroundImage  : URL?
+    var userAvatar      : URL?
     var countOfFriends  = "105" + " друзей"
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            ScreenOfUser()
-            
+        GeometryReader { proxy in
+            ScrollView(showsIndicators: false) {
+                ScreenOfUser(size: proxy.size)
+                
+            }
         }
         .ignoresSafeArea()
     }
@@ -90,11 +92,25 @@ struct ProfileView: View {
     }
     
     @ViewBuilder
-    private func ScreenOfUser() -> some View {
+    func ScreenOfUser(size: CGSize) -> some View {
         ZStack(alignment: .top) {
-            Image(backroundImage)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
+            if let urlLink = backroundImage {
+                AsyncImage(url: urlLink) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: size.width)
+                    
+                } placeholder: {
+                    ProgressView()
+                }
+                
+            } else {
+                Image("k1ng")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: size.width)
+            }
             
             VStack {
                 ZStack(alignment: .top) {
@@ -116,36 +132,39 @@ struct ProfileView: View {
 
 А вот теперь ещё один.
 """.trimmingCharacters(in: .whitespaces)
-                            
-                            UserPostsView(textOfPost: test, imageOfPost: Image("k1ng"), dateOfPost: .now, username: nickname, userImage: Image("k1ng"), countOfLike: 10)
+                            let imageOfPost = URL(string: "https://get.wallhere.com/photo/anime-girl-hurt-tennis-racquet-courts-1100259.jpg")!
+                            UserPostsView(textOfPost: test, imageOfPost: imageOfPost, dateOfPost: .now, username: nickname, userAvatar: userAvatar, countOfLike: 10, size: size)
                         }
                     }
                     
-                    Image(image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 100, height: 100)
-                        .clipShape(Circle())
-                        .overlay {
-                            Circle()
-                                .stroke(lineWidth: 5)
-                                .foregroundColor(Color(backgroundColor))
-                        }
-                        .padding(.bottom, 5)
-                        .offset(y: -50)
-                    // TODO: Убрать открытие меню по аве.
-                        .onTapGesture {
-                            DispatchQueue.main.async {
-                                withAnimation(.spring(response: 0.5, dampingFraction: 0.4)) {
-                                    selected.showMenu = true
-                                }
+                    Button {
+                        // ?
+                        self.selected.showMenu = true
+                        
+                    } label: {
+                        if let url = userAvatar {
+                            AsyncImage(url: url) { image in
+                                image
+                                    .avatarSize()
+                                    .onTapGesture {
+                                        DispatchQueue.main.async {
+                                            withAnimation(.spring(response: 0.5, dampingFraction: 0.4)) {
+                                                selected.showMenu = true
+                                            }
+                                        }
+                                    }
+                            } placeholder: {
+                                ProgressView()
                             }
+                            
+                        } else {
+                            Image("k1ng")
+                                .avatarSize()
                         }
-                    
+                    }
                 }
             }
-            
-            .padding(.top, 150)
+            .padding(.top, 180)
         }
     }
     
@@ -163,7 +182,7 @@ struct ProfileView: View {
             ScrollView(.horizontal, showsIndicators: false){
                 HStack {
                     ForEach(buttons, id: \.self.0) {
-                        ButtonsOfModes(pressedButton: $pressedButton, img: $0.1, text: $0.0)
+                        ButtonsOfModes(img: $0.1, text: $0.0)
                     }
                 }
             }
@@ -178,7 +197,8 @@ struct ProfileView: View {
                 }
             }
             
-            HStack {
+            /// Кнопки загрузить фото и смотреть ещё.
+            HStack(spacing: 25) {
                 Button {
                     // ?
                     
@@ -194,7 +214,7 @@ struct ProfileView: View {
                     // ?
                     
                 } label: {
-                    Text("Загрузить фото")
+                    Text("Смотреть ещё")
                     Image(systemName: "chevron.right")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
@@ -204,33 +224,15 @@ struct ProfileView: View {
             .padding(.bottom)
         }
         .foregroundColor(.white)
-        // TODO: Размеры подумать для других устройств.
         .frame(maxWidth: .infinity, maxHeight: 220)
         .background(Color(backgroundColor))
         .cornerRadius(20)
     }
     
-    private func CountOfFriendsView() -> some View {
-        VStack {
-            Text(countOfFriends)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading)
-                .padding(.vertical)
-                .background(Color(backgroundColor))
-                .foregroundColor(colorOfText)
-                .cornerRadius(20)
-        }
-    }
-}
-
-/// Кнопки: фотки, видео, музыка.
-struct ButtonsOfModes: View {
-    @Binding var pressedButton: String
-    var img : String
-    var text: String
-    let color = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-    
-    var body: some View {
+    /// Кнопки: фотки, видео, музыка.
+    @ViewBuilder
+    private func ButtonsOfModes(img: String, text: String) -> some View {
+        let color = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         HStack {
             Button {
                 pressedButton = text
@@ -249,6 +251,18 @@ struct ButtonsOfModes: View {
         .cornerRadius(10)
     }
     
+    /// Количество друзей.
+    private func CountOfFriendsView() -> some View {
+        VStack {
+            Text(countOfFriends)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading)
+                .padding(.vertical)
+                .background(Color(backgroundColor))
+                .foregroundColor(colorOfText)
+                .cornerRadius(20)
+        }
+    }
 }
 
 /// View постов.
@@ -257,21 +271,27 @@ struct UserPostsView: View {
     @State private var pressedComment = false
     
     var textOfPost  : String?
-    var imageOfPost : Image?
+    var imageOfPost : URL?
     var dateOfPost  : Date
     var username    : String
-    var userImage   : Image?
+    var userAvatar  : URL?
     var countOfLike : Int
+    var size        : CGSize
     
     var body: some View {
         VStack {
             Group {
                 HStack {
-                    if let img = userImage {
-                        img
-                            .resizable()
-                            .frame(width: 35, height: 35)
-                            .clipShape(Circle())
+                    if let urlLink = userAvatar {
+                        AsyncImage(url: urlLink) { image in
+                            image
+                                .resizable()
+                                .frame(width: 35, height: 35)
+                                .clipShape(Circle())
+                            
+                        } placeholder: {
+                            ProgressView()
+                        }
                         
                     } else {
                         Image(systemName: "person.circle")
@@ -307,14 +327,20 @@ struct UserPostsView: View {
             .padding(.horizontal)
             .padding(.top, 8)
             
-            if let imgPost = imageOfPost {
-                imgPost
-                    .resizable()
-                    .frame(width: 395, height: 395)
-                    .frame(maxWidth: .infinity)
-                    .background(Color(backgroundColor))
+            if let urlLink = imageOfPost {
+                AsyncImage(url: urlLink) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: size.width)
+                        .background(Color(backgroundColor))
+                    
+                } placeholder: {
+                    ProgressView()
+                }
+                
             }
-            
+
             HStack {
                 Button {
                     
@@ -416,8 +442,13 @@ struct UserPostsView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        let backImg = URL(string: "https://w-dog.ru/wallpapers/16/9/442689553177276/anime-iskusstvo-mahou-shoujo-madoka-magika-kaname-madoka-devushka-sidit-vzglyad-volshebnica-derevo-tron.jpg")!
+        
+        let userURL = URL(string: "https://proprikol.ru/wp-content/uploads/2020/05/kartinki-glaza-anime-53.jpg")!
+        
+        ProfileView(backroundImage: backImg, userAvatar: userURL)
             .environmentObject(SelectedButton())
+        
     }
 }
 
@@ -429,4 +460,20 @@ extension Image {
             .scaledToFit()
             .frame(width: 15, height: 15)
     }
+    
+    func avatarSize() -> some View {
+        return self
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(width: 100, height: 100)
+            .clipShape(Circle())
+            .overlay {
+                Circle()
+                    .stroke(lineWidth: 5)
+                    .foregroundColor(Color(backgroundColor))
+            }
+            .padding(.bottom, 5)
+            .offset(y: -50)
+    }
+    
 }

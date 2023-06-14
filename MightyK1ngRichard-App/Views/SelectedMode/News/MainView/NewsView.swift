@@ -40,7 +40,11 @@ struct NewsView: View {
                         
                         Divider()
                         ForEach(0...10, id: \.self) { user in
-                            UserPost(username: "mightyK1ngRichard", userAvatar: Image("k1ng"), imageOfPost: Image("wwdc"), countLike: 100, countResponds: 20, location: .current, size: size)
+                            // TODO: Заменить при api.
+                            let userURL = URL(string: "https://w.forfun.com/fetch/6c/6cbaa4c4c22f9df35a3f194537acca00.jpeg")!
+                            let postURL = URL(string: "https://proprikol.ru/wp-content/uploads/2020/05/kartinki-glaza-anime-53.jpg")!
+                            
+                            UserPost(username: "mightyK1ngRichard", userAvatar: userURL, imageOfPost: postURL, countLike: 100, countResponds: 20, location: .current, size: size)
                         }
                     }
                 }
@@ -130,7 +134,6 @@ struct UserCircle: View {
                         .IsActiveStory(isActive: hasNewStory)
                 }
                 
-                
                 Text(username)
                     .font(.footnote)
                     .foregroundColor(Color.primary)
@@ -140,158 +143,6 @@ struct UserCircle: View {
         .padding(.top, 5)
         .padding(.leading, 5)
         
-    }
-}
-
-struct UserPost: View {
-    var username      : String
-    var userAvatar    : Image?
-    var imageOfPost   : Image?
-    var countLike     : Int
-    var countResponds : Int
-    var location      : Locale?
-    let size          : CGSize
-    
-    @State private var pressedLike    = false
-    @State private var pressedComment = false
-    @State private var pressedSend    = false
-    @State private var inputRespond   = ""
-    
-    var body: some View {
-            VStack {
-                HStack {
-                    if let img = userAvatar {
-                        img
-                            .resizable()
-                            .frame(width: 35, height: 35)
-                            .clipShape(Circle())
-                        
-                    } else {
-                        Image(systemName: "person.circle")
-                            .resizable()
-                            .frame(width: 35, height: 35)
-                            .foregroundColor(.white.opacity(0.5))
-                    }
-                    
-                    VStack {
-                        Text(username)
-                            .font(.headline)
-                            .foregroundColor(.primary)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        Text("Moscow")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                    
-                    Spacer()
-                    
-                    Button {
-                        // ?
-                    } label: {
-                        Image(systemName: "ellipsis")
-                            .foregroundColor(.primary)
-                    }
-
-                }
-                .padding(.horizontal)
-                
-                if let imgPost = imageOfPost {
-                    imgPost
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: size.width)
-                        .frame(maxWidth: .infinity)
-                        .background(Color(backgroundColor))
-                }
-                
-                HStack {
-                    HStack(spacing: 20) {
-                        Group {
-                            Button {
-                                // ?
-                                self.pressedLike.toggle()
-                                
-                            } label: {
-                                Image(systemName: pressedLike ? "heart.fill" : "heart")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 23)
-                                    .foregroundColor(pressedLike ? .red : .primary)
-                            }
-                            
-                            Button {
-                                // ?
-                            } label: {
-                                Image(systemName: "message")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 23)
-                                    .foregroundColor(.primary)
-                            }
-                            
-                            
-                            Button {
-                                // ?
-                            } label: {
-                                Image(systemName: "paperplane")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 23)
-                                    .foregroundColor(.primary)
-                                
-                            }
-                        }
-                    }
-                    .padding(.top, 5)
-                    Spacer()
-                }
-                .foregroundColor(.white)
-                .padding(.horizontal)
-                
-                Button {
-                    // ?
-                } label: {
-                    Text("Смотреть комментарии (\(countResponds))")
-                        .font(.callout)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.leading)
-                        .foregroundColor(.gray)
-                }
-
-                
-                HStack {
-                    if let img = userAvatar {
-                        img
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                            .clipShape(Circle())
-                        
-                    } else {
-                        Image(systemName: "person.circle")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                            .foregroundColor(.white.opacity(0.5))
-                    }
-
-                    TextField(text: $inputRespond) {
-                        Text("Добавьте комментарий...")
-                            .font(.caption)
-                    }
-                    
-                    Spacer()
-                }
-                .padding(.leading)
-                
-                Text("\(5) часов назад")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                    .padding(.leading)
-            }
-            .padding(.bottom)
-
     }
 }
 
@@ -330,12 +181,12 @@ extension Image {
     
     func isYou(isActive: Bool) -> some View {
         let color1 = #colorLiteral(red: 1, green: 0, blue: 0.845524013, alpha: 1)
-        let color2 = #colorLiteral(red: 1, green: 0.4512313604, blue: 0.3125490546, alpha: 1)
+        let color2 = #colorLiteral(red: 0.9162911177, green: 0.3988925815, blue: 0.2392087281, alpha: 1)
         let color3 = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
         let gradient = LinearGradient(colors: [
+            Color(color3),
             Color(color1),
             Color(color2),
-            Color(color3)
         ], startPoint: .leading, endPoint: .bottom)
         
         if isActive {

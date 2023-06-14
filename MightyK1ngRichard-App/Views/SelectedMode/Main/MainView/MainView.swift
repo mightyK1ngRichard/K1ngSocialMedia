@@ -31,7 +31,10 @@ struct MainView: View {
     private func MainScreen() -> some View {
         switch(selected.selectedButton.text) {
         case .profile:
-            ProfileView()
+            let backImg = URL(string: "https://w-dog.ru/wallpapers/16/9/442689553177276/anime-iskusstvo-mahou-shoujo-madoka-magika-kaname-madoka-devushka-sidit-vzglyad-volshebnica-derevo-tron.jpg")!
+            
+            let userURL = URL(string: "https://proprikol.ru/wp-content/uploads/2020/05/kartinki-glaza-anime-53.jpg")!
+            ProfileView(backroundImage: backImg, userAvatar: userURL)
             
         case .news:
             NewsView()
