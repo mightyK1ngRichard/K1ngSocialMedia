@@ -84,7 +84,6 @@ struct NewsView: View {
                 self.selectedMode.showMenu = true
                 self.selectedMode.selectedButton.text = .news
             }
-            print("PRESSED!! \(selectedMode.showMenu) \(selectedMode.selectedButton.text)")
             
         } label: {
             ZStack {

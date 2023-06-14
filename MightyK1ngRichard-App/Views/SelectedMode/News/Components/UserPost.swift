@@ -30,15 +30,18 @@ struct UserPost: View {
                         AsyncImage(url: correctLink) { image in
                             image
                                 .resizable()
+                                .aspectRatio(contentMode: .fill)
                                 .frame(width: 35, height: 35)
                                 .clipShape(Circle())
                         } placeholder: {
                             ProgressView()
+                                .padding(.trailing, 5)
                         }
                         
                     } else {
                         Image(systemName: "person.circle")
                             .resizable()
+                            .aspectRatio(contentMode: .fit)
                             .frame(width: 35, height: 35)
                             .foregroundColor(.white.opacity(0.5))
                     }
@@ -76,6 +79,7 @@ struct UserPost: View {
 
                     } placeholder: {
                         ProgressView()
+                            .padding(.trailing, 5)
                     }
                    
                     
@@ -140,17 +144,20 @@ struct UserPost: View {
                         AsyncImage(url: correctURL) { image in
                             image
                                 .resizable()
+                                .aspectRatio(contentMode: .fill)
                                 .frame(width: 25, height: 25)
                                 .clipShape(Circle())
                             
                         } placeholder: {
                             ProgressView()
+                                .padding(.trailing, 5)
                         }
                             
                         
                     } else {
                         Image(systemName: "person.circle")
                             .resizable()
+                            .aspectRatio(contentMode: .fit)
                             .frame(width: 25, height: 25)
                             .foregroundColor(.white.opacity(0.5))
                     }

@@ -103,6 +103,7 @@ struct ProfileView: View {
                     
                 } placeholder: {
                     ProgressView()
+                        .padding(.trailing, 5)
                 }
                 
             } else {
@@ -155,6 +156,7 @@ struct ProfileView: View {
                                     }
                             } placeholder: {
                                 ProgressView()
+                                    .padding(.trailing, 5)
                             }
                             
                         } else {
@@ -291,6 +293,7 @@ struct UserPostsView: View {
                             
                         } placeholder: {
                             ProgressView()
+                                .padding(.trailing, 5)
                         }
                         
                     } else {
@@ -337,6 +340,7 @@ struct UserPostsView: View {
                     
                 } placeholder: {
                     ProgressView()
+                        .padding(.trailing, 5)
                 }
                 
             }
