@@ -34,7 +34,7 @@ struct NewsView: View {
                         
                         Divider()
                         ForEach(0...10, id: \.self) { user in
-                            UserPost(username: "mightyK1ngRichard", userAvatar: Image("k1ng"), imageOfPost: Image("k1ng"), countLike: 100, countResponds: 20, location: .current, size: size)
+                            UserPost(username: "mightyK1ngRichard", userAvatar: Image("k1ng"), imageOfPost: Image("wwdc"), countLike: 100, countResponds: 20, location: .current, size: size)
                         }
                     }
                 }
