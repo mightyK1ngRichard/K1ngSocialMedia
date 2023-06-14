@@ -11,10 +11,10 @@ struct NewsView: View {
     @EnvironmentObject var selectedMode: SelectedButton
     
     var people = [
-        "Richard",
-        "K1ng",
+        "developer",
         "mightyK1ngRichard",
-        "Legend",
+        "k1ng",
+        "richard",
         "User 2",
         "User 3",
     ]
@@ -41,8 +41,8 @@ struct NewsView: View {
                         Divider()
                         ForEach(0...10, id: \.self) { user in
                             // TODO: Заменить при api.
-                            let userURL = URL(string: "https://w.forfun.com/fetch/6c/6cbaa4c4c22f9df35a3f194537acca00.jpeg")!
-                            let postURL = URL(string: "https://proprikol.ru/wp-content/uploads/2020/05/kartinki-glaza-anime-53.jpg")!
+                            let userURL = URL(string: "https://ru-static.z-dn.net/files/df9/899fd190739b0985daa1921650cb9897.jpg")!
+                            let postURL = URL(string: "https://hi-news.ru/wp-content/uploads/2015/06/WWDC-2015-Wallpaper-for-Estandar-Resolution-Mac-Black-Edition-2880-x-18001.png")!
                             
                             UserPost(username: "mightyK1ngRichard", userAvatar: userURL, imageOfPost: postURL, countLike: 100, countResponds: 20, location: .current, size: size)
                         }

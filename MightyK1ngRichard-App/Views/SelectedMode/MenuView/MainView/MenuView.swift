@@ -44,7 +44,7 @@ struct MenuView: View {
                             Button {
                                 // ?
                                 selected.selectedButton.text = button.text
-                                print("==> \(button.id) \(selected.selectedButton)")
+                                
                                 
                             } label: {
                                 Image(systemName: button.image)
@@ -86,16 +86,22 @@ struct MenuView: View {
     
     @ViewBuilder
     func avatar() -> some View {
-        Image("k1ng")
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 45, height: 45)
-            .clipShape(Circle())
-            .overlay {
-                Circle()
-                    .stroke(lineWidth: 1)
-                    .foregroundColor(.white)
-            }
+        AsyncImage(url: URL(string: "https://ru-static.z-dn.net/files/df9/899fd190739b0985daa1921650cb9897.jpg")!) { image in
+            
+            image
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 45, height: 45)
+                .clipShape(Circle())
+                .overlay {
+                    Circle()
+                        .stroke(lineWidth: 1)
+                        .foregroundColor(.white)
+                }
+        } placeholder: {
+            ProgressView()
+                .padding(.trailing, 5)
+        }
     }
 }
 

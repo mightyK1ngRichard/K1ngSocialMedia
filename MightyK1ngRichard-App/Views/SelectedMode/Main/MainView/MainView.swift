@@ -31,9 +31,9 @@ struct MainView: View {
     private func MainScreen() -> some View {
         switch(selected.selectedButton.text) {
         case .profile:
-            let backImg = URL(string: "https://w-dog.ru/wallpapers/16/9/442689553177276/anime-iskusstvo-mahou-shoujo-madoka-magika-kaname-madoka-devushka-sidit-vzglyad-volshebnica-derevo-tron.jpg")!
+            let backImg = URL(string: "https://d1lss44hh2trtw.cloudfront.net/assets/article/2023/01/09/apple-to-unveil-mixed-reality-headset-spring-2023-news_feature.jpg")!
             
-            let userURL = URL(string: "https://proprikol.ru/wp-content/uploads/2020/05/kartinki-glaza-anime-53.jpg")!
+            let userURL = URL(string: "https://ru-static.z-dn.net/files/df9/899fd190739b0985daa1921650cb9897.jpg")!
             ProfileView(backroundImage: backImg, userAvatar: userURL)
             
         case .news:
