@@ -8,13 +8,19 @@
 import SwiftUI
 
 struct NewsView: View {
+    @EnvironmentObject var selectedMode: SelectedButton
+    
     var people = [
-        "User",
+        "Richard",
+        "K1ng",
+        "mightyK1ngRichard",
+        "Legend",
+        "User 2",
+        "User 3",
     ]
     
     var body: some View {
         MainScreen()
-        
     }
     
     private func MainScreen() -> some View {
@@ -26,8 +32,8 @@ struct NewsView: View {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
                                 YourCircle()
-                                ForEach(0...10, id: \.self) { user in
-                                    UserCircle(username: "user \(user)", userAvatar: Image("k1ng"), hasNewStory: true)
+                                ForEach(people, id: \.self) { user in
+                                    UserCircle(username: user, userAvatar: Image("k1ng"), hasNewStory: true)
                                 }
                             }
                         }
@@ -52,6 +58,7 @@ struct NewsView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
                             // ?
+                            
                         } label: {
                             Image(systemName: "paperplane")
                                 .foregroundColor(Color.primary)
@@ -61,11 +68,19 @@ struct NewsView: View {
             .navigationBarTitle("Новости", displayMode: .inline)
             }
         }
+        .onAppear() {
+            // ?
+        }
     }
     
     private func YourCircle() -> some View {
         Button {
             // ?
+            DispatchQueue.main.async {
+                self.selectedMode.showMenu = true
+                self.selectedMode.selectedButton.text = .news
+            }
+            print("PRESSED!! \(selectedMode.showMenu) \(selectedMode.selectedButton.text)")
             
         } label: {
             ZStack {
@@ -75,12 +90,12 @@ struct NewsView: View {
                         .padding(.leading, 5)
                     
                     Text("Вы")
-                        .font(.headline)
+                        .font(.footnote)
                         .foregroundColor(Color.primary)
                     
                 }
                 Image(systemName: "plus.circle.fill")
-                    .scaleEffect(1.5)
+                    .scaleEffect(1.2)
                     .background(
                         Color.primary
                             .colorInvert()
@@ -117,7 +132,7 @@ struct UserCircle: View {
                 
                 
                 Text(username)
-                    .font(.headline)
+                    .font(.footnote)
                     .foregroundColor(Color.primary)
             }
             .frame(maxWidth: 80)
@@ -283,6 +298,7 @@ struct UserPost: View {
 struct NewsView_Previews: PreviewProvider {
     static var previews: some View {
         NewsView()
+            .environmentObject(SelectedButton())
     }
 }
 
