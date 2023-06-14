@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-var backgroundColor : UIColor = #colorLiteral(red: 0.1105830893, green: 0.1105830893, blue: 0.1105830893, alpha: 1)
 var colorOfText     : Color = .white
+var backgroundColor : UIColor = #colorLiteral(red: 0.1105830893, green: 0.1105830893, blue: 0.1105830893, alpha: 1)
 
 struct ProfileView: View {
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var selected   : SelectedButton
     @State private var pressedButton = "Фото"
     
@@ -30,8 +31,8 @@ struct ProfileView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             ScreenOfUser()
+            
         }
-        .background(Color(.black))
         .ignoresSafeArea()
     }
     
@@ -98,7 +99,7 @@ struct ProfileView: View {
             
             VStack {
                 ZStack(alignment: .top) {
-                    Color(.black)
+                    Color.black
                         .offset(y: 20)
                     
                     VStack {
