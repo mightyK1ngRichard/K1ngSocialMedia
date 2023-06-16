@@ -47,7 +47,7 @@ struct UserPost: View {
                     }
                     
                     VStack {
-                        Text(username)
+                        Text(username.lowercased())
                             .font(.headline)
                             .foregroundColor(.primary)
                             .frame(maxWidth: .infinity, alignment: .leading)

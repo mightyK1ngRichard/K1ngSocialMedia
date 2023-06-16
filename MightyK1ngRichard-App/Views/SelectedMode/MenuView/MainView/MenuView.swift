@@ -17,7 +17,7 @@ struct MenuView: View {
     var body: some View {
         GeometryReader {
             let size = $0.size
-            let width = size.width * 0.6
+            let width = size.width * 0.646
             let height = size.height
             
             HStack {
@@ -72,7 +72,7 @@ struct MenuView: View {
                 .background(
                     Rectangle()
                         .frame(maxWidth: width, maxHeight: .infinity)
-                        .shadow(color: .white, radius: 45, x: -54, y: 0)
+                        .shadow(color: Color(#colorLiteral(red: 1, green: 0, blue: 0.980173409, alpha: 1)), radius: 20, x: -10, y: 0)
                         .ignoresSafeArea()
                 )
             }

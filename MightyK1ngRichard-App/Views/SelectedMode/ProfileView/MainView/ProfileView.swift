@@ -103,7 +103,7 @@ struct ProfileView: View {
                     
                 } placeholder: {
                     ProgressView()
-                        .padding(.trailing, 5)
+                        .padding(.top)
                 }
                 
             } else {

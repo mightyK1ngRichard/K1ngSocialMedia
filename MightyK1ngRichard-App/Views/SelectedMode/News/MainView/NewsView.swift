@@ -12,10 +12,10 @@ struct NewsView: View {
     
     var people = [
         "developer",
-        "mightyK1ngRichard",
-        "k1ng",
+        "morgen_shtern",
+        "mightyK1ngRicharad",
         "richard",
-        "User 2",
+        "permyakoovv",
         "User 3",
     ]
     
@@ -33,7 +33,7 @@ struct NewsView: View {
                             HStack {
                                 YourCircle()
                                 ForEach(people, id: \.self) { user in
-                                    UserCircle(username: user, userAvatar: Image("k1ng"), hasNewStory: true)
+                                    UserCircle(username: user, userAvatar: URL(string: "https://w.forfun.com/fetch/7e/7ed25326b59225505b699388f9579faa.jpeg")!, hasNewStory: true)
                                 }
                             }
                         }
@@ -116,7 +116,7 @@ struct NewsView: View {
 
 struct UserCircle: View {
     var username    : String
-    var userAvatar  : Image?
+    var userAvatar  : URL?
     var hasNewStory : Bool = false
     
     var body: some View {
@@ -124,20 +124,25 @@ struct UserCircle: View {
             // ?
         } label: {
             VStack{
-                if let image = userAvatar {
-                    image
-                        .IsActiveStory(isActive: hasNewStory)
+                if let url = userAvatar {
+                    AsyncImage(url: url) { image in
+                        image
+                            .IsActiveStory(isActive: hasNewStory)
+                    } placeholder: {
+                        ProgressView()
+                            .frame(width: 83, height: 83)
+                    }
                     
                 } else {
                     Image(systemName: "person.circle")
                         .IsActiveStory(isActive: hasNewStory)
                 }
                 
-                Text(username)
-                    .font(.footnote)
+                Text(username.lowercased())
+                    .font(.caption)
                     .foregroundColor(Color.primary)
+                    .frame(maxWidth: 90)
             }
-            .frame(maxWidth: 80)
         }
         .padding(.top, 5)
         .padding(.leading, 5)
@@ -158,30 +163,33 @@ extension Image {
         let color1 = #colorLiteral(red: 1, green: 0, blue: 0.845524013, alpha: 1)
         let color2 = #colorLiteral(red: 1, green: 0.4512313604, blue: 0.3125490546, alpha: 1)
         let color3 = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
-        let gradient = LinearGradient(colors: [
+        let modifiedColors = [
             Color(color1),
             Color(color2),
             Color(color3)
-        ], startPoint: .leading, endPoint: .bottom)
+        ]
+        let gradient = LinearGradient(colors: modifiedColors, startPoint: .leading, endPoint: .bottom)
         
         return self
             .resizable()
-            .frame(width: 73, height: 73)
+            .frame(width: 83, height: 83)
             .aspectRatio(contentMode: .fill)
             .clipShape(Circle())
             .padding(3)
             .overlay {
                 Circle()
-                    .stroke(lineWidth: 2)
+                    .stroke(lineWidth: 3)
                     .fill(isActive ? gradient : LinearGradient(colors: [Color.gray.opacity(0.7)], startPoint: .leading, endPoint: .top))
             }
         
     }
     
+
     func isYou(isActive: Bool) -> some View {
-        let color1 = #colorLiteral(red: 1, green: 0, blue: 0.845524013, alpha: 1)
-        let color2 = #colorLiteral(red: 0.9162911177, green: 0.3988925815, blue: 0.2392087281, alpha: 1)
-        let color3 = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
+//        let color1 = #colorLiteral(red: 0.5489674807, green: 0, blue: 0.4663746357, alpha: 1)
+        let color1 = #colorLiteral(red: 1, green: 0, blue: 0.9242385626, alpha: 1)
+        let color2 = #colorLiteral(red: 0.9287416339, green: 0.1241953298, blue: 0, alpha: 1)
+        let color3 = #colorLiteral(red: 1, green: 0.8841608167, blue: 0, alpha: 1)
         let gradient = LinearGradient(colors: [
             Color(color3),
             Color(color1),
@@ -192,21 +200,21 @@ extension Image {
             return AnyView(
                 self
                     .resizable()
-                    .frame(width: 73, height: 73)
+                    .frame(width: 83, height: 83)
                     .aspectRatio(contentMode: .fill)
                     .clipShape(Circle())
                     .padding(3)
                     .overlay {
                         Circle()
-                            .stroke(lineWidth: 2)
-                            .fill(isActive ? gradient : LinearGradient(colors: [Color.gray.opacity(0.7)], startPoint: .leading, endPoint: .top))
+                            .stroke(lineWidth: 3)
+                            .fill(isActive ? gradient.saturation(200.0) as! LinearGradient : LinearGradient(colors: [Color.gray.opacity(0.7)], startPoint: .leading, endPoint: .top))
                     }
             )
         }
         return AnyView(
             self
                 .resizable()
-                .frame(width: 80, height: 80)
+                .frame(width: 83, height: 83)
                 .aspectRatio(contentMode: .fill)
                 .clipShape(Circle())
         )
