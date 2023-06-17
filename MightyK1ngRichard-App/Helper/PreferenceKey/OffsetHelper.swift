@@ -20,7 +20,6 @@ struct OffsetKey: PreferenceKey {
 extension View {
     @ViewBuilder
     func offsetExtractor(coordinateSpace: String, complition: @escaping (CGRect) -> ()) -> some View {
-        
         self
             .overlay {
                 GeometryReader {

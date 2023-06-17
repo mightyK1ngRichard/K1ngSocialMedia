@@ -10,4 +10,5 @@ import Foundation
 enum MyKeys: String {
     case keyOfScrollView = "keyOfScrollView"
     case keyOfAnchor     = "keyOfAnchor"
+    case keyOfprofileScrollView = "keyOfprofileScrollView"
 }

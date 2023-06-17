@@ -12,8 +12,11 @@ var backgroundColor : UIColor = #colorLiteral(red: 0.1105830893, green: 0.110583
 
 struct ProfileView: View {
     @Environment(\.colorScheme) private var shemaColor
-    @EnvironmentObject var selected  : SelectedButton
-    @State private var pressedButton = "Фото"
+    @EnvironmentObject var selected   : SelectedButton
+    @State private var pressedButton  = "Фото"
+    @State private var scrollProgress : CGFloat = .zero
+    @State private var showBar        = false
+    @State private var scaleImage     : CGSize = .init(width: 1, height: 1)
     
     var userPosts       = [
         ("2023-02-02", "Просто что-то про жизнь"),
@@ -30,18 +33,174 @@ struct ProfileView: View {
     
     var body: some View {
         GeometryReader { proxy in
+            let size = proxy.size
+            let safeArea = proxy.safeAreaInsets
             ScrollView(showsIndicators: false) {
-                ScreenOfUser(size: proxy.size)
+                MainProfileView(safeArea: safeArea, size: size)
+            }
+            /// Scroll reader.
+            .coordinateSpace(name: MyKeys.keyOfprofileScrollView.rawValue)
+            .overlay(alignment: .top) {
+                HStack {
+                    Button {
+                        // ?
+                        selected.showMenu = true
+                        
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .background(
+                                Circle()
+                                    .frame(width: 35, height: 35)
+                                    .foregroundColor(Color(backgroundColor).opacity(0.8))
+                                    .offset(x: 2)
+                            )
+                            .foregroundColor(.white)
+                            .frame(height: 20)
+                    }
+
+                    
+                    Spacer()
+                    if showBar {
+                        Text(nickname)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    }
+                    
+                    Button {
+                        // ?
+                        
+                    } label: {
+                        Image(systemName: "square.grid.2x2")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .background(
+                                Circle()
+                                    .frame(width: 35, height: 35)
+                                    .foregroundColor(Color(backgroundColor).opacity(0.8))
+                            )
+                            .foregroundColor(.white)
+                            .frame(height: 20)
+                    }
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, safeArea.top)
+                .padding(.bottom)
+                .background(showBar ? Color(backgroundColor) : Color.clear)
+            }
+            .ignoresSafeArea()
+        }
+    }
+    
+    private func MainProfileView(safeArea: EdgeInsets, size: CGSize) -> some View {
+        ZStack(alignment: .top) {
+            UserHeader(size: size)
+            RoundedRectangle(cornerRadius: 20)
+                .fill(shemaColor == .dark ? .black : .white)
+                .padding(.top, safeArea.top + 120)
+            
+            VStack {
+                TopView()
+                CountOfFriendsView()
+                imagesView()
+                PostsView(size: size)
+            }
+            .padding(.top, safeArea.top + 120)
+            
+            UserAvatar(safeArea: safeArea)
+        }
+    }
+    
+    @ViewBuilder
+    private func UserHeader(size: CGSize) -> some View {
+        /// Шапка юзера.
+        if let urlLink = backroundImage {
+            AsyncImage(url: urlLink) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: size.width)
+                    .scaleEffect(scaleImage)
                 
+            } placeholder: {
+                Rectangle()
+                    .fill(Color(backgroundColor))
+                    .frame(maxWidth: .infinity)
+            }
+            
+        } else {
+            Image("wwdc")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: size.width)
+        }
+        
+    }
+    
+    @ViewBuilder
+    private func UserAvatar(safeArea: EdgeInsets) -> some View {
+        let isReduceAvatar = scrollProgress < 0
+        let currentSize = CGSize(width: isReduceAvatar ? 100 + scrollProgress : 100, height: isReduceAvatar ? (100 + scrollProgress / 30) : 100)
+        
+        Button {
+            // ?
+         
+            
+        } label: {
+            if let url = userAvatar {
+                AsyncImage(url: url) { image in
+                    image
+                        .avatarSize(size: currentSize)
+
+                } placeholder: {
+                    Image(systemName: "person.circle")
+                        .avatarSize(size: currentSize)
+
+                        .foregroundColor(.primary)
+                }
+                
+            } else {
+                Image("k1ng")
+                    .avatarSize(size: currentSize)
+
             }
         }
-        .ignoresSafeArea()
+        .padding(.top, safeArea.top + 66)
+        .offsetExtractor(coordinateSpace: MyKeys.keyOfprofileScrollView.rawValue) { scrollRect in
+            scrollProgress = scrollRect.minY
+        }
+        .onChange(of: scrollProgress) { _ in
+            showBar = (-scrollProgress >= 83)
+            let scale = min(max(1, scrollProgress / 40), 3)
+            
+            scaleImage = scrollProgress > 0 ? CGSize(width: scale, height: scale) : CGSize(width: 1, height: 1)
+        }
+  
+
+    }
+    
+    @ViewBuilder
+    private func PostsView(size: CGSize) -> some View {
+        VStack {
+            // TODO: При работе с БД заменить данные
+            ForEach(0...4, id: \.self) { _ in
+                let test = """
+Пишу что-то для тест поста. Я хз что писать для проверки вёрстки, но надо побольше текста.
+Так, вот я сделал абзац.
+
+А вот теперь ещё один.
+""".trimmingCharacters(in: .whitespaces)
+                let imageOfPost = URL(string: "https://img1.akspic.ru/attachments/crops/7/1/6/8/6/168617/168617-wwdc22-grafika-art-gaz-vizualnyj_effekt_osveshheniya-1366x768.jpg")!
+                UserPostsView(scrollProgress: $scrollProgress, textOfPost: test, imageOfPost: imageOfPost, dateOfPost: .now, username: nickname, userAvatar: userAvatar, countOfLike: 10, size: size)
+            }
+        }
     }
     
     @ViewBuilder
     private func TopView() -> some View {
         VStack {
             VStack(spacing: 5) {
+                //Text(nickname)
                 Text(nickname)
                     .font(.system(.headline, weight: .black))
                     .scaleEffect(1.3)
@@ -87,86 +246,9 @@ struct ProfileView: View {
             .padding(.bottom)
         }
         .foregroundColor(colorOfText)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+        .frame(height: 200)
         .background(Color(backgroundColor))
         .cornerRadius(20)
-    }
-    
-    @ViewBuilder
-    func ScreenOfUser(size: CGSize) -> some View {
-        ZStack(alignment: .top) {
-            if let urlLink = backroundImage {
-                AsyncImage(url: urlLink) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: size.width)
-                    
-                } placeholder: {
-                    Rectangle()
-                        .fill(Color(backgroundColor))
-                        .frame(maxWidth: .infinity)
-                }
-                
-            } else {
-                Image("k1ng")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: size.width)
-            }
-            
-            VStack {
-                ZStack(alignment: .top) {
-                    Color.black
-                        .offset(y: 20)
-                    
-                    VStack {
-                        TopView()
-                            .frame(height: 200)
-                        CountOfFriendsView()
-                        
-                        imagesView()
-                        
-                        // TODO: При работе с БД заменить данные
-                        ForEach(0...4, id: \.self) { _ in
-                            let test = """
-Пишу что-то для тест поста. Я хз что писать для проверки вёрстки, но надо побольше текста.
-Так, вот я сделал абзац.
-
-А вот теперь ещё один.
-""".trimmingCharacters(in: .whitespaces)
-                            let imageOfPost = URL(string: "https://img1.akspic.ru/attachments/crops/7/1/6/8/6/168617/168617-wwdc22-grafika-art-gaz-vizualnyj_effekt_osveshheniya-1366x768.jpg")!
-                            UserPostsView(textOfPost: test, imageOfPost: imageOfPost, dateOfPost: .now, username: nickname, userAvatar: userAvatar, countOfLike: 10, size: size)
-                        }
-                    }
-                    
-                    Button {
-                        // ?
-                        withAnimation(.spring(response: 0.5, dampingFraction: 0.4)) {
-                            selected.showMenu = true
-                        }
-                        
-                    } label: {
-                        if let url = userAvatar {
-                            AsyncImage(url: url) { image in
-                                image
-                                    .avatarSize()
-
-                            } placeholder: {
-                                Image(systemName: "person.circle")
-                                    .avatarSize()
-                                    .foregroundColor(.primary)
-                            }
-                            
-                        } else {
-                            Image("k1ng")
-                                .avatarSize()
-                        }
-                    }
-                }
-            }
-            .padding(.top, 180)
-        }
     }
     
     @ViewBuilder
@@ -266,182 +348,27 @@ struct ProfileView: View {
     }
 }
 
-/// View постов.
-struct UserPostsView: View {
-    @State private var pressedLike    = false
-    @State private var pressedComment = false
+/// Расширение для размеров иконок.
+extension Image {
+    func iconsSizes() -> some View {
+        return self
+            .resizable()
+            .scaledToFit()
+            .frame(width: 15, height: 15)
+    }
     
-    var textOfPost  : String?
-    var imageOfPost : URL?
-    var dateOfPost  : Date
-    var username    : String
-    var userAvatar  : URL?
-    var countOfLike : Int
-    var size        : CGSize
-    
-    var body: some View {
-        VStack {
-            Group {
-                HStack {
-                    if let urlLink = userAvatar {
-                        AsyncImage(url: urlLink) { image in
-                            image
-                                .resizable()
-                                .frame(width: 35, height: 35)
-                                .clipShape(Circle())
-                            
-                        } placeholder: {
-                            Image(systemName: "person.circle")
-                                .resizable()
-                                .frame(width: 35, height: 35)
-                                .padding(.trailing, 5)
-                                .foregroundColor(.primary)
-                        }
-                        
-                    } else {
-                        Image(systemName: "person.circle")
-                            .resizable()
-                            .frame(width: 35, height: 35)
-                            .foregroundColor(.white.opacity(0.5))
-                    }
-                    
-                    VStack {
-                        Text(username)
-                            .font(.subheadline)
-                            .foregroundColor(colorOfText)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        Text("\(dateOfPost.formatted())")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                    
-                    Spacer()
-                }
-                
-                if let text = textOfPost {
-                    HStack {
-                        Text(text)
-                            .foregroundColor(colorOfText)
-                            .font(.body)
-                        Spacer()
-                    }
-                }
-            }
-            .padding(.horizontal)
-            .padding(.top, 8)
-            
-            if let urlLink = imageOfPost {
-                AsyncImage(url: urlLink) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: size.width)
-                        .background(Color(backgroundColor))
-                    
-                } placeholder: {
-                    ProgressView()
-                        .padding(.trailing, 5)
-                }
-                
-            }
+    func avatarSize(size: CGSize) -> some View {
 
-            HStack {
-                Button {
-                    
-                    self.pressedLike.toggle()
-                    
-                } label: {
-                    LikeButtonView(isPressed: pressedLike)
-                }
-                
-                Button {
-                    // ? Окрыть view для коммента.
-                    self.pressedComment.toggle()
-                    
-                } label: {
-                    CommentButtonView()
-                }
-                
-                
-                Spacer()
+        return self
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(maxWidth: abs(size.width), maxHeight: abs(size.height))
+            .clipShape(Circle())
+            .overlay {
+                Circle()
+                    .stroke(lineWidth: 5)
+                    .foregroundColor(Color(backgroundColor))
             }
-            .foregroundColor(.white)
-            .padding(.horizontal)
-            .padding(.bottom, 8)
-        }
-        .frame(maxWidth: .infinity)
-        .background(Color(backgroundColor))
-        .cornerRadius(20)
-    }
-    
-    @ViewBuilder
-    private func LikeButtonView(isPressed: Bool) -> some View {
-        if isPressed {
-            HStack {
-                Image(systemName: "heart.circle.fill")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 20)
-                    .foregroundColor(.red)
-                    .background(Color.white.frame(width: 12, height: 12))
-                    .clipShape(Circle())
-                
-                Text("\(pressedLike ? countOfLike + 1 : countOfLike)")
-                    .font(.caption)
-                    .offset(x: -4)
-                    .foregroundColor(.red)
-            }
-            .padding(.horizontal, 7)
-            .padding(.vertical, 5)
-            .background(
-                Capsule()
-                    .foregroundColor(.red)
-                    .opacity(0.15)
-            )
-            
-        } else {
-            HStack {
-                Image(systemName: "heart")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 20)
-                
-                
-                Text("\(countOfLike)")
-                    .font(.caption)
-                    .offset(x: -4)
-            }
-            .padding(.horizontal, 7)
-            .padding(.vertical, 5)
-            .background(
-                Capsule()
-                    .foregroundColor(.gray)
-                    .opacity(0.1)
-            )
-            .foregroundColor(.white.opacity(0.6))
-        }
-    }
-    
-    @ViewBuilder
-    private func CommentButtonView() -> some View {
-        HStack {
-            Image(systemName: "bubble.left")
-            
-            Text("3")
-                .font(.caption)
-                .offset(x: -5)
-        }
-        .padding(.leading, 7)
-        .padding(.trailing, 4)
-        .padding(.vertical, 5)
-        .background(
-            Capsule()
-                .foregroundColor(.gray)
-                .opacity(0.1)
-        )
-        .foregroundColor(.white.opacity(0.6))
     }
     
 }
@@ -453,33 +380,5 @@ struct ProfileView_Previews: PreviewProvider {
         let userURL = URL(string: "https://ru-static.z-dn.net/files/df9/899fd190739b0985daa1921650cb9897.jpg")!
         
         ProfileView(backroundImage: backImg, userAvatar: userURL)
-            .environmentObject(SelectedButton())
-        
     }
-}
-
-/// Расширение для размеров иконок.
-extension Image {
-    func iconsSizes() -> some View {
-        return self
-            .resizable()
-            .scaledToFit()
-            .frame(width: 15, height: 15)
-    }
-    
-    func avatarSize() -> some View {
-        return self
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 100, height: 100)
-            .clipShape(Circle())
-            .overlay {
-                Circle()
-                    .stroke(lineWidth: 5)
-                    .foregroundColor(Color(backgroundColor))
-            }
-            .padding(.bottom, 5)
-            .offset(y: -50)
-    }
-    
 }
