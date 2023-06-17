@@ -22,6 +22,7 @@ struct MainView: View {
             
             if selected.showMenu {
                 MenuView(buttons: $buttons)
+                    .zIndex(2)
             }
         }
         .environmentObject(selected)
@@ -40,7 +41,7 @@ struct MainView: View {
             NewsView()
             
         case .messages:
-            MessagesView()
+            FirstTraining()
             
         case .friends:
             Text("Друзья")

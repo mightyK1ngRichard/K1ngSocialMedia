@@ -11,6 +11,7 @@ var colorOfText     : Color = .white
 var backgroundColor : UIColor = #colorLiteral(red: 0.1105830893, green: 0.1105830893, blue: 0.1105830893, alpha: 1)
 
 struct ProfileView: View {
+    @Environment(\.colorScheme) private var shemaColor
     @EnvironmentObject var selected  : SelectedButton
     @State private var pressedButton = "Фото"
     
@@ -56,7 +57,7 @@ struct ProfileView: View {
                     Text(locationInfo)
                         .font(.caption)
                     
-                    Image(systemName: "book")
+                    Image(systemName: "graduationcap")
                         .iconsSizes()
                     
                     Text("МГТУ им. Н.Э.Баумана")
@@ -102,8 +103,9 @@ struct ProfileView: View {
                         .frame(width: size.width)
                     
                 } placeholder: {
-                    ProgressView()
-                        .padding(.top)
+                    Rectangle()
+                        .fill(Color(backgroundColor))
+                        .frame(maxWidth: .infinity)
                 }
                 
             } else {
@@ -140,23 +142,20 @@ struct ProfileView: View {
                     
                     Button {
                         // ?
-                        self.selected.showMenu = true
+                        withAnimation(.spring(response: 0.5, dampingFraction: 0.4)) {
+                            selected.showMenu = true
+                        }
                         
                     } label: {
                         if let url = userAvatar {
                             AsyncImage(url: url) { image in
                                 image
                                     .avatarSize()
-                                    .onTapGesture {
-                                        DispatchQueue.main.async {
-                                            withAnimation(.spring(response: 0.5, dampingFraction: 0.4)) {
-                                                selected.showMenu = true
-                                            }
-                                        }
-                                    }
+
                             } placeholder: {
-                                ProgressView()
-                                    .padding(.trailing, 5)
+                                Image(systemName: "person.circle")
+                                    .avatarSize()
+                                    .foregroundColor(.primary)
                             }
                             
                         } else {
@@ -292,8 +291,11 @@ struct UserPostsView: View {
                                 .clipShape(Circle())
                             
                         } placeholder: {
-                            ProgressView()
+                            Image(systemName: "person.circle")
+                                .resizable()
+                                .frame(width: 35, height: 35)
                                 .padding(.trailing, 5)
+                                .foregroundColor(.primary)
                         }
                         
                     } else {

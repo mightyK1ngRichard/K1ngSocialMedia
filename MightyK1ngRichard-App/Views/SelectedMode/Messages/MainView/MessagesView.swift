@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct MessagesView: View {
+    @EnvironmentObject var selected: SelectedButton
+    
     var body: some View {
-        Text("Сообщения")
-            .foregroundColor(.yellow)
+        //
+        Text("")
     }
 }
 
 struct MessagesView_Previews: PreviewProvider {
     static var previews: some View {
         MessagesView()
+            .environmentObject(SelectedButton())
     }
 }

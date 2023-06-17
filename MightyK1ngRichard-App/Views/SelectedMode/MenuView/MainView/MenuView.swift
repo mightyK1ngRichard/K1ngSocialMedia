@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MenuView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject var selected : SelectedButton
     @Binding var buttons            : [ButtonsBar]
     
@@ -15,71 +16,73 @@ struct MenuView: View {
     let link     = "@mightyk1ngrichard"
     
     var body: some View {
-        GeometryReader {
-            let size = $0.size
-            let width = size.width * 0.646
-            let height = size.height
-            
-            HStack {
-                VStack (spacing: 20) {
+        GeometryReader { proxy in
+            HStack(spacing: 0) {
+                GeometryReader { _ in
                     HStack {
-                        avatar()
-                        VStack {
-                            Text(nickname)
-                                .font(.headline)
-                                .lineLimit(1)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            
-                            Text(link)
-                                .font(.caption)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        }
-                        .padding(.leading, 3)
-                        .foregroundColor(.primary)
-                    }
-                    .padding(.bottom, 20)
-                    
-                    ForEach(buttons) { button in
-                        HStack {
-                            Button {
-                                // ?
-                                selected.selectedButton.text = button.text
-                                
-                                
-                            } label: {
-                                Image(systemName: button.image)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 20)
-                                    .padding(.trailing, 8)
-                                
-                                Text(button.text.rawValue)
-                                    .font(.headline)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
+                        VStack (spacing: 20) {
+                            HStack {
+                                avatar()
+                                VStack {
+                                    Text(nickname)
+                                        .font(.headline)
+                                        .lineLimit(1)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                    
+                                    Text(link)
+                                        .font(.caption)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                }
+                                .padding(.leading, 3)
                             }
+                            .padding(.bottom, 20)
                             
+                            ForEach(buttons) { button in
+                                HStack {
+                                    Button {
+                                        // ?
+                                        selected.selectedButton.text = button.text
+                                        
+                                        
+                                    } label: {
+                                        Image(systemName: button.image)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 20)
+                                            .padding(.trailing, 8)
+                                        
+                                        Text(button.text.rawValue)
+                                            .font(.headline)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                    }
+                                    
+                                }
+                                .padding(.leading, 5)
+                                
+                            }
+                            Spacer()
                         }
                         .padding(.leading, 5)
+                        .font(.title2)
+                        .foregroundColor(colorScheme == .dark ? .white : .white)
                         
                     }
-                    Spacer()
                 }
-                .padding(.leading, 5)
-                .font(.title2)
-                .foregroundColor(.primary)
-                .frame(width: width, height: height)
+                .frame(width: proxy.size.width * 0.6)
                 .background(.black)
                 .background(
                     Rectangle()
-                        .frame(maxWidth: width, maxHeight: .infinity)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .shadow(color: Color(#colorLiteral(red: 1, green: 0, blue: 0.980173409, alpha: 1)), radius: 20, x: -10, y: 0)
                         .ignoresSafeArea()
                 )
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(.black.opacity(0.1))
-            .onTapGesture {
-                selected.showMenu = false
+                
+                GeometryReader { _ in
+                }
+                .background(.primary.opacity(0.1))
+                .onTapGesture {
+                    selected.showMenu = false
+                }
             }
         }
     }
@@ -114,6 +117,6 @@ struct MenuView_Previews: PreviewProvider {
             .init(id: UUID(), text: .friends, image: "person.2"),
         ]))
         .environmentObject(SelectedButton())
-        .background(.yellow.opacity(0.1))
+//        .background(.yellow.opacity(0.1))
     }
 }
