@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum MyKeys: String {
     case keyOfScrollView = "keyOfScrollView"

@@ -9,9 +9,10 @@ import SwiftUI
 
 /// View постов.
 struct UserPostsView: View {
+    @Environment(\.colorScheme) private var shemaColor
     @State private var pressedLike    = false
     @State private var pressedComment = false
-    @Binding var scrollProgress : CGFloat
+    @Binding var scrollProgress       : CGFloat
     
     var textOfPost  : String?
     var imageOfPost : URL?
@@ -22,6 +23,8 @@ struct UserPostsView: View {
     var size        : CGSize
     
     var body: some View {
+        let backgroundColor: Color = self.shemaColor == .dark ? Color.VK.black : Color.VK.white
+        
         VStack {
             Group {
                 HStack {
@@ -45,13 +48,13 @@ struct UserPostsView: View {
                         Image(systemName: "person.circle")
                             .resizable()
                             .frame(width: 35, height: 35)
-                            .foregroundColor(.white.opacity(0.5))
+                            .foregroundColor(.primary)
                     }
                     
                     VStack {
                         Text(username)
                             .font(.subheadline)
-                            .foregroundColor(colorOfText)
+                            .foregroundColor(.primary)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
                         Text("\(dateOfPost.formatted())")
@@ -66,8 +69,9 @@ struct UserPostsView: View {
                 if let text = textOfPost {
                     HStack {
                         Text(text)
-                            .foregroundColor(colorOfText)
+                            .foregroundColor(.primary)
                             .font(.body)
+                        
                         Spacer()
                     }
                 }
@@ -81,7 +85,7 @@ struct UserPostsView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: size.width)
-                        .background(Color(backgroundColor))
+                        .background(backgroundColor)
                     
                 } placeholder: {
                     ProgressView()
@@ -92,7 +96,6 @@ struct UserPostsView: View {
 
             HStack {
                 Button {
-                    
                     self.pressedLike.toggle()
                     
                 } label: {
@@ -115,7 +118,7 @@ struct UserPostsView: View {
             .padding(.bottom, 8)
         }
         .frame(maxWidth: .infinity)
-        .background(Color(backgroundColor))
+        .background(backgroundColor)
         .cornerRadius(20)
     }
     
@@ -163,7 +166,7 @@ struct UserPostsView: View {
                     .foregroundColor(.gray)
                     .opacity(0.1)
             )
-            .foregroundColor(.white.opacity(0.6))
+            .foregroundColor(.primary.opacity(0.6))
         }
     }
     
@@ -184,7 +187,7 @@ struct UserPostsView: View {
                 .foregroundColor(.gray)
                 .opacity(0.1)
         )
-        .foregroundColor(.white.opacity(0.6))
+        .foregroundColor(.primary.opacity(0.6))
     }
     
 }

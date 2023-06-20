@@ -18,6 +18,7 @@
 		2C4447932A3A05EE00248B75 /* UserPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4447922A3A05EE00248B75 /* UserPost.swift */; };
 		2C4447962A3A06F600248B75 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 2C4447952A3A06F600248B75 /* SDWebImageSwiftUI */; };
 		2C82DE682A3D977D006AA47F /* UserPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C82DE672A3D977D006AA47F /* UserPosts.swift */; };
+		2C82DE6A2A3EA93F006AA47F /* SecondTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C82DE692A3EA93F006AA47F /* SecondTraining.swift */; };
 		2CD351262A3CFE7B00E53785 /* FirstTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD351252A3CFE7B00E53785 /* FirstTraining.swift */; };
 		2CD3512A2A3D03B700E53785 /* MyEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD351292A3D03B700E53785 /* MyEnums.swift */; };
 		2CD3512D2A3D03DE00E53785 /* OffsetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3512C2A3D03DE00E53785 /* OffsetHelper.swift */; };
@@ -59,6 +60,7 @@
 		2C44478F2A39D32000248B75 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		2C4447922A3A05EE00248B75 /* UserPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPost.swift; sourceTree = "<group>"; };
 		2C82DE672A3D977D006AA47F /* UserPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPosts.swift; sourceTree = "<group>"; };
+		2C82DE692A3EA93F006AA47F /* SecondTraining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondTraining.swift; sourceTree = "<group>"; };
 		2CD351252A3CFE7B00E53785 /* FirstTraining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTraining.swift; sourceTree = "<group>"; };
 		2CD351292A3D03B700E53785 /* MyEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEnums.swift; sourceTree = "<group>"; };
 		2CD3512C2A3D03DE00E53785 /* OffsetHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetHelper.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 		2C3E99FC2A37404C00ABEBDA /* ProfileView */ = {
 			isa = PBXGroup;
 			children = (
+				2C82DE6B2A4049F3006AA47F /* Model */,
 				2C82DE642A3D919C006AA47F /* Components */,
 				2C3E99FF2A37405F00ABEBDA /* MainView */,
 			);
@@ -237,10 +240,18 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		2C82DE6B2A4049F3006AA47F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		2CD351242A3CFE6500E53785 /* FeaturesTraining */ = {
 			isa = PBXGroup;
 			children = (
 				2CD351252A3CFE7B00E53785 /* FirstTraining.swift */,
+				2C82DE692A3EA93F006AA47F /* SecondTraining.swift */,
 			);
 			path = FeaturesTraining;
 			sourceTree = "<group>";
@@ -471,6 +482,7 @@
 				2C3E9A042A376BA100ABEBDA /* APIManager.swift in Sources */,
 				2C4447902A39D32000248B75 /* ProfileView.swift in Sources */,
 				2C3E99F72A373F3E00ABEBDA /* MessagesView.swift in Sources */,
+				2C82DE6A2A3EA93F006AA47F /* SecondTraining.swift in Sources */,
 				2CE47B742A3726D6003C863C /* ContentView.swift in Sources */,
 				2C4447932A3A05EE00248B75 /* UserPost.swift in Sources */,
 				2CD3512D2A3D03DE00E53785 /* OffsetHelper.swift in Sources */,

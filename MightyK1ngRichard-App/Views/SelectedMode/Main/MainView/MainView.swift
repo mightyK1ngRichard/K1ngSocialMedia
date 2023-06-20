@@ -45,8 +45,7 @@ struct MainView: View {
             FirstTraining()
             
         case .friends:
-            Text("Друзья")
-                .foregroundColor(.yellow)
+            SecondTraining()
         }
         
     }
