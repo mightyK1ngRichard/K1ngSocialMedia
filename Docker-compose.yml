@@ -1,18 +1,18 @@
-version: "3.8" # версия вашего docker-compose
-services: # имеджи, которые запустятся по вашему желанию
-  db: # название моего имеджа
-    image: postgres:12 # скачает image postgres 12 версии
-    volumes: # часть настроек для хранения данных, пока для нас это не важно
+version: "3.8" 
+services:
+  db: 
+    image: postgres:12 
+    volumes: 
       - type: volume
-        source: postgresdb-data
+        source: k1ngSochialMedia
         target: /var/lib/postgresql/data
-    ports: # порты
-      - "5432:5432"
-    environment: # переменные окружения, меняйте их если хотите поменять пароль, логин или название стартовой базы данных
-      POSTGRES_USER: bmstu_user
-      POSTGRES_DB: bmstu
-      POSTGRES_PASSWORD: bmstu_password
+    ports:
+      - "2727:5432"
+    environment: 
+      POSTGRES_USER: king
+      POSTGRES_DB: kingSochialMedia
+      POSTGRES_PASSWORD: king
 
-volumes: # часть настроек для хранения данных
-  postgresdb-data:
+volumes:
+  k1ngSochialMedia:
     driver: local

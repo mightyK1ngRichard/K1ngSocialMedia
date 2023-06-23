@@ -7,7 +7,10 @@
 
 import Foundation
 
+/// Работа с go lang server.
 class APIManager {
     static var shared = APIManager()
+    let host = "localhost"
+    let post = 2727
     
 }
