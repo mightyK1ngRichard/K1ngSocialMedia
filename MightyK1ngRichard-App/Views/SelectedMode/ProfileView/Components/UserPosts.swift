@@ -12,15 +12,9 @@ struct UserPostsView: View {
     @Environment(\.colorScheme) private var shemaColor
     @State private var pressedLike    = false
     @State private var pressedComment = false
-    @Binding var scrollProgress       : CGFloat
     
-    var textOfPost  : String?
-    var imageOfPost : URL?
-    var dateOfPost  : Date
-    var username    : String
-    var userAvatar  : URL?
-    var countOfLike : Int
-    var size        : CGSize
+    var post : UserPostData
+    var size : CGSize
     
     var body: some View {
         let backgroundColor: Color = self.shemaColor == .dark ? Color.VK.black : Color.VK.white
@@ -29,7 +23,7 @@ struct UserPostsView: View {
             Group {
                 HStack {
                     /// Аватарка пользователя.
-                    if let urlLink = userAvatar {
+                    if let urlLink = post.user.userAvatar {
                         AsyncImage(url: urlLink) { image in
                             image
                                 .resizable()
@@ -52,12 +46,12 @@ struct UserPostsView: View {
                     }
                     
                     VStack {
-                        Text(username)
+                        Text(post.user.nickname)
                             .font(.subheadline)
                             .foregroundColor(.primary)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
-                        Text("\(dateOfPost.formatted())")
+                        Text("\(post.datePublic.formatted())")
                             .font(.caption)
                             .foregroundColor(.gray)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -66,7 +60,8 @@ struct UserPostsView: View {
                     Spacer()
                 }
                 
-                if let text = textOfPost {
+                // TODO: -
+                if let text = post.content {
                     HStack {
                         Text(text)
                             .foregroundColor(.primary)
@@ -79,7 +74,7 @@ struct UserPostsView: View {
             .padding(.horizontal)
             .padding(.top, 8)
             
-            if let urlLink = imageOfPost {
+            if let urlLink = post.imageInPost {
                 AsyncImage(url: urlLink) { image in
                     image
                         .resizable()
@@ -134,7 +129,8 @@ struct UserPostsView: View {
                     .background(Color.white.frame(width: 12, height: 12))
                     .clipShape(Circle())
                 
-                Text("\(pressedLike ? countOfLike + 1 : countOfLike)")
+                // TODO: Переделать при работе с БД.
+                Text("\(pressedLike ? post.countOfLike + 1 : post.countOfLike)")
                     .font(.caption)
                     .offset(x: -4)
                     .foregroundColor(.red)
@@ -155,7 +151,7 @@ struct UserPostsView: View {
                     .frame(width: 20)
                 
                 
-                Text("\(countOfLike)")
+                Text("\(post.countOfLike)")
                     .font(.caption)
                     .offset(x: -4)
             }
@@ -194,6 +190,12 @@ struct UserPostsView: View {
 
 struct UserPosts_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ScrollView {
+            UserPostsView(post: testPosts[0], size: CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height))
+                .preferredColorScheme(.dark)
+        }
+        .ignoresSafeArea()
     }
 }
+
+

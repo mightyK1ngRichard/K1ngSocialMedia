@@ -32,11 +32,7 @@ struct MainView: View {
     private func MainScreen() -> some View {
         switch(selected.selectedButton.text) {
         case .profile:
-            let backImg = URL(string: "https://d1lss44hh2trtw.cloudfront.net/assets/article/2023/01/09/apple-to-unveil-mixed-reality-headset-spring-2023-news_feature.jpg")!
-            
-            let userURL = URL(string: "https://ru-static.z-dn.net/files/df9/899fd190739b0985daa1921650cb9897.jpg")!
-            
-            ProfileView(backroundImage: backImg, userAvatar: userURL)
+            ProfileView(user: testUser, posts: testPosts, userImages: testImagesUser)
             
         case .news:
             NewsView()
@@ -57,5 +53,6 @@ struct MainView_Previews: PreviewProvider {
         @ObservedObject var selected = SelectedButton()
         MainView()
             .environmentObject(selected)
+            .preferredColorScheme(.dark)
     }
 }

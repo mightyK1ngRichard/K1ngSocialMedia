@@ -40,18 +40,9 @@ struct ProfileView: View {
     @State private var scrollProgress : CGFloat = .zero
     @State private var scaleImage     : CGSize  = .init(width: 1, height: 1)
     
-    var userPosts       = [
-        ("2023-02-02", "Просто что-то про жизнь"),
-        ("2023-02-02", "Просто что-то про жизнь"),
-        ("2023-02-02", "Просто что-то про жизнь"),
-        ("2023-02-02", "Просто что-то про жизнь")
-    ]
-    var nickname        = "Dmitriy Permyakov"
-    var description     = " Engoing Web/iOS developing"
-    var locationInfo    = "London"
-    var backroundImage  : URL?
-    var userAvatar      : URL?
-    var countOfFriends  = "105" + " друзей"
+    var user       : UserData         /// Данные о пользователе.
+    var posts      : [UserPostData]   /// Посты пользователя.
+    var userImages : [UserImagesData] /// Фотографии плользователя.
     
     var body: some View {
         let backgroundColor: Color = self.shemaColor == .dark ? Color.VK.black : Color.VK.white
@@ -91,7 +82,7 @@ struct ProfileView: View {
                         
                         Spacer()
                         if showBar {
-                            Text(nickname)
+                            Text(user.nickname)
                                 .frame(maxWidth: .infinity, alignment: .center)
                                 .foregroundColor(.primary)
                         }
@@ -144,7 +135,7 @@ struct ProfileView: View {
     @ViewBuilder
     private func UserHeader(size: CGSize) -> some View {
         let backgroundColor: Color = self.shemaColor == .dark ? Color.VK.black : Color.VK.white
-        if let urlLink = backroundImage {
+        if let urlLink = user.backroundImage {
             AsyncImage(url: urlLink) { image in
                 image
                     .resizable()
@@ -177,16 +168,15 @@ struct ProfileView: View {
          
             
         } label: {
-            if let url = userAvatar {
+            if let url = user.userAvatar {
                 AsyncImage(url: url) { image in
                     image
                         .avatarSize(size: currentSize, backgroundColor: backgroundColor)
 
                 } placeholder: {
-                    Image(systemName: "person.circle")
-                        .avatarSize(size: currentSize, backgroundColor: backgroundColor)
-
-                        .foregroundColor(.primary)
+                    Circle()
+                        .frame(maxWidth: currentSize <= 60 ? 60 : currentSize, maxHeight: 100)
+                        .foregroundColor(Color.VK.black)
                 }
                 
             } else {
@@ -209,16 +199,8 @@ struct ProfileView: View {
     @ViewBuilder
     private func PostsView(size: CGSize) -> some View {
         VStack {
-            // TODO: При работе с БД заменить данные
-            ForEach(0...4, id: \.self) { _ in
-                let test = """
-Пишу что-то для тест поста. Я хз что писать для проверки вёрстки, но надо побольше текста.
-Так, вот я сделал абзац.
-
-А вот теперь ещё один.
-""".trimmingCharacters(in: .whitespaces)
-                let imageOfPost = URL(string: "https://img1.akspic.ru/attachments/crops/7/1/6/8/6/168617/168617-wwdc22-grafika-art-gaz-vizualnyj_effekt_osveshheniya-1366x768.jpg")!
-                UserPostsView(scrollProgress: $scrollProgress, textOfPost: test, imageOfPost: imageOfPost, dateOfPost: .now, username: nickname, userAvatar: userAvatar, countOfLike: 10, size: size)
+            ForEach(posts) { currentPost in
+                UserPostsView(post: currentPost, size: size)
             }
         }
     }
@@ -228,26 +210,32 @@ struct ProfileView: View {
         let backgroundColor: Color = self.shemaColor == .dark ? Color.VK.black : Color.VK.white
         VStack {
             VStack(spacing: 5) {
-                Text(nickname)
+                Text(user.nickname)
                     .font(.system(.headline, weight: .black))
                     .scaleEffect(1.3)
                     .lineLimit(1)
                 
-                Text(description)
-                    .font(.caption)
-                
+                if let description = user.description {
+                    Text(description)
+                        .font(.caption)
+                }
+                    
                 HStack {
-                    Image(systemName: "location")
-                        .iconsSizes()
+                    if let locationInfo = user.locationInfo {
+                        Image(systemName: "location")
+                            .iconsSizes()
+                        
+                        Text(locationInfo)
+                            .font(.caption)
+                    }
                     
-                    Text(locationInfo)
-                        .font(.caption)
-                    
-                    Image(systemName: "graduationcap")
-                        .iconsSizes()
-                    
-                    Text("МГТУ им. Н.Э.Баумана")
-                        .font(.caption)
+                    if let university = user.university {
+                        Image(systemName: "graduationcap")
+                            .iconsSizes()
+                        
+                        Text(university)
+                            .font(.caption)
+                    }
                     
                     Image(systemName: "info.circle")
                         .iconsSizes()
@@ -300,27 +288,11 @@ struct ProfileView: View {
             }
             .padding(.leading)
             .padding(.top)
-            
-            HStack {
-                let temp = URL(string: "https://sm.ign.com/t/ign_in/screenshot/default/across-the-spider-verse_5k3c.1200.jpg")!
-                LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
-                    ForEach(0...2, id: \.self) { _ in
-                        AsyncImage(url: temp) { image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: UIScreen.main.bounds.width / 3 - 10, height: UIScreen.main.bounds.width / 3 - 10)
-                                .clipped()
-                            
-                        } placeholder: {
-                            ProgressView()
-                                .frame(width: UIScreen.main.bounds.width / 3 - 10, height: UIScreen.main.bounds.width / 3 - 10)
-                        }
-                    }
-                }
-                .padding(.horizontal)
+            LazyVGrid(columns: [GridItem(), GridItem(), GridItem()], spacing: 1) {
+                UserImages()
             }
-            
+            .padding(.horizontal)
+
             /// Кнопки загрузить фото и смотреть ещё.
             HStack(spacing: 25) {
                 Button {
@@ -355,6 +327,26 @@ struct ProfileView: View {
         .cornerRadius(20)
     }
     
+    @ViewBuilder
+    private func UserImages() -> some View {
+        ForEach(userImages.prefix(6)) {
+            if let img = $0.image {
+                AsyncImage(url: img) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: UIScreen.main.bounds.width / 3 - 10, height: UIScreen.main.bounds.width / 3 - 10)
+                        .clipped()
+                    
+                } placeholder: {
+                    ProgressView()
+                        .frame(width: UIScreen.main.bounds.width / 3 - 10, height: UIScreen.main.bounds.width / 3 - 10)
+                }
+            }
+            
+        }
+    }
+    
     /// Кнопки: фотки, видео, музыка.
     @ViewBuilder
     private func ButtonsOfModes(img: String, text: String) -> some View {
@@ -384,7 +376,7 @@ struct ProfileView: View {
         let backgroundColor: Color = self.shemaColor == .dark ? Color.VK.black : Color.VK.white
         
         VStack {
-            Text(countOfFriends)
+            Text("\(user.countOfFriends) друзей")
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading)
                 .padding(.vertical)
@@ -421,10 +413,10 @@ extension Image {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        let backImg = URL(string: "https://d1lss44hh2trtw.cloudfront.net/assets/article/2023/01/09/apple-to-unveil-mixed-reality-headset-spring-2023-news_feature.jpg")!
-        let userURL = URL(string: "https://ru-static.z-dn.net/files/df9/899fd190739b0985daa1921650cb9897.jpg")!
         
-        ProfileView(backroundImage: backImg, userAvatar: userURL)
+        ProfileView(user: testUser, posts: testPosts, userImages: testImagesUser)
             .environmentObject(SelectedButton())
+            .preferredColorScheme(.dark)
+            
     }
 }
