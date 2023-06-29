@@ -33,7 +33,7 @@ struct NewsView: View {
                             HStack {
                                 YourCircle()
                                 ForEach(people, id: \.self) { user in
-                                    UserCircle(username: user, userAvatar: URL(string: "https://w.forfun.com/fetch/7e/7ed25326b59225505b699388f9579faa.jpeg")!, hasNewStory: true)
+                                    UserCircle(username: user, userAvatar: URL(string: "https://images.hdqwalls.com/download/gwen-stacy-spider-man-into-the-spider-verse-o4-2560x1700.jpg")!, hasNewStory: true)
                                 }
                             }
                         }
@@ -41,7 +41,7 @@ struct NewsView: View {
                         Divider()
                         ForEach(0...10, id: \.self) { user in
                             // TODO: Заменить при api.
-                            let userURL = URL(string: "https://ru-static.z-dn.net/files/df9/899fd190739b0985daa1921650cb9897.jpg")!
+                            let userURL = URL(string: "https://images.hdqwalls.com/download/gwen-stacy-spider-man-into-the-spider-verse-o4-2560x1700.jpg")!
                             let postURL = URL(string: "https://hi-news.ru/wp-content/uploads/2015/06/WWDC-2015-Wallpaper-for-Estandar-Resolution-Mac-Black-Edition-2880-x-18001.png")!
                             
                             UserPost(username: "mightyK1ngRichard", userAvatar: userURL, imageOfPost: postURL, countLike: 100, countResponds: 20, location: .current, size: size)
@@ -88,9 +88,16 @@ struct NewsView: View {
         } label: {
             ZStack {
                 VStack {
-                    Image("k1ng")
-                        .isYou(isActive: false)
-                        .padding(.leading, 5)
+                    AsyncImage(url: URL(string: "https://images.wallpapersden.com/image/download/gwen-stacy-in-spider-man-across-the-spider-verse_bWZlZm2UmZqaraWkpJRmZ21lrW5rZQ.jpg")!) { img in
+                        img
+                            .isYou(isActive: false)
+                            .padding(.leading, 5)
+                        
+                    } placeholder: {
+                        ProgressView()
+                            .frame(width: 82, height: 82)
+                            .padding(.leading, 5)
+                    }
                     
                     Text("Вы")
                         .font(.footnote)
@@ -128,6 +135,7 @@ struct UserCircle: View {
                     AsyncImage(url: url) { image in
                         image
                             .IsActiveStory(isActive: hasNewStory)
+                        
                     } placeholder: {
                         ProgressView()
                             .frame(width: 83, height: 83)
@@ -172,9 +180,10 @@ extension Image {
         
         return self
             .resizable()
-            .frame(width: 83, height: 83)
             .aspectRatio(contentMode: .fill)
+            .frame(width: 82, height: 82)
             .clipShape(Circle())
+            
             .padding(3)
             .overlay {
                 Circle()
@@ -200,8 +209,8 @@ extension Image {
             return AnyView(
                 self
                     .resizable()
-                    .frame(width: 83, height: 83)
                     .aspectRatio(contentMode: .fill)
+                    .frame(width: 82, height: 82)
                     .clipShape(Circle())
                     .padding(3)
                     .overlay {

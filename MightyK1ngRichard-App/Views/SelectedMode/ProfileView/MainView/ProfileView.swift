@@ -111,6 +111,7 @@ struct ProfileView: View {
                 .ignoresSafeArea()
             }
         }
+        
     }
     
     private func MainProfileView(safeArea: EdgeInsets, size: CGSize) -> some View {
