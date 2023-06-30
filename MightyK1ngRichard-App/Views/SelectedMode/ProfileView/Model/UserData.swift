@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import CryptoKit
-
 
 struct UserData: Identifiable {
     var id             : UInt
@@ -19,6 +17,16 @@ struct UserData: Identifiable {
     var userAvatar     : URL?
     var countOfFriends : Int
     var posts          : [UserPostData]?
+    var images         : [UserImagesData]?
+}
+
+struct UserImagesData: Identifiable {
+    let id              : UInt
+    var datePublic      : String
+    var imageURL        : URL
+    var countOfLikes    : Int
+    var countOfComments : Int
+    var userID          : Int
 }
 
 struct UserPostData: Identifiable {
@@ -27,8 +35,8 @@ struct UserPostData: Identifiable {
     var content         : String?
     var countOfLike     : Int
     var countOfComments : Int
-    var imageInPost     : [UserImagesData]?
-    var comments        : [CommentUnderPost]
+    var filesInPost     : [UserFielsData]?
+    var comments        : [CommentUnderPost]?
     var userAvatar      : URL?
     var nickname        : String
 }
@@ -41,9 +49,10 @@ struct CommentUnderPost: Identifiable {
     var imageInComment : URL?
 }
 
-struct UserImagesData: Identifiable {
-    let id    : UInt
-    var image : URL?
+struct UserFielsData: Identifiable {
+    let id     : UInt
+    var url    : URL?
+    var postID : Int
 }
 
 
@@ -51,11 +60,11 @@ struct UserImagesData: Identifiable {
 let testUser = UserData(id: 1, nickname: "Dmitriy Permyakov", description: " Engoing Web/iOS developing", locationInfo: "London", university: "МГТУ им. Н.Э.Баумана", backroundImage: backImg, userAvatar: userURL, countOfFriends: 105)
 
 let testPosts: [UserPostData] = [
-    .init(id: 2, datePublic: "2023-02-24T05:26:52.086114Z", content: testText2, countOfLike: 16, countOfComments: 4, imageInPost: [.init(id: 1, image: imageOfPostThird)], comments: testComments, nickname: "Dmitriy Permyakov"),
-    .init(id: 3, datePublic: "2023-06-24T05:26:52.086114Z", content: testText, countOfLike: 9, countOfComments: 5, imageInPost: [.init(id: 1, image: imageOfPostSecond)], comments: testComments, nickname: "Dmitriy Permyakov"),
-    .init(id: 4, datePublic: "2023-04-24T05:26:52.086114Z", content: testText, countOfLike: 8, countOfComments: 6, imageInPost: [.init(id: 1, image: imageOfPost)], comments: testComments, nickname: "Dmitriy Permyakov"),
-    .init(id: 5, datePublic: "2023-06-24T05:26:52.086114Z", content: testText, countOfLike: 7, countOfComments: 8, imageInPost: [.init(id: 1, image: imageOfPostSecond)], comments: testComments, nickname: "Dmitriy Permyakov"),
-    .init(id: 6, datePublic: "2025-06-24T05:26:52.086114Z", content: testText, countOfLike: 5, countOfComments: 10, imageInPost: [.init(id: 1, image: imageOfPost)], comments: testComments, nickname: "Dmitriy Permyakov"),
+    .init(id: 2, datePublic: "2023-02-24T05:26:52.086114Z", content: testText2, countOfLike: 16, countOfComments: 4, filesInPost: [.init(id: 1, postID: 1)], comments: testComments, nickname: "Dmitriy Permyakov"),
+    .init(id: 3, datePublic: "2023-06-24T05:26:52.086114Z", content: testText, countOfLike: 9, countOfComments: 5, filesInPost: [.init(id: 1, postID: 1)], comments: testComments, nickname: "Dmitriy Permyakov"),
+    .init(id: 4, datePublic: "2023-04-24T05:26:52.086114Z", content: testText, countOfLike: 8, countOfComments: 6, filesInPost: [.init(id: 1, postID: 1)], comments: testComments, nickname: "Dmitriy Permyakov"),
+    .init(id: 5, datePublic: "2023-06-24T05:26:52.086114Z", content: testText, countOfLike: 7, countOfComments: 8, filesInPost: [.init(id: 1, postID: 1)], comments: testComments, nickname: "Dmitriy Permyakov"),
+    .init(id: 6, datePublic: "2025-06-24T05:26:52.086114Z", content: testText, countOfLike: 5, countOfComments: 10, filesInPost: [.init(id: 1, postID: 1)], comments: testComments, nickname: "Dmitriy Permyakov"),
 
 ]
 
@@ -63,15 +72,15 @@ let testComments: [CommentUnderPost] = [
     // ....
 ]
 
-let testImagesUser: [UserImagesData] = [
-    .init(id: 1, image: imageOfPost),
-    .init(id: 2, image: imageOfPostSecond),
-    .init(id: 3, image: imageOfPostThird),
-    .init(id: 4, image: backImg),
-    .init(id: 5, image: imageOfPostThird),
-    .init(id: 6, image: imageOfPostSecond),
-    .init(id: 7, image: imageOfPostSecond),
-]
+//let testImagesUser: [UserImagesData] = [
+//    .init(id: 1, image: imageOfPost),
+//    .init(id: 2, image: imageOfPostSecond),
+//    .init(id: 3, image: imageOfPostThird),
+//    .init(id: 4, image: backImg),
+//    .init(id: 5, image: imageOfPostThird),
+//    .init(id: 6, image: imageOfPostSecond),
+//    .init(id: 7, image: imageOfPostSecond),
+//]
 
 
 private let backImg = URL(string: "https://d1lss44hh2trtw.cloudfront.net/assets/article/2023/01/09/apple-to-unveil-mixed-reality-headset-spring-2023-news_feature.jpg")!

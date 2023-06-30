@@ -32,7 +32,7 @@ struct MainView: View {
     private func MainScreen() -> some View {
         switch(selected.selectedButton.text) {
         case .profile:
-            ProfileView(userID: UInt(1), userImages: testImagesUser)
+            ProfileView(userID: UInt(1))
             
         case .news:
             NewsView()

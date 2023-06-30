@@ -16,12 +16,23 @@ class UserDecoder: Decodable, Identifiable {
 }
 
 class UserRow: Decodable, Identifiable {
-    let id: UInt
-    let nickname: String
-    let description: String?
-    let location: String?
-    let university: String?
-    let header_image: URL?
-    let avatar: URL?
-    let count_of_friends: Int
+    let id               : UInt
+    let nickname         : String
+    let description      : String?
+    let location         : String?
+    let university       : String?
+    let header_image     : URL?
+    let avatar           : URL?
+    let count_of_friends : Int
+    let posts            : [PostRow]?
+    let images           : [ImageRow]?
+}
+
+class ImageRow: Decodable, Identifiable {
+    let id                : UInt
+    let date_public       : String
+    let image_name        : URL
+    let count_of_likes    : Int
+    let count_of_comments : Int
+    let user_id           : Int
 }

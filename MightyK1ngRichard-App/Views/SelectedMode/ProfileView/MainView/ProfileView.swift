@@ -42,33 +42,40 @@ struct ProfileView: View {
     @State private var scrollProgress : CGFloat = .zero
     @State private var scaleImage     : CGSize  = .init(width: 1, height: 1)
     @State private var user           : UserData?
-    @State private var posts          : [UserPostData]?  /// Посты пользователя.
-    var userImages                    : [UserImagesData] /// Фотографии плользователя.
     
     var body: some View {
         MainView()
             .onAppear {
-                
-                APIManager.user.post.getUserPost(userID: userID) { data, error in
-                    if let error = error {
-                        print("ERROR FROM ProfileView onAppear:", error)
-                        return
-                    }
-                    
-                    if let data = data {
-                        var tempPosts: [UserPostData] = []
-                        for p in data.posts {
-                            let temp = UserPostData(id: p.id, datePublic: p.date_public, content: p.content, countOfLike: p.count_of_likes, countOfComments: p.count_of_comments, imageInPost: [], comments: [], userAvatar: p.avatar, nickname: p.nickname)
-                            tempPosts.append(temp)
-                        }
-                        self.posts = tempPosts
-                    }
-                }
-                
                 APIManager.user.getUserById(userID: userID) { data, error in
                     if let data = data {
                         let u = data.user
-                        self.user = UserData(id: u.id, nickname: u.nickname, description: u.description, locationInfo: u.location, university: u.university, backroundImage: u.header_image, userAvatar: u.avatar, countOfFriends: u.count_of_friends)
+                        
+                        /// Получаем посты пользователя.
+                        var uPosts: [UserPostData] = []
+                        if let uPost = u.posts {
+                            for p in uPost {
+                                var tempFiles: [UserFielsData] = []
+                                if let files = p.files {
+                                    for file in files {
+                                        tempFiles.append(.init(id: file.id, url: file.file_name, postID: file.post_id))
+                                    }
+                                }
+                                
+                                let temp = UserPostData(id: p.id, datePublic: p.date_public, content: p.content, countOfLike: p.count_of_likes, countOfComments: p.count_of_comments, filesInPost: tempFiles, comments: [], userAvatar: p.avatar, nickname: p.nickname)
+                                uPosts.append(temp)
+                            }
+                        }
+                        
+                        /// Получаем фоторграфии пользователя.
+                        var uImages: [UserImagesData] = []
+                        if let imgs = u.images {
+                            for i in imgs {
+                                uImages.append(.init(id: i.id, datePublic: i.date_public, imageURL: i.image_name, countOfLikes: i.count_of_likes, countOfComments: i.count_of_comments, userID: i.user_id))
+                            }
+                        }
+                        
+                        /// Итоговое присвоение.
+                        self.user = UserData(id: u.id, nickname: u.nickname, description: u.description, locationInfo: u.location, university: u.university, backroundImage: u.header_image, userAvatar: u.avatar, countOfFriends: u.count_of_friends, posts: uPosts, images: uImages)
                     }
                 }
             }
@@ -249,7 +256,7 @@ struct ProfileView: View {
     @ViewBuilder
     private func PostsView(size: CGSize) -> some View {
         VStack {
-            if let posts = posts {
+            if let user = user, let posts = user.posts {
                 ForEach(posts) { currentPost in
                     UserPostsView(post: currentPost, size: size)
                 }
@@ -399,9 +406,9 @@ struct ProfileView: View {
     
     @ViewBuilder
     private func UserImages() -> some View {
-        ForEach(userImages.prefix(6)) {
-            if let img = $0.image {
-                AsyncImage(url: img) { image in
+        if let user = user, let images = user.images {
+            ForEach(images.prefix(6)) {
+                AsyncImage(url: $0.imageURL) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -413,7 +420,6 @@ struct ProfileView: View {
                         .frame(width: UIScreen.main.bounds.width / 3 - 10, height: UIScreen.main.bounds.width / 3 - 10)
                 }
             }
-            
         }
     }
     
@@ -498,7 +504,7 @@ extension Image {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         
-        ProfileView(userID: UInt(1), userImages: testImagesUser)
+        ProfileView(userID: UInt(1))
             .environmentObject(SelectedButton())
             .preferredColorScheme(.dark)
             

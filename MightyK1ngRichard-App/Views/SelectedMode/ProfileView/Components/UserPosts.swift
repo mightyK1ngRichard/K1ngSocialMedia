@@ -75,8 +75,8 @@ struct UserPostsView: View {
             .padding(.horizontal)
             .padding(.top, 8)
             
-            ForEach(post.imageInPost ?? []) { postImg in
-                if let urlLink = postImg.image {
+            ForEach(post.filesInPost ?? []) { postImg in
+                if let urlLink = postImg.url {
                     AsyncImage(url: urlLink) { image in
                         image
                             .resizable()

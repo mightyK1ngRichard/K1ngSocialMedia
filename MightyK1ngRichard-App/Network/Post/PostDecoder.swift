@@ -12,14 +12,21 @@ class PostDecoder: Decodable {
 }
 
 class PostRow: Decodable, Identifiable {
-    let id: UInt
-    let date_public: String
-    let content: String
-    let count_of_likes: Int
-    let count_of_comments: Int
-    let user_id: Int
-    let avatar: URL?
-    let nickname: String
+    let id                : UInt
+    let date_public       : String
+    let content           : String
+    let count_of_likes    : Int
+    let count_of_comments : Int
+    let user_id           : Int
+    let avatar            : URL?
+    let nickname          : String
+    let files             : [PostFilesDecoder]?
+}
+
+class PostFilesDecoder: Decodable, Identifiable {
+    let id        : UInt
+    let file_name : URL?
+    let post_id   : Int
 }
 
 /// Хах, прикольная штучка.
