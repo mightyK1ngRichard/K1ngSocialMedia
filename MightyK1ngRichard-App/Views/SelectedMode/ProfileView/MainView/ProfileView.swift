@@ -32,6 +32,8 @@ extension Color {
 }
 
 struct ProfileView: View {
+    let userID: UInt
+    
     @Environment(\.colorScheme) private var shemaColor
     @EnvironmentObject var selected   : SelectedButton
     
@@ -48,7 +50,11 @@ struct ProfileView: View {
     var body: some View {
         MainView()
             .onAppear {
-                APIManager.shared.getUserById(userID: 1) { data, error in
+                APIManager.user.post.getUserPost(userID: userID) { data, error in
+                    // ....
+                }
+
+                APIManager.user.getUserById(userID: userID) { data, error in
                     if let data = data {
                         let u = data.user
                         
@@ -134,7 +140,7 @@ struct ProfileView: View {
             }
         }
         .onAppear {
-            APIManager.shared.getUserById(userID: 1) { data, error in
+            APIManager.user.getUserById(userID: 1) { data, error in
                 
             }
         }
@@ -484,7 +490,7 @@ extension Image {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         
-        ProfileView(posts: testPosts, userImages: testImagesUser)
+        ProfileView(userID: UInt(1), posts: testPosts, userImages: testImagesUser)
             .environmentObject(SelectedButton())
             .preferredColorScheme(.dark)
             

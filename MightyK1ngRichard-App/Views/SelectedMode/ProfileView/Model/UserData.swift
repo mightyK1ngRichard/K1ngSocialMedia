@@ -10,7 +10,7 @@ import CryptoKit
 
 
 struct UserData: Identifiable {
-    var id             : Int
+    var id             : UInt
     var nickname       : String
     var description    : String?
     var locationInfo   : String?

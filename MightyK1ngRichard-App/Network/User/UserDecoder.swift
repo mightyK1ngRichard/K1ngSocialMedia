@@ -16,7 +16,7 @@ class UserDecoder: Decodable, Identifiable {
 }
 
 class UserRow: Decodable, Identifiable {
-    let id: Int
+    let id: UInt
     let nickname: String
     let description: String?
     let location: String?

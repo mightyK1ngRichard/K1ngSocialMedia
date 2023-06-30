@@ -13,20 +13,18 @@ struct TestScreen: View {
     
     var body: some View {
         VStack {
-            if let data = data {
-                ForEach(data.users) { user in
-                    UserCard(name: user.nickname, description: user.description, location: user.location, avatar: user.avatar)
-                }
-            }
+           
         }
         .onAppear() {
-            APIManager.shared.getUsers { data, error in
+            APIManager.user.post.getUserPost(userID: 1) { data, error in
                 if let error = error {
-                    print(error)
+                    print("ERROR: ", error)
                     return
                 }
                 if let data = data {
-                    self.data = data
+                    for el in data.posts {
+                        print(el.content)
+                    }
                 }
             }
         }
