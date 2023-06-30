@@ -42,22 +42,32 @@ struct ProfileView: View {
     @State private var scrollProgress : CGFloat = .zero
     @State private var scaleImage     : CGSize  = .init(width: 1, height: 1)
     @State private var user           : UserData?
-
-    // TODO: сделать так, чтобы это всё было в UserData
-    var posts      : [UserPostData]   /// Посты пользователя.
-    var userImages : [UserImagesData] /// Фотографии плользователя.
+    @State private var posts          : [UserPostData]?  /// Посты пользователя.
+    var userImages                    : [UserImagesData] /// Фотографии плользователя.
     
     var body: some View {
         MainView()
             .onAppear {
+                
                 APIManager.user.post.getUserPost(userID: userID) { data, error in
-                    // ....
+                    if let error = error {
+                        print("ERROR FROM ProfileView onAppear:", error)
+                        return
+                    }
+                    
+                    if let data = data {
+                        var tempPosts: [UserPostData] = []
+                        for p in data.posts {
+                            let temp = UserPostData(id: p.id, datePublic: p.date_public, content: p.content, countOfLike: p.count_of_likes, countOfComments: p.count_of_comments, imageInPost: [], comments: [], userAvatar: p.avatar, nickname: p.nickname)
+                            tempPosts.append(temp)
+                        }
+                        self.posts = tempPosts
+                    }
                 }
-
+                
                 APIManager.user.getUserById(userID: userID) { data, error in
                     if let data = data {
                         let u = data.user
-                        
                         self.user = UserData(id: u.id, nickname: u.nickname, description: u.description, locationInfo: u.location, university: u.university, backroundImage: u.header_image, userAvatar: u.avatar, countOfFriends: u.count_of_friends)
                     }
                 }
@@ -137,11 +147,6 @@ struct ProfileView: View {
                     .background(showBar ? backgroundColor : Color.clear)
                 }
                 .ignoresSafeArea()
-            }
-        }
-        .onAppear {
-            APIManager.user.getUserById(userID: 1) { data, error in
-                
             }
         }
     }
@@ -244,10 +249,13 @@ struct ProfileView: View {
     @ViewBuilder
     private func PostsView(size: CGSize) -> some View {
         VStack {
-            ForEach(posts) { currentPost in
-                UserPostsView(post: currentPost, size: size)
+            if let posts = posts {
+                ForEach(posts) { currentPost in
+                    UserPostsView(post: currentPost, size: size)
+                }
             }
         }
+        .padding(.bottom)
     }
     
     @ViewBuilder
@@ -490,7 +498,7 @@ extension Image {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         
-        ProfileView(userID: UInt(1), posts: testPosts, userImages: testImagesUser)
+        ProfileView(userID: UInt(1), userImages: testImagesUser)
             .environmentObject(SelectedButton())
             .preferredColorScheme(.dark)
             

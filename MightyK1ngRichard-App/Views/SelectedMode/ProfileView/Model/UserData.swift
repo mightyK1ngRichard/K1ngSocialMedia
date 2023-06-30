@@ -18,21 +18,23 @@ struct UserData: Identifiable {
     var backroundImage : URL?
     var userAvatar     : URL?
     var countOfFriends : Int
+    var posts          : [UserPostData]?
 }
 
 struct UserPostData: Identifiable {
-    let id              : UUID
-    var user            : UserData
-    var datePublic      : Date
+    let id              : UInt
+    var datePublic      : String
     var content         : String?
     var countOfLike     : Int
     var countOfComments : Int
-    var imageInPost     : URL?
+    var imageInPost     : [UserImagesData]?
     var comments        : [CommentUnderPost]
+    var userAvatar      : URL?
+    var nickname        : String
 }
 
 struct CommentUnderPost: Identifiable {
-    let id             : UUID
+    let id             : UInt
     var date           : Date
     var content        : String
     var countOfLike    : Int
@@ -40,7 +42,7 @@ struct CommentUnderPost: Identifiable {
 }
 
 struct UserImagesData: Identifiable {
-    let id    : UUID
+    let id    : UInt
     var image : URL?
 }
 
@@ -49,12 +51,12 @@ struct UserImagesData: Identifiable {
 let testUser = UserData(id: 1, nickname: "Dmitriy Permyakov", description: " Engoing Web/iOS developing", locationInfo: "London", university: "МГТУ им. Н.Э.Баумана", backroundImage: backImg, userAvatar: userURL, countOfFriends: 105)
 
 let testPosts: [UserPostData] = [
-    .init(id: UUID(), user: testUser, datePublic: .now, content: testText2, countOfLike: 16, countOfComments: 4, imageInPost: imageOfPostThird, comments: testComments),
-    .init(id: UUID(), user: testUser, datePublic: .now, content: testText, countOfLike: 9, countOfComments: 5, imageInPost: imageOfPostSecond, comments: testComments),
-    .init(id: UUID(), user: testUser, datePublic: .now, content: testText, countOfLike: 8, countOfComments: 6, imageInPost: imageOfPost, comments: testComments),
-    .init(id: UUID(), user: testUser, datePublic: .now, content: testText, countOfLike: 7, countOfComments: 8, imageInPost: imageOfPostSecond, comments: testComments),
-    .init(id: UUID(), user: testUser, datePublic: .now, content: testText, countOfLike: 5, countOfComments: 10, imageInPost: imageOfPost, comments: testComments),
-    
+    .init(id: 2, datePublic: "2023-02-24T05:26:52.086114Z", content: testText2, countOfLike: 16, countOfComments: 4, imageInPost: [.init(id: 1, image: imageOfPostThird)], comments: testComments, nickname: "Dmitriy Permyakov"),
+    .init(id: 3, datePublic: "2023-06-24T05:26:52.086114Z", content: testText, countOfLike: 9, countOfComments: 5, imageInPost: [.init(id: 1, image: imageOfPostSecond)], comments: testComments, nickname: "Dmitriy Permyakov"),
+    .init(id: 4, datePublic: "2023-04-24T05:26:52.086114Z", content: testText, countOfLike: 8, countOfComments: 6, imageInPost: [.init(id: 1, image: imageOfPost)], comments: testComments, nickname: "Dmitriy Permyakov"),
+    .init(id: 5, datePublic: "2023-06-24T05:26:52.086114Z", content: testText, countOfLike: 7, countOfComments: 8, imageInPost: [.init(id: 1, image: imageOfPostSecond)], comments: testComments, nickname: "Dmitriy Permyakov"),
+    .init(id: 6, datePublic: "2025-06-24T05:26:52.086114Z", content: testText, countOfLike: 5, countOfComments: 10, imageInPost: [.init(id: 1, image: imageOfPost)], comments: testComments, nickname: "Dmitriy Permyakov"),
+
 ]
 
 let testComments: [CommentUnderPost] = [
@@ -62,13 +64,13 @@ let testComments: [CommentUnderPost] = [
 ]
 
 let testImagesUser: [UserImagesData] = [
-    .init(id: UUID(), image: imageOfPost),
-    .init(id: UUID(), image: imageOfPostSecond),
-    .init(id: UUID(), image: imageOfPostThird),
-    .init(id: UUID(), image: backImg),
-    .init(id: UUID(), image: imageOfPostThird),
-    .init(id: UUID(), image: imageOfPostSecond),
-    .init(id: UUID(), image: imageOfPostSecond),
+    .init(id: 1, image: imageOfPost),
+    .init(id: 2, image: imageOfPostSecond),
+    .init(id: 3, image: imageOfPostThird),
+    .init(id: 4, image: backImg),
+    .init(id: 5, image: imageOfPostThird),
+    .init(id: 6, image: imageOfPostSecond),
+    .init(id: 7, image: imageOfPostSecond),
 ]
 
 

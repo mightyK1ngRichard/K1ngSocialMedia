@@ -23,7 +23,7 @@ struct UserPostsView: View {
             Group {
                 HStack {
                     /// Аватарка пользователя.
-                    if let urlLink = post.user.userAvatar {
+                    if let urlLink = post.userAvatar {
                         AsyncImage(url: urlLink) { image in
                             image
                                 .resizable()
@@ -46,12 +46,13 @@ struct UserPostsView: View {
                     }
                     
                     VStack {
-                        Text(post.user.nickname)
+                        Text(post.nickname)
                             .font(.subheadline)
                             .foregroundColor(.primary)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
-                        Text("\(post.datePublic.formatted())")
+//                        Text("\(post.datePublic.formatted())")
+                        Text(formatDateString(post.datePublic) ?? "")
                             .font(.caption)
                             .foregroundColor(.gray)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -74,19 +75,21 @@ struct UserPostsView: View {
             .padding(.horizontal)
             .padding(.top, 8)
             
-            if let urlLink = post.imageInPost {
-                AsyncImage(url: urlLink) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: size.width)
-                        .background(backgroundColor)
+            ForEach(post.imageInPost ?? []) { postImg in
+                if let urlLink = postImg.image {
+                    AsyncImage(url: urlLink) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: size.width)
+                            .background(backgroundColor)
+                        
+                    } placeholder: {
+                        ProgressView()
+                            .padding(.trailing, 5)
+                    }
                     
-                } placeholder: {
-                    ProgressView()
-                        .padding(.trailing, 5)
                 }
-                
             }
 
             HStack {
@@ -116,6 +119,8 @@ struct UserPostsView: View {
         .background(backgroundColor)
         .cornerRadius(20)
     }
+    
+    
     
     @ViewBuilder
     private func LikeButtonView(isPressed: Bool) -> some View {

@@ -16,17 +16,17 @@ struct TestScreen: View {
            
         }
         .onAppear() {
-            APIManager.user.post.getUserPost(userID: 1) { data, error in
-                if let error = error {
-                    print("ERROR: ", error)
-                    return
-                }
-                if let data = data {
-                    for el in data.posts {
-                        print(el.content)
-                    }
-                }
-            }
+//            APIManager.user.post.getUserPost(userID: 1) { data, error in
+//                if let error = error {
+//                    print("ERROR: ", error)
+//                    return
+//                }
+//                if let data = data {
+//                    for el in data.posts {
+//                        print(el.content)
+//                    }
+//                }
+//            }
         }
     }
     

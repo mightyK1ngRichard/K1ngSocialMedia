@@ -10,7 +10,7 @@ import Foundation
 class UserAPI: APIManager {
     let post  = PostAPI()
     
-    func getUsers(completion: @escaping (UsersDecoder?, APIError?) -> Void) {
+    func getUsers(completion: @escaping (UsersDecoder?, APIError?) -> Void)  {
         let urlString = "http://\(host):\(port)/users"
         guard let url = URL(string: urlString) else {
             DispatchQueue.main.async {
@@ -58,7 +58,7 @@ class UserAPI: APIManager {
         }.resume()
     }
     
-    func getUserById(userID: UInt, completion: @escaping (UserDecoder?, APIError?) -> Void) {
+    func getUserById(userID: UInt, completion: @escaping (UserDecoder?, APIError?) -> Void)  {
         let urlString = "http://\(host):\(port)/users?id=\(userID)"
         guard let url = URL(string: urlString) else {
             DispatchQueue.main.async {
