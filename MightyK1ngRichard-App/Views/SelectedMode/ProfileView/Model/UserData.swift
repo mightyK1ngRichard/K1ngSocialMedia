@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import CryptoKit
+
 
 struct UserData: Identifiable {
-    var id             : UUID
+    var id             : Int
     var nickname       : String
     var description    : String?
     var locationInfo   : String?
@@ -44,7 +46,7 @@ struct UserImagesData: Identifiable {
 
 
 // MARK: - Тестовые данные для вёрски
-let testUser = UserData(id: UUID(), nickname: "Dmitriy Permyakov", description: " Engoing Web/iOS developing", locationInfo: "London", university: "МГТУ им. Н.Э.Баумана", backroundImage: backImg, userAvatar: userURL, countOfFriends: 105)
+let testUser = UserData(id: 1, nickname: "Dmitriy Permyakov", description: " Engoing Web/iOS developing", locationInfo: "London", university: "МГТУ им. Н.Э.Баумана", backroundImage: backImg, userAvatar: userURL, countOfFriends: 105)
 
 let testPosts: [UserPostData] = [
     .init(id: UUID(), user: testUser, datePublic: .now, content: testText2, countOfLike: 16, countOfComments: 4, imageInPost: imageOfPostThird, comments: testComments),

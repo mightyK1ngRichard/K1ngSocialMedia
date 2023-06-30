@@ -39,12 +39,27 @@ struct ProfileView: View {
     @State private var showBar        = false
     @State private var scrollProgress : CGFloat = .zero
     @State private var scaleImage     : CGSize  = .init(width: 1, height: 1)
-    
-    var user       : UserData         /// Данные о пользователе.
+    @State private var user           : UserData?
+
+    // TODO: сделать так, чтобы это всё было в UserData
     var posts      : [UserPostData]   /// Посты пользователя.
     var userImages : [UserImagesData] /// Фотографии плользователя.
     
     var body: some View {
+        MainView()
+            .onAppear {
+                APIManager.shared.getUserById(userID: 1) { data, error in
+                    if let data = data {
+                        let u = data.user
+                        
+                        self.user = UserData(id: u.id, nickname: u.nickname, description: u.description, locationInfo: u.location, university: u.university, backroundImage: u.header_image, userAvatar: u.avatar, countOfFriends: u.count_of_friends)
+                    }
+                }
+            }
+    }
+    
+    @ViewBuilder
+    private func MainView() -> some View {
         let backgroundColor: Color = self.shemaColor == .dark ? Color.VK.black : Color.VK.white
         
         GeometryReader { proxy in
@@ -82,9 +97,16 @@ struct ProfileView: View {
                         
                         Spacer()
                         if showBar {
-                            Text(user.nickname)
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .foregroundColor(.primary)
+                            if let user = user {
+                                Text(user.nickname)
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .foregroundColor(.primary)
+                                
+                            } else {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(.gray)
+                                    .frame(width: 40, height: 5)
+                            }
                         }
                         
                         Button {
@@ -111,7 +133,11 @@ struct ProfileView: View {
                 .ignoresSafeArea()
             }
         }
-        
+        .onAppear {
+            APIManager.shared.getUserById(userID: 1) { data, error in
+                
+            }
+        }
     }
     
     private func MainProfileView(safeArea: EdgeInsets, size: CGSize) -> some View {
@@ -136,15 +162,22 @@ struct ProfileView: View {
     @ViewBuilder
     private func UserHeader(size: CGSize) -> some View {
         let backgroundColor: Color = self.shemaColor == .dark ? Color.VK.black : Color.VK.white
-        if let urlLink = user.backroundImage {
-            AsyncImage(url: urlLink) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: size.width)
-                    .scaleEffect(scaleImage)
+        if let user = user {
+            if let urlLink = user.backroundImage {
+                AsyncImage(url: urlLink) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: size.width)
+                        .scaleEffect(scaleImage)
+                    
+                } placeholder: {
+                    Rectangle()
+                        .fill(backgroundColor)
+                        .frame(maxWidth: .infinity)
+                }
                 
-            } placeholder: {
+            } else {
                 Rectangle()
                     .fill(backgroundColor)
                     .frame(maxWidth: .infinity)
@@ -155,7 +188,6 @@ struct ProfileView: View {
                 .fill(backgroundColor)
                 .frame(maxWidth: .infinity)
         }
-        
     }
     
     @ViewBuilder
@@ -169,21 +201,27 @@ struct ProfileView: View {
          
             
         } label: {
-            if let url = user.userAvatar {
-                AsyncImage(url: url) { image in
-                    image
-                        .avatarSize(size: currentSize, backgroundColor: backgroundColor)
+            if let user = user {
+                if let url = user.userAvatar {
+                    AsyncImage(url: url) { image in
+                        image
+                            .avatarSize(size: currentSize, backgroundColor: backgroundColor)
 
-                } placeholder: {
-                    Circle()
-                        .frame(maxWidth: currentSize <= 60 ? 60 : currentSize, maxHeight: 100)
-                        .foregroundColor(Color.VK.black)
+                    } placeholder: {
+                        Circle()
+                            .frame(maxWidth: currentSize <= 60 ? 60 : currentSize, maxHeight: 100)
+                            .foregroundColor(Color.VK.black)
+                    }
+                    
+                } else {
+                    Image(systemName: "peson.circle")
+                        .avatarSize(size: currentSize, backgroundColor: backgroundColor)
                 }
                 
             } else {
-                Image(systemName: "peson.circle")
-                    .avatarSize(size: currentSize, backgroundColor: backgroundColor)
-
+                Circle()
+                    .frame(maxWidth: currentSize <= 60 ? 60 : currentSize, maxHeight: 100)
+                    .foregroundColor(Color.VK.black)
             }
         }
         .padding(.top, safeArea.top + 78)
@@ -211,36 +249,53 @@ struct ProfileView: View {
         let backgroundColor: Color = self.shemaColor == .dark ? Color.VK.black : Color.VK.white
         VStack {
             VStack(spacing: 5) {
-                Text(user.nickname)
-                    .font(.system(.headline, weight: .black))
-                    .scaleEffect(1.3)
-                    .lineLimit(1)
+                if let user = user {
+                    Text(user.nickname)
+                        .font(.system(.headline, weight: .black))
+                        .scaleEffect(1.3)
+                        .lineLimit(1)
+                    
+                    if let description = user.description {
+                        Text(description)
+                            .font(.caption)
+                    }
+                        
+                    HStack {
+                        if let locationInfo = user.locationInfo {
+                            Image(systemName: "location")
+                                .iconsSizes()
+                            
+                            Text(locationInfo)
+                                .font(.caption)
+                        }
+                        
+                        if let university = user.university {
+                            Image(systemName: "graduationcap")
+                                .iconsSizes()
+                            
+                            Text(university)
+                                .font(.caption)
+                        }
+                        
+                        Image(systemName: "info.circle")
+                            .iconsSizes()
+                    }
+                    
+                } else {
+                    VStack {
+                        ForEach(1...4, id: \.self) { col in
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(.gray.opacity(0.2))
+                                .frame(width: CGFloat(col) * 52, height: 15)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.horizontal)
+                                .background(backgroundColor)
+                                .foregroundColor(.primary)
+                                .cornerRadius(20)
+                        }
+                    }
+                }
                 
-                if let description = user.description {
-                    Text(description)
-                        .font(.caption)
-                }
-                    
-                HStack {
-                    if let locationInfo = user.locationInfo {
-                        Image(systemName: "location")
-                            .iconsSizes()
-                        
-                        Text(locationInfo)
-                            .font(.caption)
-                    }
-                    
-                    if let university = user.university {
-                        Image(systemName: "graduationcap")
-                            .iconsSizes()
-                        
-                        Text(university)
-                            .font(.caption)
-                    }
-                    
-                    Image(systemName: "info.circle")
-                        .iconsSizes()
-                }
             }
             .padding()
             .padding(.top, 40)
@@ -377,13 +432,27 @@ struct ProfileView: View {
         let backgroundColor: Color = self.shemaColor == .dark ? Color.VK.black : Color.VK.white
         
         VStack {
-            Text("\(user.countOfFriends) друзей")
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading)
-                .padding(.vertical)
-                .background(backgroundColor)
-                .foregroundColor(.primary)
-                .cornerRadius(20)
+            if let user = user {
+                Text("\(user.countOfFriends) друзей")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading)
+                    .padding(.vertical)
+                    .background(backgroundColor)
+                    .foregroundColor(.primary)
+                    .cornerRadius(20)
+                
+            } else {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(.gray.opacity(0.2))
+                    .frame(width: 50, height: 15)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
+                    .padding(.vertical)
+                    .background(backgroundColor)
+                    .foregroundColor(.primary)
+                    .cornerRadius(20)
+            }
+            
         }
     }
 }
@@ -415,7 +484,7 @@ extension Image {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         
-        ProfileView(user: testUser, posts: testPosts, userImages: testImagesUser)
+        ProfileView(posts: testPosts, userImages: testImagesUser)
             .environmentObject(SelectedButton())
             .preferredColorScheme(.dark)
             

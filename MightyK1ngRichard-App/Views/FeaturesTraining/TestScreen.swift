@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TestScreen: View {
-    @State private var data: UserDecoder?
+    @State private var data: UsersDecoder?
     
     
     var body: some View {

@@ -21,6 +21,8 @@
 		2C82DE682A3D977D006AA47F /* UserPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C82DE672A3D977D006AA47F /* UserPosts.swift */; };
 		2C82DE6A2A3EA93F006AA47F /* SecondTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C82DE692A3EA93F006AA47F /* SecondTraining.swift */; };
 		2C9102CE2A4713680024F27B /* TestScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9102CD2A4713680024F27B /* TestScreen.swift */; };
+		2C96B8CF2A4EB86B00BCF506 /* ErrorNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96B8CE2A4EB86B00BCF506 /* ErrorNetwork.swift */; };
+		2C96B8D22A4EB89400BCF506 /* UserDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96B8D12A4EB89400BCF506 /* UserDecoder.swift */; };
 		2CD351262A3CFE7B00E53785 /* FirstTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD351252A3CFE7B00E53785 /* FirstTraining.swift */; };
 		2CD3512A2A3D03B700E53785 /* MyEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD351292A3D03B700E53785 /* MyEnums.swift */; };
 		2CD3512D2A3D03DE00E53785 /* OffsetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3512C2A3D03DE00E53785 /* OffsetHelper.swift */; };
@@ -65,6 +67,8 @@
 		2C82DE672A3D977D006AA47F /* UserPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPosts.swift; sourceTree = "<group>"; };
 		2C82DE692A3EA93F006AA47F /* SecondTraining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondTraining.swift; sourceTree = "<group>"; };
 		2C9102CD2A4713680024F27B /* TestScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestScreen.swift; sourceTree = "<group>"; };
+		2C96B8CE2A4EB86B00BCF506 /* ErrorNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorNetwork.swift; sourceTree = "<group>"; };
+		2C96B8D12A4EB89400BCF506 /* UserDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDecoder.swift; sourceTree = "<group>"; };
 		2CD351252A3CFE7B00E53785 /* FirstTraining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTraining.swift; sourceTree = "<group>"; };
 		2CD351292A3D03B700E53785 /* MyEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEnums.swift; sourceTree = "<group>"; };
 		2CD3512C2A3D03DE00E53785 /* OffsetHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetHelper.swift; sourceTree = "<group>"; };
@@ -223,6 +227,8 @@
 		2C3E9A022A376B9000ABEBDA /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				2C96B8D02A4EB88000BCF506 /* DecoderDataFromApi */,
+				2C96B8CE2A4EB86B00BCF506 /* ErrorNetwork.swift */,
 				2C3E9A032A376BA100ABEBDA /* APIManager.swift */,
 			);
 			path = Network;
@@ -250,6 +256,14 @@
 				2C6054D42A45429B004A7F54 /* UserData.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		2C96B8D02A4EB88000BCF506 /* DecoderDataFromApi */ = {
+			isa = PBXGroup;
+			children = (
+				2C96B8D12A4EB89400BCF506 /* UserDecoder.swift */,
+			);
+			path = DecoderDataFromApi;
 			sourceTree = "<group>";
 		};
 		2CD351242A3CFE6500E53785 /* FeaturesTraining */ = {
@@ -485,6 +499,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C3E99EE2A3735BA00ABEBDA /* MainView.swift in Sources */,
+				2C96B8CF2A4EB86B00BCF506 /* ErrorNetwork.swift in Sources */,
 				2C3E9A042A376BA100ABEBDA /* APIManager.swift in Sources */,
 				2C9102CE2A4713680024F27B /* TestScreen.swift in Sources */,
 				2C4447902A39D32000248B75 /* ProfileView.swift in Sources */,
@@ -497,6 +512,7 @@
 				2CD351302A3D070500E53785 /* AnchorKey.swift in Sources */,
 				2C3E99E42A3731B900ABEBDA /* MenuView.swift in Sources */,
 				2CD3512A2A3D03B700E53785 /* MyEnums.swift in Sources */,
+				2C96B8D22A4EB89400BCF506 /* UserDecoder.swift in Sources */,
 				2C6054D52A45429B004A7F54 /* UserData.swift in Sources */,
 				2C3E99EA2A37354100ABEBDA /* NewsView.swift in Sources */,
 				2C3E99F12A37363000ABEBDA /* SelectedModeButton.swift in Sources */,
