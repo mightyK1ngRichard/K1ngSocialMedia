@@ -27,6 +27,7 @@
 		2C96B8D82A4ED78800BCF506 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96B8D72A4ED78800BCF506 /* UserAPI.swift */; };
 		2C96B8DA2A4ED79E00BCF506 /* PostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96B8D92A4ED79E00BCF506 /* PostAPI.swift */; };
 		2C96B8DC2A4F52DE00BCF506 /* DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96B8DB2A4F52DE00BCF506 /* DateFormat.swift */; };
+		2C96B8EF2A50220C00BCF506 /* MovableGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96B8EE2A50220C00BCF506 /* MovableGrid.swift */; };
 		2CD351262A3CFE7B00E53785 /* FirstTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD351252A3CFE7B00E53785 /* FirstTraining.swift */; };
 		2CD3512A2A3D03B700E53785 /* MyEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD351292A3D03B700E53785 /* MyEnums.swift */; };
 		2CD3512D2A3D03DE00E53785 /* OffsetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3512C2A3D03DE00E53785 /* OffsetHelper.swift */; };
@@ -35,12 +36,16 @@
 		2CE47B742A3726D6003C863C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE47B732A3726D6003C863C /* ContentView.swift */; };
 		2CE47B762A3726D7003C863C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CE47B752A3726D7003C863C /* Assets.xcassets */; };
 		2CE47B792A3726D7003C863C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CE47B782A3726D7003C863C /* Preview Assets.xcassets */; };
-		2CE47B832A3726D7003C863C /* MightyK1ngRichard_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE47B822A3726D7003C863C /* MightyK1ngRichard_AppTests.swift */; };
-		2CE47B8D2A3726D7003C863C /* MightyK1ngRichard_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE47B8C2A3726D7003C863C /* MightyK1ngRichard_AppUITests.swift */; };
-		2CE47B8F2A3726D7003C863C /* MightyK1ngRichard_AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE47B8E2A3726D7003C863C /* MightyK1ngRichard_AppUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2C96B8E72A501E6D00BCF506 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2CE47B662A3726D5003C863C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2CE47B6D2A3726D6003C863C;
+			remoteInfo = "MightyK1ngRichard-App";
+		};
 		2CE47B7F2A3726D7003C863C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2CE47B662A3726D5003C863C /* Project object */;
@@ -77,6 +82,8 @@
 		2C96B8D72A4ED78800BCF506 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		2C96B8D92A4ED79E00BCF506 /* PostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAPI.swift; sourceTree = "<group>"; };
 		2C96B8DB2A4F52DE00BCF506 /* DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormat.swift; sourceTree = "<group>"; };
+		2C96B8E32A501E6D00BCF506 /* Network-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Network-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C96B8EE2A50220C00BCF506 /* MovableGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableGrid.swift; sourceTree = "<group>"; };
 		2CD351252A3CFE7B00E53785 /* FirstTraining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTraining.swift; sourceTree = "<group>"; };
 		2CD351292A3D03B700E53785 /* MyEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEnums.swift; sourceTree = "<group>"; };
 		2CD3512C2A3D03DE00E53785 /* OffsetHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetHelper.swift; sourceTree = "<group>"; };
@@ -87,13 +94,17 @@
 		2CE47B752A3726D7003C863C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2CE47B782A3726D7003C863C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2CE47B7E2A3726D7003C863C /* MightyK1ngRichard-AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MightyK1ngRichard-AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2CE47B822A3726D7003C863C /* MightyK1ngRichard_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MightyK1ngRichard_AppTests.swift; sourceTree = "<group>"; };
 		2CE47B882A3726D7003C863C /* MightyK1ngRichard-AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MightyK1ngRichard-AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2CE47B8C2A3726D7003C863C /* MightyK1ngRichard_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MightyK1ngRichard_AppUITests.swift; sourceTree = "<group>"; };
-		2CE47B8E2A3726D7003C863C /* MightyK1ngRichard_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MightyK1ngRichard_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2C96B8E02A501E6D00BCF506 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2CE47B6B2A3726D6003C863C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -291,6 +302,7 @@
 				2CD351252A3CFE7B00E53785 /* FirstTraining.swift */,
 				2C82DE692A3EA93F006AA47F /* SecondTraining.swift */,
 				2C9102CD2A4713680024F27B /* TestScreen.swift */,
+				2C96B8EE2A50220C00BCF506 /* MovableGrid.swift */,
 			);
 			path = FeaturesTraining;
 			sourceTree = "<group>";
@@ -326,8 +338,6 @@
 			isa = PBXGroup;
 			children = (
 				2CE47B702A3726D6003C863C /* MightyK1ngRichard-App */,
-				2CE47B812A3726D7003C863C /* MightyK1ngRichard-AppTests */,
-				2CE47B8B2A3726D7003C863C /* MightyK1ngRichard-AppUITests */,
 				2CE47B6F2A3726D6003C863C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -338,6 +348,7 @@
 				2CE47B6E2A3726D6003C863C /* MightyK1ngRichard-App.app */,
 				2CE47B7E2A3726D7003C863C /* MightyK1ngRichard-AppTests.xctest */,
 				2CE47B882A3726D7003C863C /* MightyK1ngRichard-AppUITests.xctest */,
+				2C96B8E32A501E6D00BCF506 /* Network-tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -365,26 +376,27 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		2CE47B812A3726D7003C863C /* MightyK1ngRichard-AppTests */ = {
-			isa = PBXGroup;
-			children = (
-				2CE47B822A3726D7003C863C /* MightyK1ngRichard_AppTests.swift */,
-			);
-			path = "MightyK1ngRichard-AppTests";
-			sourceTree = "<group>";
-		};
-		2CE47B8B2A3726D7003C863C /* MightyK1ngRichard-AppUITests */ = {
-			isa = PBXGroup;
-			children = (
-				2CE47B8C2A3726D7003C863C /* MightyK1ngRichard_AppUITests.swift */,
-				2CE47B8E2A3726D7003C863C /* MightyK1ngRichard_AppUITestsLaunchTests.swift */,
-			);
-			path = "MightyK1ngRichard-AppUITests";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2C96B8E22A501E6D00BCF506 /* Network-tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C96B8E92A501E6E00BCF506 /* Build configuration list for PBXNativeTarget "Network-tests" */;
+			buildPhases = (
+				2C96B8DF2A501E6D00BCF506 /* Sources */,
+				2C96B8E02A501E6D00BCF506 /* Frameworks */,
+				2C96B8E12A501E6D00BCF506 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2C96B8E82A501E6D00BCF506 /* PBXTargetDependency */,
+			);
+			name = "Network-tests";
+			productName = "Network-tests";
+			productReference = 2C96B8E32A501E6D00BCF506 /* Network-tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		2CE47B6D2A3726D6003C863C /* MightyK1ngRichard-App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2CE47B922A3726D7003C863C /* Build configuration list for PBXNativeTarget "MightyK1ngRichard-App" */;
@@ -451,6 +463,10 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					2C96B8E22A501E6D00BCF506 = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = 2CE47B6D2A3726D6003C863C;
+					};
 					2CE47B6D2A3726D6003C863C = {
 						CreatedOnToolsVersion = 14.3;
 					};
@@ -483,11 +499,19 @@
 				2CE47B6D2A3726D6003C863C /* MightyK1ngRichard-App */,
 				2CE47B7D2A3726D7003C863C /* MightyK1ngRichard-AppTests */,
 				2CE47B872A3726D7003C863C /* MightyK1ngRichard-AppUITests */,
+				2C96B8E22A501E6D00BCF506 /* Network-tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2C96B8E12A501E6D00BCF506 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2CE47B6C2A3726D6003C863C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -514,6 +538,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2C96B8DF2A501E6D00BCF506 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2CE47B6A2A3726D6003C863C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -532,6 +563,7 @@
 				2CD3512D2A3D03DE00E53785 /* OffsetHelper.swift in Sources */,
 				2CD351262A3CFE7B00E53785 /* FirstTraining.swift in Sources */,
 				2CD351302A3D070500E53785 /* AnchorKey.swift in Sources */,
+				2C96B8EF2A50220C00BCF506 /* MovableGrid.swift in Sources */,
 				2C96B8D42A4ED6AE00BCF506 /* PostDecoder.swift in Sources */,
 				2C3E99E42A3731B900ABEBDA /* MenuView.swift in Sources */,
 				2CD3512A2A3D03B700E53785 /* MyEnums.swift in Sources */,
@@ -550,7 +582,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CE47B832A3726D7003C863C /* MightyK1ngRichard_AppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,14 +589,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CE47B8D2A3726D7003C863C /* MightyK1ngRichard_AppUITests.swift in Sources */,
-				2CE47B8F2A3726D7003C863C /* MightyK1ngRichard_AppUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2C96B8E82A501E6D00BCF506 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2CE47B6D2A3726D6003C863C /* MightyK1ngRichard-App */;
+			targetProxy = 2C96B8E72A501E6D00BCF506 /* PBXContainerItemProxy */;
+		};
 		2CE47B802A3726D7003C863C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2CE47B6D2A3726D6003C863C /* MightyK1ngRichard-App */;
@@ -579,6 +613,42 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		2C96B8EA2A501E6E00BCF506 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SKCX3NJ774;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mightyK1ngRichard.Network-tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MightyK1ngRichard-App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MightyK1ngRichard-App";
+			};
+			name = Debug;
+		};
+		2C96B8EB2A501E6E00BCF506 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SKCX3NJ774;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mightyK1ngRichard.Network-tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MightyK1ngRichard-App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MightyK1ngRichard-App";
+			};
+			name = Release;
+		};
 		2CE47B902A3726D7003C863C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -705,6 +775,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = K1ng;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -735,6 +806,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = K1ng;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -832,6 +904,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2C96B8E92A501E6E00BCF506 /* Build configuration list for PBXNativeTarget "Network-tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C96B8EA2A501E6E00BCF506 /* Debug */,
+				2C96B8EB2A501E6E00BCF506 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2CE47B692A3726D5003C863C /* Build configuration list for PBXProject "MightyK1ngRichard-App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

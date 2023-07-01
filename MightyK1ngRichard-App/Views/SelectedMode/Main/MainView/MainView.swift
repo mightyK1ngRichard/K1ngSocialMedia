@@ -41,7 +41,7 @@ struct MainView: View {
             FirstTraining()
             
         case .friends:
-            SecondTraining()
+            MovableGrid()
         }
         
     }

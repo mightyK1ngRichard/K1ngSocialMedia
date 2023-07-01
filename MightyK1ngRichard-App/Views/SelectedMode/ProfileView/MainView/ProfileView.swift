@@ -42,41 +42,21 @@ struct ProfileView: View {
     @State private var scrollProgress : CGFloat = .zero
     @State private var scaleImage     : CGSize  = .init(width: 1, height: 1)
     @State private var user           : UserData?
+    @State private var isRefresh      = false
     
     var body: some View {
         MainView()
-            .onAppear {
-                APIManager.user.getUserById(userID: userID) { data, error in
-                    if let data = data {
-                        let u = data.user
-                        
-                        /// Получаем посты пользователя.
-                        var uPosts: [UserPostData] = []
-                        if let uPost = u.posts {
-                            for p in uPost {
-                                var tempFiles: [UserFielsData] = []
-                                if let files = p.files {
-                                    for file in files {
-                                        tempFiles.append(.init(id: file.id, url: file.file_name, postID: file.post_id))
-                                    }
-                                }
-                                
-                                let temp = UserPostData(id: p.id, datePublic: p.date_public, content: p.content, countOfLike: p.count_of_likes, countOfComments: p.count_of_comments, filesInPost: tempFiles, comments: [], userAvatar: p.avatar, nickname: p.nickname)
-                                uPosts.append(temp)
-                            }
-                        }
-                        
-                        /// Получаем фоторграфии пользователя.
-                        var uImages: [UserImagesData] = []
-                        if let imgs = u.images {
-                            for i in imgs {
-                                uImages.append(.init(id: i.id, datePublic: i.date_public, imageURL: i.image_name, countOfLikes: i.count_of_likes, countOfComments: i.count_of_comments, userID: i.user_id))
-                            }
-                        }
-                        
-                        /// Итоговое присвоение.
-                        self.user = UserData(id: u.id, nickname: u.nickname, description: u.description, locationInfo: u.location, university: u.university, backroundImage: u.header_image, userAvatar: u.avatar, countOfFriends: u.count_of_friends, posts: uPosts, images: uImages)
-                    }
+            .onAppear(perform: GetNetworkData)
+        
+            /// TODO: Научиться делать refresh нормально. Пока так...
+            /// Не забыть потом под UserHeader убрать overlay в MainView.
+            .onChange(of: scrollProgress) { _ in
+                if scrollProgress > 10 {
+                    isRefresh = true
+                }
+                if scrollProgress == 0 && isRefresh {
+                    GetNetworkData()
+                    isRefresh = false
                 }
             }
     }
@@ -84,13 +64,20 @@ struct ProfileView: View {
     @ViewBuilder
     private func MainView() -> some View {
         let backgroundColor: Color = self.shemaColor == .dark ? Color.VK.black : Color.VK.white
-        
         GeometryReader { proxy in
             let size = proxy.size
             let safeArea = proxy.safeAreaInsets
             ZStack(alignment: .top) {
                 UserHeader(size: size)
                     .ignoresSafeArea()
+                    // MARK: REFRESH DATA.
+                    .overlay {
+                        if isRefresh {
+                            ProgressView()
+                                .scaleEffect(1.2)
+                                .offset(y: -30)
+                        }
+                    }
                 
                 ScrollView(showsIndicators: false) {
                     MainProfileView(safeArea: safeArea, size: size)
@@ -127,8 +114,9 @@ struct ProfileView: View {
                                 
                             } else {
                                 RoundedRectangle(cornerRadius: 10)
-                                    .fill(.gray)
-                                    .frame(width: 40, height: 5)
+                                    .fill(.gray.opacity(0.2))
+                                    .frame(maxWidth: .infinity, maxHeight: 5, alignment: .center)
+                                    .padding(.horizontal, 30)
                             }
                         }
                         
@@ -157,12 +145,13 @@ struct ProfileView: View {
             }
         }
     }
+
     
     private func MainProfileView(safeArea: EdgeInsets, size: CGSize) -> some View {
         ZStack(alignment: .top) {
-
             RoundedRectangle(cornerRadius: 20)
                 .fill(shemaColor == .dark ? .black : .white)
+                .frame(height: 300)
                 .padding(.top, safeArea.top + 130)
             
             VStack {
@@ -172,9 +161,9 @@ struct ProfileView: View {
                 PostsView(size: size)
             }
             .padding(.top, safeArea.top + 130)
-            
             UserAvatar(safeArea: safeArea)
         }
+        
     }
     
     @ViewBuilder
@@ -307,7 +296,7 @@ struct ProfileView: View {
                         ForEach(1...4, id: \.self) { col in
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(.gray.opacity(0.2))
-                                .frame(width: CGFloat(col) * 52, height: 15)
+                                .frame(maxWidth: .infinity, maxHeight: 15)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.horizontal)
                                 .background(backgroundColor)
@@ -464,15 +453,49 @@ struct ProfileView: View {
             } else {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(.gray.opacity(0.2))
-                    .frame(width: 50, height: 15)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal)
+                    .frame(maxWidth: .infinity, maxHeight: 15, alignment: .center)
+                    .padding(.horizontal, 40)
                     .padding(.vertical)
                     .background(backgroundColor)
                     .foregroundColor(.primary)
                     .cornerRadius(20)
             }
             
+        }
+    }
+    
+    private func GetNetworkData() {
+        APIManager.user.getUserById(userID: userID) { data, error in
+            if let data = data {
+                let u = data.user
+                
+                /// Получаем посты пользователя.
+                var uPosts: [UserPostData] = []
+                if let uPost = u.posts {
+                    for p in uPost {
+                        var tempFiles: [UserFielsData] = []
+                        if let files = p.files {
+                            for file in files {
+                                tempFiles.append(.init(id: file.id, url: file.file_name, postID: file.post_id))
+                            }
+                        }
+                        
+                        let temp = UserPostData(id: p.id, datePublic: p.date_public, content: p.content, countOfLike: p.count_of_likes, countOfComments: p.count_of_comments, filesInPost: tempFiles, comments: [], userAvatar: p.avatar, nickname: p.nickname)
+                        uPosts.append(temp)
+                    }
+                }
+                
+                /// Получаем фоторграфии пользователя.
+                var uImages: [UserImagesData] = []
+                if let imgs = u.images {
+                    for i in imgs {
+                        uImages.append(.init(id: i.id, datePublic: i.date_public, imageURL: i.image_name, countOfLikes: i.count_of_likes, countOfComments: i.count_of_comments, userID: i.user_id))
+                    }
+                }
+                
+                /// Итоговое присвоение.
+                self.user = UserData(id: u.id, nickname: u.nickname, description: u.description, locationInfo: u.location, university: u.university, backroundImage: u.header_image, userAvatar: u.avatar, countOfFriends: u.count_of_friends, posts: uPosts, images: uImages)
+            }
         }
     }
 }

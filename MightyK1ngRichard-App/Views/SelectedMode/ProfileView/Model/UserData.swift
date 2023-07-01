@@ -60,12 +60,18 @@ struct UserFielsData: Identifiable {
 let testUser = UserData(id: 1, nickname: "Dmitriy Permyakov", description: " Engoing Web/iOS developing", locationInfo: "London", university: "МГТУ им. Н.Э.Баумана", backroundImage: backImg, userAvatar: userURL, countOfFriends: 105)
 
 let testPosts: [UserPostData] = [
-    .init(id: 2, datePublic: "2023-02-24T05:26:52.086114Z", content: testText2, countOfLike: 16, countOfComments: 4, filesInPost: [.init(id: 1, postID: 1)], comments: testComments, nickname: "Dmitriy Permyakov"),
-    .init(id: 3, datePublic: "2023-06-24T05:26:52.086114Z", content: testText, countOfLike: 9, countOfComments: 5, filesInPost: [.init(id: 1, postID: 1)], comments: testComments, nickname: "Dmitriy Permyakov"),
-    .init(id: 4, datePublic: "2023-04-24T05:26:52.086114Z", content: testText, countOfLike: 8, countOfComments: 6, filesInPost: [.init(id: 1, postID: 1)], comments: testComments, nickname: "Dmitriy Permyakov"),
+    .init(id: 2, datePublic: "2023-02-24T05:26:52.086114Z", content: testText2, countOfLike: 16, countOfComments: 4, filesInPost: testFiles, comments: testComments, nickname: "Dmitriy Permyakov"),
+    .init(id: 3, datePublic: "2023-06-24T05:26:52.086114Z", content: testText, countOfLike: 9, countOfComments: 5, filesInPost: testFiles, comments: testComments, nickname: "Dmitriy Permyakov"),
+    .init(id: 4, datePublic: "2023-04-24T05:26:52.086114Z", content: testText, countOfLike: 8, countOfComments: 6, filesInPost: testFiles, comments: testComments, nickname: "Dmitriy Permyakov"),
     .init(id: 5, datePublic: "2023-06-24T05:26:52.086114Z", content: testText, countOfLike: 7, countOfComments: 8, filesInPost: [.init(id: 1, postID: 1)], comments: testComments, nickname: "Dmitriy Permyakov"),
     .init(id: 6, datePublic: "2025-06-24T05:26:52.086114Z", content: testText, countOfLike: 5, countOfComments: 10, filesInPost: [.init(id: 1, postID: 1)], comments: testComments, nickname: "Dmitriy Permyakov"),
 
+]
+
+let testFiles: [UserFielsData] = [
+    .init(id: 1, url: imageOfPost, postID: 1),
+    .init(id: 1, url: imageOfPostSecond, postID: 1),
+    .init(id: 1, url: imageOfPostThird, postID: 1),
 ]
 
 let testComments: [CommentUnderPost] = [
@@ -94,7 +100,7 @@ private let testText = """
 А вот теперь ещё один.
 """.trimmingCharacters(in: .whitespaces)
 
-private let testText2 = """
+ let testText2 = """
 Некоторые режиссеры просто могут, вот и всё. Талант есть талант.
 
 Великолепный визуал. Очень понравилось всё такое красочное, яркое, контрастное. Местами стиль отдельных пауков немного раздражал (панка), но это вкусовщина. В целом и в большинстве своём я просто наслаждался визуалом, который ещё и двигался... Ах как же он двигался, этот визуал...

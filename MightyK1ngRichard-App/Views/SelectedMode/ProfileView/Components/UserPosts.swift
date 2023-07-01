@@ -51,7 +51,7 @@ struct UserPostsView: View {
                             .foregroundColor(.primary)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
-//                        Text("\(post.datePublic.formatted())")
+                        //                        Text("\(post.datePublic.formatted())")
                         Text(formatDateString(post.datePublic) ?? "")
                             .font(.caption)
                             .foregroundColor(.gray)
@@ -75,20 +75,23 @@ struct UserPostsView: View {
             .padding(.horizontal)
             .padding(.top, 8)
             
-            ForEach(post.filesInPost ?? []) { postImg in
-                if let urlLink = postImg.url {
-                    AsyncImage(url: urlLink) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: size.width)
-                            .background(backgroundColor)
+            VStack(spacing: 0) {
+                ForEach(post.filesInPost ?? []) { postImg in
+                    if let urlLink = postImg.url {
+                        AsyncImage(url: urlLink) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: size.width)
+                                .background(backgroundColor)
+                            
+                        } placeholder: {
+                            ProgressView()
+                                .padding(.trailing, 5)
+                        }
                         
-                    } placeholder: {
-                        ProgressView()
-                            .padding(.trailing, 5)
+                        
                     }
-                    
                 }
             }
 
@@ -196,7 +199,7 @@ struct UserPostsView: View {
 struct UserPosts_Previews: PreviewProvider {
     static var previews: some View {
         ScrollView {
-            UserPostsView(post: testPosts[0], size: CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height))
+            UserPostsView(post: testPosts.first!, size: CGSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height))
                 .preferredColorScheme(.dark)
         }
         .ignoresSafeArea()
