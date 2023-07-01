@@ -28,6 +28,9 @@
 		2C96B8DA2A4ED79E00BCF506 /* PostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96B8D92A4ED79E00BCF506 /* PostAPI.swift */; };
 		2C96B8DC2A4F52DE00BCF506 /* DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96B8DB2A4F52DE00BCF506 /* DateFormat.swift */; };
 		2C96B8EF2A50220C00BCF506 /* MovableGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96B8EE2A50220C00BCF506 /* MovableGrid.swift */; };
+		2C96B8F12A50687B00BCF506 /* AsyncNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96B8F02A50687B00BCF506 /* AsyncNetwork.swift */; };
+		2C96B8F32A50A82000BCF506 /* UploadImageToServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96B8F22A50A82000BCF506 /* UploadImageToServer.swift */; };
+		2C96B8F52A50A92100BCF506 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96B8F42A50A92100BCF506 /* ImagePicker.swift */; };
 		2CD351262A3CFE7B00E53785 /* FirstTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD351252A3CFE7B00E53785 /* FirstTraining.swift */; };
 		2CD3512A2A3D03B700E53785 /* MyEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD351292A3D03B700E53785 /* MyEnums.swift */; };
 		2CD3512D2A3D03DE00E53785 /* OffsetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3512C2A3D03DE00E53785 /* OffsetHelper.swift */; };
@@ -84,6 +87,9 @@
 		2C96B8DB2A4F52DE00BCF506 /* DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormat.swift; sourceTree = "<group>"; };
 		2C96B8E32A501E6D00BCF506 /* Network-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Network-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C96B8EE2A50220C00BCF506 /* MovableGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableGrid.swift; sourceTree = "<group>"; };
+		2C96B8F02A50687B00BCF506 /* AsyncNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncNetwork.swift; sourceTree = "<group>"; };
+		2C96B8F22A50A82000BCF506 /* UploadImageToServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageToServer.swift; sourceTree = "<group>"; };
+		2C96B8F42A50A92100BCF506 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		2CD351252A3CFE7B00E53785 /* FirstTraining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTraining.swift; sourceTree = "<group>"; };
 		2CD351292A3D03B700E53785 /* MyEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEnums.swift; sourceTree = "<group>"; };
 		2CD3512C2A3D03DE00E53785 /* OffsetHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetHelper.swift; sourceTree = "<group>"; };
@@ -303,6 +309,9 @@
 				2C82DE692A3EA93F006AA47F /* SecondTraining.swift */,
 				2C9102CD2A4713680024F27B /* TestScreen.swift */,
 				2C96B8EE2A50220C00BCF506 /* MovableGrid.swift */,
+				2C96B8F02A50687B00BCF506 /* AsyncNetwork.swift */,
+				2C96B8F22A50A82000BCF506 /* UploadImageToServer.swift */,
+				2C96B8F42A50A92100BCF506 /* ImagePicker.swift */,
 			);
 			path = FeaturesTraining;
 			sourceTree = "<group>";
@@ -566,7 +575,9 @@
 				2C96B8EF2A50220C00BCF506 /* MovableGrid.swift in Sources */,
 				2C96B8D42A4ED6AE00BCF506 /* PostDecoder.swift in Sources */,
 				2C3E99E42A3731B900ABEBDA /* MenuView.swift in Sources */,
+				2C96B8F52A50A92100BCF506 /* ImagePicker.swift in Sources */,
 				2CD3512A2A3D03B700E53785 /* MyEnums.swift in Sources */,
+				2C96B8F12A50687B00BCF506 /* AsyncNetwork.swift in Sources */,
 				2C96B8D22A4EB89400BCF506 /* UserDecoder.swift in Sources */,
 				2C6054D52A45429B004A7F54 /* UserData.swift in Sources */,
 				2C3E99EA2A37354100ABEBDA /* NewsView.swift in Sources */,
@@ -574,6 +585,7 @@
 				2C82DE682A3D977D006AA47F /* UserPosts.swift in Sources */,
 				2CE47B722A3726D6003C863C /* MightyK1ngRichard_AppApp.swift in Sources */,
 				2C96B8DC2A4F52DE00BCF506 /* DateFormat.swift in Sources */,
+				2C96B8F32A50A82000BCF506 /* UploadImageToServer.swift in Sources */,
 				2C3E99E12A37306B00ABEBDA /* FontView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

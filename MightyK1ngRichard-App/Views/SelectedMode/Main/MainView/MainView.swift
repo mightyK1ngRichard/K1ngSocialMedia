@@ -38,7 +38,8 @@ struct MainView: View {
             NewsView()
             
         case .messages:
-            FirstTraining()
+//            FirstTraining()
+            UploadImageToServer()
             
         case .friends:
             MovableGrid()

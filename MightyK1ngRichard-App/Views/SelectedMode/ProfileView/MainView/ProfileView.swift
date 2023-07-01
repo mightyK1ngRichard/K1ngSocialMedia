@@ -47,7 +47,7 @@ struct ProfileView: View {
     var body: some View {
         MainView()
             .onAppear(perform: GetNetworkData)
-        
+
             /// TODO: Научиться делать refresh нормально. Пока так...
             /// Не забыть потом под UserHeader убрать overlay в MainView.
             .onChange(of: scrollProgress) { _ in

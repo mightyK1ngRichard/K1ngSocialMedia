@@ -75,7 +75,7 @@ struct UserPostsView: View {
             .padding(.horizontal)
             .padding(.top, 8)
             
-            VStack(spacing: 0) {
+            VStack(spacing: 3) {
                 ForEach(post.filesInPost ?? []) { postImg in
                     if let urlLink = postImg.url {
                         AsyncImage(url: urlLink) { image in

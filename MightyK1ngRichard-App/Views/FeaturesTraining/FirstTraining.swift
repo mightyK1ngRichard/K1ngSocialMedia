@@ -19,14 +19,6 @@ struct FirstTraining: View {
     }
 }
 
-
-
-struct FirstTraining_Previews: PreviewProvider {
-    static var previews: some View {
-        FirstTraining()
-    }
-}
-
 struct PersoneViewTrain: View {
     @Environment(\.colorScheme) private var colorSheme
     @EnvironmentObject var selected: SelectedButton
@@ -188,5 +180,11 @@ struct PersoneViewTrain: View {
         }
         .padding(.horizontal, 15)
         .padding(.bottom, safeArea.bottom)
+    }
+}
+
+struct FirstTraining_Previews: PreviewProvider {
+    static var previews: some View {
+        FirstTraining()
     }
 }
