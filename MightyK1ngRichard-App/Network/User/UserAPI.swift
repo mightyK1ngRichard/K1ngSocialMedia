@@ -70,7 +70,7 @@ class UserAPI: APIManager {
         let request = URLRequest(url: url)
         URLSession.shared.dataTask(with: request) { data, response, error in
 
-            if let err = error {
+            if let _ = error {
                 DispatchQueue.main.async {
                     completion(nil, .NotConnect)
                 }

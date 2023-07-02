@@ -225,6 +225,18 @@ struct ProfileView: View {
                 Circle()
                     .frame(maxWidth: currentSize <= 60 ? 60 : currentSize, maxHeight: 100)
                     .foregroundColor(Color.VK.black)
+                    .overlay {
+                        VStack {
+                            
+                            Image(systemName: "xmark.icloud")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 50)
+                            
+                            Text("Server Error")
+                        }
+                        .foregroundColor(.white)
+                    }
             }
         }
         .padding(.top, safeArea.top + 78)
@@ -458,7 +470,6 @@ struct ProfileView: View {
     }
     
     private func GetNetworkData() {
-        print("Start Network")
         APIManager.user.getUserById(userID: userID) { data, error in
 
             if let error = error {
@@ -498,7 +509,6 @@ struct ProfileView: View {
                 self.user = UserData(id: u.id, nickname: u.nickname, description: u.description, locationInfo: u.location, university: u.university, backroundImage: u.header_image, userAvatar: u.avatar, countOfFriends: u.count_of_friends, posts: uPosts, images: uImages)
             }
         }
-        print("Stop Network")
     }
 }
 
