@@ -12,6 +12,7 @@ enum APIError: Error {
     case badURL
     case decodedError
     case noResponse
+    case NotConnect
     
     func contentError() -> String {
         switch(self) {
@@ -23,6 +24,8 @@ enum APIError: Error {
             return "Error of decoding"
         case .noResponse:
             return "api manager without response"
+        case .NotConnect:
+            return "could not connect to the server"
         }
     }
 }

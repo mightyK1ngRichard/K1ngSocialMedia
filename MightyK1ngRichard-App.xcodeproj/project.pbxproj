@@ -29,8 +29,6 @@
 		2C96B8DC2A4F52DE00BCF506 /* DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96B8DB2A4F52DE00BCF506 /* DateFormat.swift */; };
 		2C96B8EF2A50220C00BCF506 /* MovableGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96B8EE2A50220C00BCF506 /* MovableGrid.swift */; };
 		2C96B8F12A50687B00BCF506 /* AsyncNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96B8F02A50687B00BCF506 /* AsyncNetwork.swift */; };
-		2C96B8F32A50A82000BCF506 /* UploadImageToServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96B8F22A50A82000BCF506 /* UploadImageToServer.swift */; };
-		2C96B8F52A50A92100BCF506 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96B8F42A50A92100BCF506 /* ImagePicker.swift */; };
 		2CD351262A3CFE7B00E53785 /* FirstTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD351252A3CFE7B00E53785 /* FirstTraining.swift */; };
 		2CD3512A2A3D03B700E53785 /* MyEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD351292A3D03B700E53785 /* MyEnums.swift */; };
 		2CD3512D2A3D03DE00E53785 /* OffsetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3512C2A3D03DE00E53785 /* OffsetHelper.swift */; };
@@ -39,6 +37,8 @@
 		2CE47B742A3726D6003C863C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE47B732A3726D6003C863C /* ContentView.swift */; };
 		2CE47B762A3726D7003C863C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CE47B752A3726D7003C863C /* Assets.xcassets */; };
 		2CE47B792A3726D7003C863C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CE47B782A3726D7003C863C /* Preview Assets.xcassets */; };
+		2CF397FB2A5167240018299D /* TestPostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF397FA2A5167240018299D /* TestPostRequest.swift */; };
+		2CF397FD2A517DEA0018299D /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF397FC2A517DEA0018299D /* ImagePickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,8 +88,6 @@
 		2C96B8E32A501E6D00BCF506 /* Network-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Network-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C96B8EE2A50220C00BCF506 /* MovableGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableGrid.swift; sourceTree = "<group>"; };
 		2C96B8F02A50687B00BCF506 /* AsyncNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncNetwork.swift; sourceTree = "<group>"; };
-		2C96B8F22A50A82000BCF506 /* UploadImageToServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageToServer.swift; sourceTree = "<group>"; };
-		2C96B8F42A50A92100BCF506 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		2CD351252A3CFE7B00E53785 /* FirstTraining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTraining.swift; sourceTree = "<group>"; };
 		2CD351292A3D03B700E53785 /* MyEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEnums.swift; sourceTree = "<group>"; };
 		2CD3512C2A3D03DE00E53785 /* OffsetHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetHelper.swift; sourceTree = "<group>"; };
@@ -101,6 +99,8 @@
 		2CE47B782A3726D7003C863C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2CE47B7E2A3726D7003C863C /* MightyK1ngRichard-AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MightyK1ngRichard-AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE47B882A3726D7003C863C /* MightyK1ngRichard-AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MightyK1ngRichard-AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2CF397FA2A5167240018299D /* TestPostRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPostRequest.swift; sourceTree = "<group>"; };
+		2CF397FC2A517DEA0018299D /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -310,8 +310,8 @@
 				2C9102CD2A4713680024F27B /* TestScreen.swift */,
 				2C96B8EE2A50220C00BCF506 /* MovableGrid.swift */,
 				2C96B8F02A50687B00BCF506 /* AsyncNetwork.swift */,
-				2C96B8F22A50A82000BCF506 /* UploadImageToServer.swift */,
-				2C96B8F42A50A92100BCF506 /* ImagePicker.swift */,
+				2CF397FA2A5167240018299D /* TestPostRequest.swift */,
+				2CF397FC2A517DEA0018299D /* ImagePickerView.swift */,
 			);
 			path = FeaturesTraining;
 			sourceTree = "<group>";
@@ -562,6 +562,7 @@
 				2C96B8CF2A4EB86B00BCF506 /* ErrorNetwork.swift in Sources */,
 				2C3E9A042A376BA100ABEBDA /* APIManager.swift in Sources */,
 				2C96B8D82A4ED78800BCF506 /* UserAPI.swift in Sources */,
+				2CF397FD2A517DEA0018299D /* ImagePickerView.swift in Sources */,
 				2C9102CE2A4713680024F27B /* TestScreen.swift in Sources */,
 				2C4447902A39D32000248B75 /* ProfileView.swift in Sources */,
 				2C3E99F72A373F3E00ABEBDA /* MessagesView.swift in Sources */,
@@ -575,7 +576,6 @@
 				2C96B8EF2A50220C00BCF506 /* MovableGrid.swift in Sources */,
 				2C96B8D42A4ED6AE00BCF506 /* PostDecoder.swift in Sources */,
 				2C3E99E42A3731B900ABEBDA /* MenuView.swift in Sources */,
-				2C96B8F52A50A92100BCF506 /* ImagePicker.swift in Sources */,
 				2CD3512A2A3D03B700E53785 /* MyEnums.swift in Sources */,
 				2C96B8F12A50687B00BCF506 /* AsyncNetwork.swift in Sources */,
 				2C96B8D22A4EB89400BCF506 /* UserDecoder.swift in Sources */,
@@ -583,9 +583,9 @@
 				2C3E99EA2A37354100ABEBDA /* NewsView.swift in Sources */,
 				2C3E99F12A37363000ABEBDA /* SelectedModeButton.swift in Sources */,
 				2C82DE682A3D977D006AA47F /* UserPosts.swift in Sources */,
+				2CF397FB2A5167240018299D /* TestPostRequest.swift in Sources */,
 				2CE47B722A3726D6003C863C /* MightyK1ngRichard_AppApp.swift in Sources */,
 				2C96B8DC2A4F52DE00BCF506 /* DateFormat.swift in Sources */,
-				2C96B8F32A50A82000BCF506 /* UploadImageToServer.swift in Sources */,
 				2C3E99E12A37306B00ABEBDA /* FontView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

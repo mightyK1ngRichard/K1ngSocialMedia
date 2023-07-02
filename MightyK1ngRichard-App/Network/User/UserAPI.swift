@@ -69,13 +69,14 @@ class UserAPI: APIManager {
         
         let request = URLRequest(url: url)
         URLSession.shared.dataTask(with: request) { data, response, error in
+
             if let err = error {
                 DispatchQueue.main.async {
-                    completion(nil, err as? APIError)
+                    completion(nil, .NotConnect)
                 }
                 return
             }
-            
+
             if let httpResponse = response as? HTTPURLResponse {
                 // TODO: add status codes of 201 202 203 ...
                 if httpResponse.statusCode == 200 {

@@ -37,12 +37,13 @@ struct ProfileView: View {
     @Environment(\.colorScheme) private var shemaColor
     @EnvironmentObject var selected   : SelectedButton
     
-    @State private var pressedButton  = "Фото"
-    @State private var showBar        = false
-    @State private var scrollProgress : CGFloat = .zero
-    @State private var scaleImage     : CGSize  = .init(width: 1, height: 1)
-    @State private var user           : UserData?
-    @State private var isRefresh      = false
+    @State private var pressedButton   = "Фото"
+    @State private var showBar         = false
+    @State private var scrollProgress  : CGFloat = .zero
+    @State private var scaleImage      : CGSize  = .init(width: 1, height: 1)
+    @State private var user            : UserData?
+    @State private var isRefresh       = false
+    @State private var isServerConnect = true
     
     var body: some View {
         MainView()
@@ -75,12 +76,13 @@ struct ProfileView: View {
                         if isRefresh {
                             ProgressView()
                                 .scaleEffect(1.2)
-                                .offset(y: -30)
+                                .offset(y: -50)
                         }
                     }
                 
                 ScrollView(showsIndicators: false) {
                     MainProfileView(safeArea: safeArea, size: size)
+
                 }
                 /// Scroll reader.
                 .coordinateSpace(name: MyKeys.keyOfprofileScrollView.rawValue)
@@ -146,12 +148,11 @@ struct ProfileView: View {
         }
     }
 
-    
     private func MainProfileView(safeArea: EdgeInsets, size: CGSize) -> some View {
         ZStack(alignment: .top) {
             RoundedRectangle(cornerRadius: 20)
                 .fill(shemaColor == .dark ? .black : .white)
-                .frame(height: 300)
+                .frame(height: UIScreen.main.bounds.size.height)
                 .padding(.top, safeArea.top + 130)
             
             VStack {
@@ -169,22 +170,16 @@ struct ProfileView: View {
     @ViewBuilder
     private func UserHeader(size: CGSize) -> some View {
         let backgroundColor: Color = self.shemaColor == .dark ? Color.VK.black : Color.VK.white
-        if let user = user {
-            if let urlLink = user.backroundImage {
-                AsyncImage(url: urlLink) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: size.width)
-                        .scaleEffect(scaleImage)
-                    
-                } placeholder: {
-                    Rectangle()
-                        .fill(backgroundColor)
-                        .frame(maxWidth: .infinity)
-                }
+        
+        if let user = user, let urlLink = user.backroundImage {
+            AsyncImage(url: urlLink) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: size.width)
+                    .scaleEffect(scaleImage)
                 
-            } else {
+            } placeholder: {
                 Rectangle()
                     .fill(backgroundColor)
                     .frame(maxWidth: .infinity)
@@ -193,8 +188,9 @@ struct ProfileView: View {
         } else {
             Rectangle()
                 .fill(backgroundColor)
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity, maxHeight: 230 + scrollProgress)
         }
+        
     }
     
     @ViewBuilder
@@ -335,20 +331,19 @@ struct ProfileView: View {
     
     @ViewBuilder
     private func imagesView() -> some View {
-        let buttons = [
-            ("Фото", "photo"),
-            ("Видео", "play.square"),
-            ("Музыка", "airpodspro"),
-            ("Клипы", "video"),
+        let buttons: [ModemButton] = [
+            .init(text: "Фото", image: "photo"),
+            .init(text: "Видео", image: "play.square"),
+            .init(text: "Музыка", image: "airpodspro"),
+            .init(text: "Клипы", image: "video"),
         ]
         let backgroundColor: Color = self.shemaColor == .dark ? Color.VK.black : Color.VK.white
         
         VStack {
-            // TODO: Сделать LazyHStack. Щас лень.
             ScrollView(.horizontal, showsIndicators: false){
                 HStack {
-                    ForEach(buttons, id: \.self.0) {
-                        ButtonsOfModes(img: $0.1, text: $0.0)
+                    ForEach(buttons) {
+                        ButtonsOfModes(img: $0.image, text: $0.text)
                     }
                 }
             }
@@ -416,23 +411,21 @@ struct ProfileView: View {
     @ViewBuilder
     private func ButtonsOfModes(img: String, text: String) -> some View {
         let color = shemaColor == .dark ? Color.VK.foregroundColorButtonBlack : Color.VK.foregroundColorButtonWhite
-
-        HStack {
-            Button {
-                pressedButton = text
-                
-            } label: {
-                Label(text, systemImage: img)
-                    .foregroundColor(pressedButton == text ? Color.black : .primary)
-            }
+        
+        Button {
+            self.pressedButton = text
             
+        } label: {
+            Label(text, systemImage: img)
+                .foregroundColor(pressedButton == text ? Color.black : .primary)
+                .padding(6)
+                .background(
+                    color
+                        .opacity(pressedButton == text ? 0.7 : 0)
+                )
+                .cornerRadius(10)
         }
-        .padding(6)
-        .background(
-            color
-                .opacity(pressedButton == text ? 0.7 : 0)
-        )
-        .cornerRadius(10)
+        
     }
     
     /// Количество друзей.
@@ -465,7 +458,15 @@ struct ProfileView: View {
     }
     
     private func GetNetworkData() {
+        print("Start Network")
         APIManager.user.getUserById(userID: userID) { data, error in
+
+            if let error = error {
+                print(error.contentError())
+                self.isServerConnect = false
+                return
+            }
+            self.isServerConnect = true
             if let data = data {
                 let u = data.user
                 
@@ -497,6 +498,7 @@ struct ProfileView: View {
                 self.user = UserData(id: u.id, nickname: u.nickname, description: u.description, locationInfo: u.location, university: u.university, backroundImage: u.header_image, userAvatar: u.avatar, countOfFriends: u.count_of_friends, posts: uPosts, images: uImages)
             }
         }
+        print("Stop Network")
     }
 }
 
@@ -531,5 +533,16 @@ struct ProfileView_Previews: PreviewProvider {
             .environmentObject(SelectedButton())
             .preferredColorScheme(.dark)
             
+    }
+}
+
+private class ModemButton: Identifiable {
+    let id: UUID = .init()
+    let text: String
+    let image: String
+    
+    init(text: String, image: String) {
+        self.text = text
+        self.image = image
     }
 }
