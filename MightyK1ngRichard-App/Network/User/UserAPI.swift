@@ -8,7 +8,7 @@
 import Foundation
 
 class UserAPI: APIManager {
-    let post  = PostAPI()
+    static let post  = PostAPI()
     
     func getUsers(completion: @escaping (UsersDecoder?, APIError?) -> Void)  {
         let urlString = "http://\(host):\(port)/users"

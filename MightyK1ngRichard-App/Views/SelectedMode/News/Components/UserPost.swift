@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-import SDWebImageSwiftUI
-
 struct UserPost: View {
     var username      : String
     var userAvatar    : URL?

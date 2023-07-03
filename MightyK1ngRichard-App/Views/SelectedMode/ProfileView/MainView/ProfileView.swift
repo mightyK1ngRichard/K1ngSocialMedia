@@ -202,7 +202,6 @@ struct ProfileView: View {
         Button {
             // ?
          
-            
         } label: {
             if let user = user {
                 if let url = user.userAvatar {
@@ -226,16 +225,17 @@ struct ProfileView: View {
                     .frame(maxWidth: currentSize <= 60 ? 60 : currentSize, maxHeight: 100)
                     .foregroundColor(Color.VK.black)
                     .overlay {
-                        VStack {
-                            
-                            Image(systemName: "xmark.icloud")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(height: 50)
-                            
-                            Text("Server Error")
+                        if !isServerConnect {
+                            VStack {
+                                Image(systemName: "xmark.icloud")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(height: 50)
+                                
+                                Text("Server Error")
+                            }
+                            .foregroundColor(.white)
                         }
-                        .foregroundColor(.white)
                     }
             }
         }
@@ -471,12 +471,12 @@ struct ProfileView: View {
     
     private func GetNetworkData() {
         APIManager.user.getUserById(userID: userID) { data, error in
-
             if let error = error {
                 print(error.contentError())
                 self.isServerConnect = false
                 return
             }
+            
             self.isServerConnect = true
             if let data = data {
                 let u = data.user
