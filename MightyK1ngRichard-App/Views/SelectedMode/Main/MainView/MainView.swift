@@ -14,6 +14,7 @@ struct MainView: View {
         .init(id: UUID(), text: .news, image: "note"),
         .init(id: UUID(), text: .messages, image: "message"),
         .init(id: UUID(), text: .friends, image: "person.2"),
+        .init(id: UUID(), text: .auth, image: "rectangle.portrait.and.arrow.forward"),
     ]
     
     var body: some View {
@@ -38,11 +39,14 @@ struct MainView: View {
             NewsView()
             
         case .messages:
-//            FirstTraining()
-            UploadImageToServer()
+            FirstTraining()
+//            UploadImageToServer()
             
         case .friends:
             MovableGrid()
+            
+        case .auth:
+            AuthView()
         }
         
     }
@@ -55,5 +59,6 @@ struct MainView_Previews: PreviewProvider {
         MainView()
             .environmentObject(selected)
             .preferredColorScheme(.dark)
+            .environmentObject(DataManager())
     }
 }

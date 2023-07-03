@@ -23,4 +23,5 @@ enum TextModeOfButtonBar: String {
     case news     = "Новости"
     case messages = "Сообщения"
     case friends  = "Друзья"
+    case auth     = "Регистация"
 }
