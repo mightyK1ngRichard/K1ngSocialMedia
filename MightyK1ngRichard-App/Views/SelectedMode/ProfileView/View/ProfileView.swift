@@ -90,7 +90,7 @@ struct ProfileView: View {
                     HStack {
                         Button {
                             // ?
-                            selected.showMenu = true
+                            self.selected.showMenu = true
                             
                         } label: {
                             Image(systemName: "chevron.left")

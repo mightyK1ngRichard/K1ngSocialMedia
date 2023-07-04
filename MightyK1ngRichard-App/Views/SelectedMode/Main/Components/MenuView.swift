@@ -10,7 +10,14 @@ import SwiftUI
 struct MenuView: View {
     @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject var selected : SelectedButton
-    @Binding var buttons            : [ButtonsBar]
+    @EnvironmentObject var authData : AuthDataManager
+    
+    private let buttons             : [ButtonsBar] = [
+        .init(id: UUID(), text: .profile, image: "person"),
+        .init(id: UUID(), text: .news, image: "note"),
+        .init(id: UUID(), text: .messages, image: "message"),
+        .init(id: UUID(), text: .friends, image: "person.2"),
+    ]
     
     let nickname = "Дмитрий Пермяков"
     let link     = "@mightyk1ngrichard"
@@ -61,6 +68,25 @@ struct MenuView: View {
                                 
                             }
                             Spacer()
+                            
+                            Button {
+                                self.selected.showMenu = false
+                                self.selected.selectedButton = .init(id: UUID(), text: .profile, image: "profile")
+                                
+                                do {
+                                    try authData.SignOut()
+                                    
+                                } catch {
+                                    print("error of sign out: \(error.localizedDescription)")
+                                }
+                                
+                            } label: {
+                                Label("Выход", systemImage: "rectangle.portrait.and.arrow.forward")
+                                    .font(.title3)
+                                    
+                            }
+
+
                         }
                         .padding(.leading, 5)
                         .font(.title2)
@@ -110,12 +136,7 @@ struct MenuView: View {
 
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
-        MenuView(buttons: .constant([
-            .init(id: UUID(), text: .profile, image: "person"),
-            .init(id: UUID(), text: .news, image: "note"),
-            .init(id: UUID(), text: .messages, image: "message"),
-            .init(id: UUID(), text: .friends, image: "person.2"),
-        ]))
+        MenuView()
         .environmentObject(SelectedButton())
 //        .background(.yellow.opacity(0.1))
     }

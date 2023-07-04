@@ -11,7 +11,6 @@ import Firebase
 @main
 struct MightyK1ngRichard_AppApp: App {
 //    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @StateObject var dataManager = DataManager()
     
     init() {
         FirebaseApp.configure()
@@ -20,7 +19,6 @@ struct MightyK1ngRichard_AppApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(dataManager)
         }
     }
 }

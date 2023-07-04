@@ -9,18 +9,21 @@ import SwiftUI
 import Firebase
 
 struct SignUpView: View {
-    @EnvironmentObject var selected : SelectedButton
-    
+    @EnvironmentObject var authData : AuthDataManager
     @State private var email        = ""
     @State private var password     = ""
-    @State private var userIsSignIn = false
+    @State private var errorMessage = ("", "")
+    @Binding var showAlert          : Bool
+    @Binding var showSignInView     : Bool
+    
     var body: some View {
-        if userIsSignIn {
-            DogsViewTemp()
-                
-        } else {
-            content
-        }
+        content
+            .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text(errorMessage.0),
+                        message: Text(errorMessage.1)
+                    )
+                }
     }
     
     var content: some View {
@@ -32,15 +35,6 @@ struct SignUpView: View {
             Buttons()
         }
         .ignoresSafeArea()
-        .onAppear {
-            Auth.auth().addStateDidChangeListener { auth, user in
-                if let user = user {
-                    self.userIsSignIn.toggle()
-                    print("USER: ", user)
-                }
-                print("AUTH: ", auth)
-            }
-        }
     }
     
     @ViewBuilder
@@ -48,7 +42,7 @@ struct SignUpView: View {
         Color.black
         
         Rectangle()
-            .fill(LinearGradient(colors: [.pink, .purple], startPoint: .topLeading, endPoint: .bottomTrailing))
+            .fill(LinearGradient(colors: showSignInView ? [.mint, .blue] : [.pink, .purple] , startPoint: .topLeading, endPoint: .bottomTrailing))
             .rotationEffect(.degrees(45))
             .offset(x: -100, y: -130)
     }
@@ -74,12 +68,12 @@ struct SignUpView: View {
                             .foregroundColor(.white.opacity(0.7))
                             .padding(.horizontal)
                     }
-
+                
                 RoundedRectangle(cornerRadius: 10)
                     .frame(width: UIScreen.main.bounds.size.width - 20, height: 2, alignment: .center)
                     .foregroundColor(.white.opacity(0.4))
             }
-
+            
             VStack(spacing: 0) {
                 SecureField("", text: $password)
                     .textFieldStyle(.plain)
@@ -91,12 +85,12 @@ struct SignUpView: View {
                             .foregroundColor(.white.opacity(0.7))
                             .padding(.horizontal)
                     }
-
+                
                 RoundedRectangle(cornerRadius: 10)
                     .frame(width: UIScreen.main.bounds.size.width - 20, height: 2, alignment: .center)
                     .foregroundColor(.white.opacity(0.4))
-
-
+                
+                
             }
         }
     }
@@ -105,16 +99,26 @@ struct SignUpView: View {
     private func Buttons() -> some View {
         VStack(spacing: 20) {
             Button {
-                // ? sign up
-                SignIn()
+                /// Если пользователь на вьюшке входа, то реализуем вход.
+                if showSignInView {
+                    Task {
+                        await SignIn()
+                    }
+                    
+                } else {
+                    Task {
+                        await SignUp()
+                    }
+                }
                 
             } label: {
-                Text("Sign Up")
+                Text(showSignInView ? "Sign In" : "Sign Up")
                     .padding(.horizontal, 36)
                     .padding(.vertical, 10)
                     .background(
                         RoundedRectangle(cornerRadius: 20)
                             .fill(
+                                
                                 .linearGradient(colors: [.pink, .purple], startPoint: .topLeading, endPoint: .bottomTrailing)
                             )
                     )
@@ -122,10 +126,10 @@ struct SignUpView: View {
             }
             
             Button {
-                // ? sign in
+                self.showSignInView.toggle()
                 
             } label: {
-                Text("Already have account? Login")
+                Text(showSignInView ? "Don't have account? Register" : "Already have account? Login")
                     .foregroundColor(.white)
                     .font(.caption)
                     .bold()
@@ -134,35 +138,45 @@ struct SignUpView: View {
         .offset(y: 200)
     }
     
-    private func SignUp() {
-        Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            if let error = error {
-                print("==> ERROR FROM SIGN UP: \(error.localizedDescription)")
-                return
-            }
-            if let result = result {
-                print(result)
-            }
+    private func SignUp() async {
+        do {
+            let user = try await AuthService.shared.SignUp(email: email, password: password)
+            self.authData.user = user
+            self.authData.userIsAuth = true
+            
+        } catch {
+            print("Error of create user: \(error.localizedDescription)")
+            self.errorMessage.0 = "Ошибка авторизации"
+            self.errorMessage.1 = error.localizedDescription
+            self.password = ""
+            self.showAlert = true
         }
     }
     
-    private func SignIn() {
-        Auth.auth().signIn(withEmail: email, password: password) { result, error in
-            if let error = error {
-                print("==> ERROR FROM SIGN IN: \(error.localizedDescription)")
-                return
-            }
-            if let result = result {
-                print("SUCCESS")
-                print(result)
-            }
+    private func SignIn() async {
+        do {
+            let user = try await AuthService.shared.SignIn(email: email, password: password)
+            self.authData.user = user
+            self.authData.userIsAuth = true
+            
+        } catch {
+            print("Error of create user: \(error.localizedDescription)")
+            self.errorMessage.0 = "Ошибка аутенфикации"
+            self.errorMessage.1 = error.localizedDescription
+            self.password = ""
+            self.showAlert = true
         }
     }
+    
+    
 }
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView()
+        let showSignIn = false
+//        let showSignIn = true
+        
+        SignUpView(showAlert: .constant(false), showSignInView: .constant(showSignIn))
             .environmentObject(DataManager())
     }
 }
