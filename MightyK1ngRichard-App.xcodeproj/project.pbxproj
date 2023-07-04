@@ -39,6 +39,9 @@
 		2CD3512A2A3D03B700E53785 /* MyEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD351292A3D03B700E53785 /* MyEnums.swift */; };
 		2CD3512D2A3D03DE00E53785 /* OffsetHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3512C2A3D03DE00E53785 /* OffsetHelper.swift */; };
 		2CD351302A3D070500E53785 /* AnchorKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3512F2A3D070500E53785 /* AnchorKey.swift */; };
+		2CDCAAFD2A54B0F80079BF3A /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 2CDCAAFC2A54B0F80079BF3A /* GoogleSignIn */; };
+		2CDCAAFF2A54B0F80079BF3A /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2CDCAAFE2A54B0F80079BF3A /* GoogleSignInSwift */; };
+		2CDCAB022A54B8700079BF3A /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCAB012A54B8700079BF3A /* Utilities.swift */; };
 		2CE47B722A3726D6003C863C /* MightyK1ngRichard_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE47B712A3726D6003C863C /* MightyK1ngRichard_AppApp.swift */; };
 		2CE47B742A3726D6003C863C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE47B732A3726D6003C863C /* ContentView.swift */; };
 		2CE47B762A3726D7003C863C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CE47B752A3726D7003C863C /* Assets.xcassets */; };
@@ -46,30 +49,6 @@
 		2CF397FB2A5167240018299D /* TestPostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF397FA2A5167240018299D /* TestPostRequest.swift */; };
 		2CF397FD2A517DEA0018299D /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF397FC2A517DEA0018299D /* ImagePickerView.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		2C96B8E72A501E6D00BCF506 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2CE47B662A3726D5003C863C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2CE47B6D2A3726D6003C863C;
-			remoteInfo = "MightyK1ngRichard-App";
-		};
-		2CE47B7F2A3726D7003C863C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2CE47B662A3726D5003C863C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2CE47B6D2A3726D6003C863C;
-			remoteInfo = "MightyK1ngRichard-App";
-		};
-		2CE47B892A3726D7003C863C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2CE47B662A3726D5003C863C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2CE47B6D2A3726D6003C863C;
-			remoteInfo = "MightyK1ngRichard-App";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		2C1D8A692A52B57000EE8F00 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
@@ -94,7 +73,6 @@
 		2C96B8D72A4ED78800BCF506 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		2C96B8D92A4ED79E00BCF506 /* PostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAPI.swift; sourceTree = "<group>"; };
 		2C96B8DB2A4F52DE00BCF506 /* DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormat.swift; sourceTree = "<group>"; };
-		2C96B8E32A501E6D00BCF506 /* Network-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Network-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C96B8EE2A50220C00BCF506 /* MovableGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableGrid.swift; sourceTree = "<group>"; };
 		2C96B8F02A50687B00BCF506 /* AsyncNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncNetwork.swift; sourceTree = "<group>"; };
 		2CB4414C2A51D9060000F89E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -103,45 +81,26 @@
 		2CD351292A3D03B700E53785 /* MyEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEnums.swift; sourceTree = "<group>"; };
 		2CD3512C2A3D03DE00E53785 /* OffsetHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetHelper.swift; sourceTree = "<group>"; };
 		2CD3512F2A3D070500E53785 /* AnchorKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorKey.swift; sourceTree = "<group>"; };
+		2CDCAB002A54B19B0079BF3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		2CDCAB012A54B8700079BF3A /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		2CE47B6E2A3726D6003C863C /* MightyK1ngRichard-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MightyK1ngRichard-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE47B712A3726D6003C863C /* MightyK1ngRichard_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MightyK1ngRichard_AppApp.swift; sourceTree = "<group>"; };
 		2CE47B732A3726D6003C863C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2CE47B752A3726D7003C863C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2CE47B782A3726D7003C863C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		2CE47B7E2A3726D7003C863C /* MightyK1ngRichard-AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MightyK1ngRichard-AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2CE47B882A3726D7003C863C /* MightyK1ngRichard-AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MightyK1ngRichard-AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CF397FA2A5167240018299D /* TestPostRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPostRequest.swift; sourceTree = "<group>"; };
 		2CF397FC2A517DEA0018299D /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		2C96B8E02A501E6D00BCF506 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2CE47B6B2A3726D6003C863C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				2C1D8A7D2A52EDBD00EE8F00 /* FirebaseAuth in Frameworks */,
 				2C1D8A7F2A52EDBD00EE8F00 /* FirebaseFirestore in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2CE47B7B2A3726D7003C863C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2CE47B852A3726D7003C863C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				2CDCAAFD2A54B0F80079BF3A /* GoogleSignIn in Frameworks */,
+				2CDCAAFF2A54B0F80079BF3A /* GoogleSignInSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +347,7 @@
 				2CD3512E2A3D06F300E53785 /* PreferenceKey */,
 				2CD351282A3D03A500E53785 /* Enums */,
 				2C96B8DB2A4F52DE00BCF506 /* DateFormat.swift */,
+				2CDCAB012A54B8700079BF3A /* Utilities.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -429,9 +389,6 @@
 			isa = PBXGroup;
 			children = (
 				2CE47B6E2A3726D6003C863C /* MightyK1ngRichard-App.app */,
-				2CE47B7E2A3726D7003C863C /* MightyK1ngRichard-AppTests.xctest */,
-				2CE47B882A3726D7003C863C /* MightyK1ngRichard-AppUITests.xctest */,
-				2C96B8E32A501E6D00BCF506 /* Network-tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -439,6 +396,7 @@
 		2CE47B702A3726D6003C863C /* MightyK1ngRichard-App */ = {
 			isa = PBXGroup;
 			children = (
+				2CDCAB002A54B19B0079BF3A /* Info.plist */,
 				2C3E9A022A376B9000ABEBDA /* Network */,
 				2CD351272A3D039400E53785 /* Utils */,
 				2C3E99E22A3731B000ABEBDA /* Views */,
@@ -461,24 +419,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2C96B8E22A501E6D00BCF506 /* Network-tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2C96B8E92A501E6E00BCF506 /* Build configuration list for PBXNativeTarget "Network-tests" */;
-			buildPhases = (
-				2C96B8DF2A501E6D00BCF506 /* Sources */,
-				2C96B8E02A501E6D00BCF506 /* Frameworks */,
-				2C96B8E12A501E6D00BCF506 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2C96B8E82A501E6D00BCF506 /* PBXTargetDependency */,
-			);
-			name = "Network-tests";
-			productName = "Network-tests";
-			productReference = 2C96B8E32A501E6D00BCF506 /* Network-tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		2CE47B6D2A3726D6003C863C /* MightyK1ngRichard-App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2CE47B922A3726D7003C863C /* Build configuration list for PBXNativeTarget "MightyK1ngRichard-App" */;
@@ -495,46 +435,12 @@
 			packageProductDependencies = (
 				2C1D8A7C2A52EDBD00EE8F00 /* FirebaseAuth */,
 				2C1D8A7E2A52EDBD00EE8F00 /* FirebaseFirestore */,
+				2CDCAAFC2A54B0F80079BF3A /* GoogleSignIn */,
+				2CDCAAFE2A54B0F80079BF3A /* GoogleSignInSwift */,
 			);
 			productName = "MightyK1ngRichard-App";
 			productReference = 2CE47B6E2A3726D6003C863C /* MightyK1ngRichard-App.app */;
 			productType = "com.apple.product-type.application";
-		};
-		2CE47B7D2A3726D7003C863C /* MightyK1ngRichard-AppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2CE47B952A3726D7003C863C /* Build configuration list for PBXNativeTarget "MightyK1ngRichard-AppTests" */;
-			buildPhases = (
-				2CE47B7A2A3726D7003C863C /* Sources */,
-				2CE47B7B2A3726D7003C863C /* Frameworks */,
-				2CE47B7C2A3726D7003C863C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2CE47B802A3726D7003C863C /* PBXTargetDependency */,
-			);
-			name = "MightyK1ngRichard-AppTests";
-			productName = "MightyK1ngRichard-AppTests";
-			productReference = 2CE47B7E2A3726D7003C863C /* MightyK1ngRichard-AppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		2CE47B872A3726D7003C863C /* MightyK1ngRichard-AppUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2CE47B982A3726D7003C863C /* Build configuration list for PBXNativeTarget "MightyK1ngRichard-AppUITests" */;
-			buildPhases = (
-				2CE47B842A3726D7003C863C /* Sources */,
-				2CE47B852A3726D7003C863C /* Frameworks */,
-				2CE47B862A3726D7003C863C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2CE47B8A2A3726D7003C863C /* PBXTargetDependency */,
-			);
-			name = "MightyK1ngRichard-AppUITests";
-			productName = "MightyK1ngRichard-AppUITests";
-			productReference = 2CE47B882A3726D7003C863C /* MightyK1ngRichard-AppUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -546,20 +452,8 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
-					2C96B8E22A501E6D00BCF506 = {
-						CreatedOnToolsVersion = 14.3;
-						TestTargetID = 2CE47B6D2A3726D6003C863C;
-					};
 					2CE47B6D2A3726D6003C863C = {
 						CreatedOnToolsVersion = 14.3;
-					};
-					2CE47B7D2A3726D7003C863C = {
-						CreatedOnToolsVersion = 14.3;
-						TestTargetID = 2CE47B6D2A3726D6003C863C;
-					};
-					2CE47B872A3726D7003C863C = {
-						CreatedOnToolsVersion = 14.3;
-						TestTargetID = 2CE47B6D2A3726D6003C863C;
 					};
 				};
 			};
@@ -574,27 +468,18 @@
 			mainGroup = 2CE47B652A3726D5003C863C;
 			packageReferences = (
 				2C1D8A7B2A52EDBD00EE8F00 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				2CDCAAFB2A54B0F80079BF3A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 2CE47B6F2A3726D6003C863C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				2CE47B6D2A3726D6003C863C /* MightyK1ngRichard-App */,
-				2CE47B7D2A3726D7003C863C /* MightyK1ngRichard-AppTests */,
-				2CE47B872A3726D7003C863C /* MightyK1ngRichard-AppUITests */,
-				2C96B8E22A501E6D00BCF506 /* Network-tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		2C96B8E12A501E6D00BCF506 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2CE47B6C2A3726D6003C863C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -605,30 +490,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2CE47B7C2A3726D7003C863C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2CE47B862A3726D7003C863C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		2C96B8DF2A501E6D00BCF506 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2CE47B6A2A3726D6003C863C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -643,6 +507,7 @@
 				2C96B8DA2A4ED79E00BCF506 /* PostAPI.swift in Sources */,
 				2CE47B742A3726D6003C863C /* ContentView.swift in Sources */,
 				2C1D8A7A2A52DE9000EE8F00 /* DogViewTemp.swift in Sources */,
+				2CDCAB022A54B8700079BF3A /* Utilities.swift in Sources */,
 				2C1D8A762A52D37D00EE8F00 /* FirebaseService.swift in Sources */,
 				2C4447932A3A05EE00248B75 /* UserPost.swift in Sources */,
 				2CD3512D2A3D03DE00E53785 /* OffsetHelper.swift in Sources */,
@@ -669,77 +534,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2CE47B7A2A3726D7003C863C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2CE47B842A3726D7003C863C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		2C96B8E82A501E6D00BCF506 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2CE47B6D2A3726D6003C863C /* MightyK1ngRichard-App */;
-			targetProxy = 2C96B8E72A501E6D00BCF506 /* PBXContainerItemProxy */;
-		};
-		2CE47B802A3726D7003C863C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2CE47B6D2A3726D6003C863C /* MightyK1ngRichard-App */;
-			targetProxy = 2CE47B7F2A3726D7003C863C /* PBXContainerItemProxy */;
-		};
-		2CE47B8A2A3726D7003C863C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2CE47B6D2A3726D6003C863C /* MightyK1ngRichard-App */;
-			targetProxy = 2CE47B892A3726D7003C863C /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		2C96B8EA2A501E6E00BCF506 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SKCX3NJ774;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mightyK1ngRichard.Network-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MightyK1ngRichard-App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MightyK1ngRichard-App";
-			};
-			name = Debug;
-		};
-		2C96B8EB2A501E6E00BCF506 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SKCX3NJ774;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mightyK1ngRichard.Network-tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MightyK1ngRichard-App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MightyK1ngRichard-App";
-			};
-			name = Release;
-		};
 		2CE47B902A3726D7003C863C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -865,6 +662,7 @@
 				DEVELOPMENT_TEAM = SKCX3NJ774;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MightyK1ngRichard-App/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = K1ng;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -896,6 +694,7 @@
 				DEVELOPMENT_TEAM = SKCX3NJ774;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MightyK1ngRichard-App/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = K1ng;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -916,94 +715,9 @@
 			};
 			name = Release;
 		};
-		2CE47B962A3726D7003C863C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SKCX3NJ774;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mightyK1ngRichard.MightyK1ngRichard-AppTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MightyK1ngRichard-App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MightyK1ngRichard-App";
-			};
-			name = Debug;
-		};
-		2CE47B972A3726D7003C863C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SKCX3NJ774;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mightyK1ngRichard.MightyK1ngRichard-AppTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MightyK1ngRichard-App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MightyK1ngRichard-App";
-			};
-			name = Release;
-		};
-		2CE47B992A3726D7003C863C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SKCX3NJ774;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mightyK1ngRichard.MightyK1ngRichard-AppUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "MightyK1ngRichard-App";
-			};
-			name = Debug;
-		};
-		2CE47B9A2A3726D7003C863C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = SKCX3NJ774;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mightyK1ngRichard.MightyK1ngRichard-AppUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "MightyK1ngRichard-App";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2C96B8E92A501E6E00BCF506 /* Build configuration list for PBXNativeTarget "Network-tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2C96B8EA2A501E6E00BCF506 /* Debug */,
-				2C96B8EB2A501E6E00BCF506 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		2CE47B692A3726D5003C863C /* Build configuration list for PBXProject "MightyK1ngRichard-App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1022,24 +736,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2CE47B952A3726D7003C863C /* Build configuration list for PBXNativeTarget "MightyK1ngRichard-AppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2CE47B962A3726D7003C863C /* Debug */,
-				2CE47B972A3726D7003C863C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2CE47B982A3726D7003C863C /* Build configuration list for PBXNativeTarget "MightyK1ngRichard-AppUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2CE47B992A3726D7003C863C /* Debug */,
-				2CE47B9A2A3726D7003C863C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -1049,6 +745,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 10.0.0;
+			};
+		};
+		2CDCAAFB2A54B0F80079BF3A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1063,6 +767,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2C1D8A7B2A52EDBD00EE8F00 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		2CDCAAFC2A54B0F80079BF3A /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2CDCAAFB2A54B0F80079BF3A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		2CDCAAFE2A54B0F80079BF3A /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2CDCAAFB2A54B0F80079BF3A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

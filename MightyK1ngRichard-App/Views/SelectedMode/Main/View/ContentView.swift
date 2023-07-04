@@ -18,7 +18,7 @@ struct ContentView: View {
                 
                 if selected.showMenu {
                     MenuView()
-                        
+                        .zIndex(2)
                 }
             }
         }

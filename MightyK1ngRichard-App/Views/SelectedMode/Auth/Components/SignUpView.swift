@@ -7,6 +7,9 @@
 
 import SwiftUI
 import Firebase
+import GoogleSignIn
+import GoogleSignInSwift
+
 
 struct SignUpView: View {
     @EnvironmentObject var authData : AuthDataManager
@@ -134,8 +137,29 @@ struct SignUpView: View {
                     .font(.caption)
                     .bold()
             }
+            
+            GoogleButton()
         }
-        .offset(y: 200)
+        .offset(y: 260)
+        
+    }
+    
+    private func GoogleButton() -> some View {
+        GoogleSignInButton(viewModel: GoogleSignInButtonViewModel(scheme: .light, style: .icon, state: .normal)) {
+            Task {
+                do {
+                    self.authData.user = try await AuthService.shared.SignInWithGoogle()
+                    self.authData.userIsAuth = true
+                    
+                } catch {
+                    print("error from sign in with google: \(error.localizedDescription)")
+                    self.errorMessage.0 = "Ошибка авторизации"
+                    self.errorMessage.1 = error.localizedDescription
+                    self.showAlert = true
+                }
+            }
+        }
+        .clipShape(Circle())
     }
     
     private func SignUp() async {
@@ -173,8 +197,8 @@ struct SignUpView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        let showSignIn = false
-//        let showSignIn = true
+//        let showSignIn = false
+        let showSignIn = true
         
         SignUpView(showAlert: .constant(false), showSignInView: .constant(showSignIn))
             .environmentObject(DataManager())

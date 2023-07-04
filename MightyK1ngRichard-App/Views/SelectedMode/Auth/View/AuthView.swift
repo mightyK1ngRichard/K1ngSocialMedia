@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 
+
 struct AuthView: View {
     @EnvironmentObject var authData   : AuthDataManager
     @EnvironmentObject var selected   : SelectedButton
