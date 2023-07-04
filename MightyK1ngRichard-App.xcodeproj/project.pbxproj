@@ -409,11 +409,19 @@
 			path = PreferenceKey;
 			sourceTree = "<group>";
 		};
+		2CDCAAFA2A549E920079BF3A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2CE47B652A3726D5003C863C = {
 			isa = PBXGroup;
 			children = (
 				2CE47B702A3726D6003C863C /* MightyK1ngRichard-App */,
 				2CE47B6F2A3726D6003C863C /* Products */,
+				2CDCAAFA2A549E920079BF3A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
