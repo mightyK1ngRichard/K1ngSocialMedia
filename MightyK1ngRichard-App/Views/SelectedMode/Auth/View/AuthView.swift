@@ -43,7 +43,7 @@ struct AuthView: View {
             NewsView()
             
         case .messages:
-            FirstTraining()
+            MessagesView()
 //            UploadImageToServer()
             
         case .friends:

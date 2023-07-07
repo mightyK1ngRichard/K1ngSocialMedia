@@ -107,4 +107,32 @@ class UserAPI: APIManager {
         }.resume()
     }
     
+    // Просто попробовать.
+    func getUsers() async throws -> [UserData] {
+        let urlString = "http://\(host):\(port)/users"
+        guard let url = URL(string: urlString) else { throw URLError(.badURL) }
+        do {
+            let (data, response) = try await URLSession.shared.data(from: url)
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                throw URLError(.badServerResponse)
+            }
+            do {
+                let users = try JSONDecoder().decode(UsersDecoder.self, from: data)
+                
+                var allUsers: [UserData] = []
+                for u in users.users {
+                    let tmp = UserData(id: u.id, nickname: u.nickname, description: nil, locationInfo: nil, university: nil, backroundImage: nil, userAvatar: u.avatar, countOfFriends: u.count_of_friends, posts: nil, images: nil)
+                    allUsers.append(tmp)
+                }
+                return allUsers
+                
+            } catch {
+                throw error
+            }
+            
+        } catch {
+            throw error
+        }
+    }
 }

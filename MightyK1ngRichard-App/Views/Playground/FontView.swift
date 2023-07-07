@@ -26,6 +26,9 @@ struct FontView: View {
                     .font(.callout)
                 Text("Caption")
                     .font(.caption)
+                Text("Captio2")
+                    .font(.caption2)
+
                 Text("Footnote")
                     .font(.footnote)
             }
