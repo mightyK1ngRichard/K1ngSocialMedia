@@ -13,6 +13,7 @@ import GoogleSignInSwift
 
 struct SignUpView: View {
     @EnvironmentObject var authData : AuthDataManager
+    
     @State private var email        = ""
     @State private var password     = ""
     @State private var errorMessage = ("", "")
