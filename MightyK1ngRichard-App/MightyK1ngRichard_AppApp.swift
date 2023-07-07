@@ -18,7 +18,7 @@ struct MightyK1ngRichard_AppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AuthView()
         }
     }
 }

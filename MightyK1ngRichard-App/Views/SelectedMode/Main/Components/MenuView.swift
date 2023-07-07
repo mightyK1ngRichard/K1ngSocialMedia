@@ -12,13 +12,7 @@ struct MenuView: View {
     @EnvironmentObject var selected : SelectedButton
     @EnvironmentObject var authData : AuthDataManager
     
-    private let buttons             : [ButtonsBar] = [
-        .init(id: UUID(), text: .profile, image: "person"),
-        .init(id: UUID(), text: .news, image: "note"),
-        .init(id: UUID(), text: .messages, image: "message"),
-        .init(id: UUID(), text: .friends, image: "person.2"),
-    ]
-    
+    let buttons  : [ButtonsBar]
     let nickname = "Дмитрий Пермяков"
     let link     = "@mightyk1ngrichard"
     
@@ -136,7 +130,12 @@ struct MenuView: View {
 
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
-        MenuView()
+        MenuView(buttons: [
+            .init(id: UUID(), text: .profile, image: "person"),
+            .init(id: UUID(), text: .news, image: "note"),
+            .init(id: UUID(), text: .messages, image: "message"),
+            .init(id: UUID(), text: .friends, image: "person.2"),
+        ])
         .environmentObject(SelectedButton())
 //        .background(.yellow.opacity(0.1))
     }

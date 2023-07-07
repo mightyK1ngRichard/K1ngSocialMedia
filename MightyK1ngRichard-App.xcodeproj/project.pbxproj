@@ -25,6 +25,8 @@
 		2C82DE682A3D977D006AA47F /* UserPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C82DE672A3D977D006AA47F /* UserPosts.swift */; };
 		2C82DE6A2A3EA93F006AA47F /* SecondTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C82DE692A3EA93F006AA47F /* SecondTraining.swift */; };
 		2C8AFD202A588F7C001CB76C /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8AFD1F2A588F7C001CB76C /* MessagesView.swift */; };
+		2C8AFD232A58ABB5001CB76C /* DialogueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8AFD222A58ABB5001CB76C /* DialogueView.swift */; };
+		2C8AFD252A58B2F6001CB76C /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8AFD242A58B2F6001CB76C /* TabBarView.swift */; };
 		2C96B8CF2A4EB86B00BCF506 /* ErrorNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96B8CE2A4EB86B00BCF506 /* ErrorNetwork.swift */; };
 		2C96B8D22A4EB89400BCF506 /* UserDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96B8D12A4EB89400BCF506 /* UserDecoder.swift */; };
 		2C96B8D42A4ED6AE00BCF506 /* PostDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96B8D32A4ED6AE00BCF506 /* PostDecoder.swift */; };
@@ -67,6 +69,8 @@
 		2C82DE672A3D977D006AA47F /* UserPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPosts.swift; sourceTree = "<group>"; };
 		2C82DE692A3EA93F006AA47F /* SecondTraining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondTraining.swift; sourceTree = "<group>"; };
 		2C8AFD1F2A588F7C001CB76C /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
+		2C8AFD222A58ABB5001CB76C /* DialogueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogueView.swift; sourceTree = "<group>"; };
+		2C8AFD242A58B2F6001CB76C /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		2C96B8CE2A4EB86B00BCF506 /* ErrorNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorNetwork.swift; sourceTree = "<group>"; };
 		2C96B8D12A4EB89400BCF506 /* UserDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDecoder.swift; sourceTree = "<group>"; };
 		2C96B8D32A4ED6AE00BCF506 /* PostDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDecoder.swift; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 		2C3E99F32A373F2200ABEBDA /* Messages */ = {
 			isa = PBXGroup;
 			children = (
+				2C8AFD212A58AB9C001CB76C /* Components */,
 				2C3E99F92A37400B00ABEBDA /* View */,
 			);
 			path = Messages;
@@ -248,6 +253,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		2C8AFD212A58AB9C001CB76C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2C8AFD222A58ABB5001CB76C /* DialogueView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		2C96B8D52A4ED75B00BCF506 /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,6 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				2C3E99E32A3731B900ABEBDA /* MenuView.swift */,
+				2C8AFD242A58B2F6001CB76C /* TabBarView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -507,9 +521,11 @@
 				2C96B8DA2A4ED79E00BCF506 /* PostAPI.swift in Sources */,
 				2CE47B742A3726D6003C863C /* ContentView.swift in Sources */,
 				2C1D8A7A2A52DE9000EE8F00 /* DogViewTemp.swift in Sources */,
+				2C8AFD252A58B2F6001CB76C /* TabBarView.swift in Sources */,
 				2CDCAB022A54B8700079BF3A /* Utilities.swift in Sources */,
 				2C1D8A762A52D37D00EE8F00 /* FirebaseService.swift in Sources */,
 				2C4447932A3A05EE00248B75 /* UserPost.swift in Sources */,
+				2C8AFD232A58ABB5001CB76C /* DialogueView.swift in Sources */,
 				2CD3512D2A3D03DE00E53785 /* OffsetHelper.swift in Sources */,
 				2CD351262A3CFE7B00E53785 /* FirstTraining.swift in Sources */,
 				2CD351302A3D070500E53785 /* AnchorKey.swift in Sources */,

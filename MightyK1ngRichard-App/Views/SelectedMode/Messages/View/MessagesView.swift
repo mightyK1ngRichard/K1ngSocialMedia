@@ -13,6 +13,7 @@ struct MessagesView: View {
     @State private var users: [UserData] = []
     @State private var searchedUser = ""
     @State private var errorMessage = ""
+    @State private var openDialogue = false
     
     var body: some View {
         MainScreen()
@@ -28,24 +29,31 @@ struct MessagesView: View {
     
     @ViewBuilder
     private func MainScreen() -> some View {
-        VStack {
-            TopView()
-            
-            ScrollView(.vertical, showsIndicators: true) {
-                SearchBar()
-                ForEach(users) { user in
-                    HStack {
-                        MessageCard(user: user)
+        NavigationStack {
+            VStack {
+                TopView()
+                ScrollView(.vertical, showsIndicators: true) {
+                    SearchBar()
+                    ForEach(users) { user in
+                        HStack {
+                            NavigationLink {
+                                DialogueView()
+                                    
+                            } label: {
+                                MessageCard(user: user)
+                            }
+
+                        }
+                        .padding(.horizontal)
+                        
                     }
-                    .padding(.horizontal)
-                    
+                    .frame(maxWidth: .infinity)
                 }
-                .frame(maxWidth: .infinity)
             }
-        }
-        .background(Color.VK.black)
-        .foregroundColor(Color.VK.white)
+            .background(Color.VK.black)
+            .foregroundColor(Color.VK.white)
         .onAppear(perform: fetchData)
+        }
     }
     
     private func ErrorView() -> some View {
@@ -102,8 +110,6 @@ struct MessagesView: View {
                 .font(.body)
         }
         .padding(.leading, 5)
-        
-        Spacer()
     }
     
     @ViewBuilder

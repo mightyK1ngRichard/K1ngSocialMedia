@@ -21,6 +21,6 @@ struct ButtonsBar: Identifiable {
 enum TextModeOfButtonBar: String {
     case profile  = "Профиль"
     case news     = "Новости"
-    case messages = "Сообщения"
+    case messages = "Мессенджер"
     case friends  = "Друзья"
 }
