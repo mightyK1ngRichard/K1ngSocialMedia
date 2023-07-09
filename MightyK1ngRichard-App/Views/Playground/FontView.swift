@@ -9,7 +9,8 @@ import SwiftUI
 
 struct FontView: View {
     var body: some View {
-            VStack(spacing: 20) {
+        VStack(spacing: 20) {
+            Group {
                 Text("System Font")
                     .font(.system(size: 20))
                 Text("Large Title")
@@ -28,11 +29,12 @@ struct FontView: View {
                     .font(.caption)
                 Text("Captio2")
                     .font(.caption2)
-
                 Text("Footnote")
                     .font(.footnote)
             }
+            
         }
+    }
 }
 
 struct FontView_Previews: PreviewProvider {

@@ -10,7 +10,9 @@ import Foundation
 /// Работа с go lang server.
 class APIManager {
 //    static var shared = APIManager()
-    let host  = "localhost"
-    let port  = 8010
+//    let host  = "localhost"
+//    let port  = 8010
+    let host = "45.8.250.50"
+    let port = 8010
     static let user  = UserAPI()
 }
