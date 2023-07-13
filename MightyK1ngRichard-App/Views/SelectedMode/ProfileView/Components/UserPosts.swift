@@ -89,8 +89,6 @@ struct UserPostsView: View {
                             ProgressView()
                                 .padding(.trailing, 5)
                         }
-                        
-                        
                     }
                 }
             }

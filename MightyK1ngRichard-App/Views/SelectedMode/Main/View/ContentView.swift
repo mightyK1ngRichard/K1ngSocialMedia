@@ -69,22 +69,22 @@ struct ContentView_Previews: PreviewProvider {
 
 /*
  ZStack {
-     if authData.userIsAuth {
-         //                Text("User is auth \(authData.user?.uid ?? "")")
-         //                Text("User is auth \(authData.user?.email ?? "")")
-         // TODO: Сделать что-то с этим.
-         
-         SelecteMenuPoint()
-         TabBarView(buttons: buttons)
-         
-         if selected.showMenu {
-             MenuView(buttons: buttons)
-                 .zIndex(2)
-         }
-         
-     } else {
-         /// Это авторизация или аутенфикация.
-         SignUpView(showAlert: $showAlert, showSignInView: $showSignInView)
-     }
+ if authData.userIsAuth {
+ //                Text("User is auth \(authData.user?.uid ?? "")")
+ //                Text("User is auth \(authData.user?.email ?? "")")
+ // TODO: Сделать что-то с этим.
+ 
+ SelecteMenuPoint()
+ TabBarView(buttons: buttons)
+ 
+ if selected.showMenu {
+ MenuView(buttons: buttons)
+ .zIndex(2)
+ }
+ 
+ } else {
+ /// Это авторизация или аутенфикация.
+ SignUpView(showAlert: $showAlert, showSignInView: $showSignInView)
+ }
  }
  */

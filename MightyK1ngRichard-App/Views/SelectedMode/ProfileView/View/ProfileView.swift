@@ -31,13 +31,20 @@ extension Color {
     }
 }
 
+private let buttons: [ModemButton] = [
+    .init(text: "Фото", image: "photo"),
+    .init(text: "Видео", image: "play.square"),
+    .init(text: "Музыка", image: "airpodspro"),
+    .init(text: "Клипы", image: "video"),
+]
+
 struct ProfileView: View {
     let userID: UInt
     
     @Environment(\.colorScheme) private var shemaColor
     @EnvironmentObject var selected   : SelectedButton
     
-    @State private var pressedButton   = "Фото"
+    @State private var pressedButton   = buttons.first!.id
     @State private var showBar         = false
     @State private var scrollProgress  : CGFloat = .zero
     @State private var scaleImage      : CGSize  = .init(width: 1, height: 1)
@@ -61,7 +68,7 @@ struct ProfileView: View {
                 }
             }
     }
-    
+  
     @ViewBuilder
     private func MainView() -> some View {
         let backgroundColor: Color = self.shemaColor == .dark ? Color.VK.black : Color.VK.white
@@ -343,28 +350,15 @@ struct ProfileView: View {
     
     @ViewBuilder
     private func imagesView() -> some View {
-        let buttons: [ModemButton] = [
-            .init(text: "Фото", image: "photo"),
-            .init(text: "Видео", image: "play.square"),
-            .init(text: "Музыка", image: "airpodspro"),
-            .init(text: "Клипы", image: "video"),
-        ]
         let backgroundColor: Color = self.shemaColor == .dark ? Color.VK.black : Color.VK.white
-        
         VStack {
-            ScrollView(.horizontal, showsIndicators: false){
-                HStack {
-                    ForEach(buttons) {
-                        ButtonsOfModes(img: $0.image, text: $0.text)
-                    }
-                }
+            ScrollView(.horizontal, showsIndicators: false) {
+                ButtonsOfModes()
             }
             .padding(.leading)
             .padding(.top)
-            LazyVGrid(columns: [GridItem(), GridItem(), GridItem()], spacing: 1) {
-                UserImages()
-            }
-            .padding(.horizontal)
+            
+            UserImagesView()
 
             /// Кнопки загрузить фото и смотреть ещё.
             HStack(spacing: 25) {
@@ -401,6 +395,14 @@ struct ProfileView: View {
     }
     
     @ViewBuilder
+    private func UserImagesView() -> some View {
+        LazyVGrid(columns: [GridItem(), GridItem(), GridItem()], spacing: 1) {
+            UserImages()
+        }
+        .padding(.horizontal)
+    }
+    
+    @ViewBuilder
     private func UserImages() -> some View {
         if let user = user, let images = user.images {
             ForEach(images.prefix(6)) {
@@ -421,21 +423,28 @@ struct ProfileView: View {
     
     /// Кнопки: фотки, видео, музыка.
     @ViewBuilder
-    private func ButtonsOfModes(img: String, text: String) -> some View {
+    private func ButtonsOfModes() -> some View {
         let color = shemaColor == .dark ? Color.VK.foregroundColorButtonBlack : Color.VK.foregroundColorButtonWhite
         
-        Button {
-            self.pressedButton = text
-            
-        } label: {
-            Label(text, systemImage: img)
-                .foregroundColor(pressedButton == text ? Color.black : .primary)
-                .padding(6)
-                .background(
-                    color
-                        .opacity(pressedButton == text ? 0.7 : 0)
-                )
-                .cornerRadius(10)
+        
+        HStack {
+            ForEach(buttons) { button in
+                
+                Button {
+                    self.pressedButton = button.id
+                    
+                } label: {
+                    Label(button.text, systemImage: button.image)
+                        .foregroundColor(.primary)
+                        .padding(6)
+                        .background(
+                            color
+                                .opacity(pressedButton == button.id ? 0.7 : 0)
+                        )
+                        .cornerRadius(10)
+                }
+                
+            }
         }
         
     }
